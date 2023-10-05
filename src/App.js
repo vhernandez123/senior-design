@@ -1,6 +1,8 @@
-import "../Css/Site.css";
 
-function Home() {
+import './App.css';
+
+
+function App() {
   return (
     <div className="App">
       <h1>Let senior design begin!</h1>
@@ -8,4 +10,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default App;
