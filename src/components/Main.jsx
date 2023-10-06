@@ -12,10 +12,9 @@ const Main = () => {
     const { loginWithRedirect } = useAuth0(); // Get Auth0 hook
   
     const handleLogin = () => {
-        loginWithRedirect({
-          returnTo: `${window.location.origin}/landing`, // Redirect to the landing page
-        });
-      };
+        loginWithRedirect(
+           // Redirect to the landi);
+        );
     return (
         <Auth0Provider
         domain={domain}
