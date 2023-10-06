@@ -1,6 +1,6 @@
 import React from "react";
 import videoBG from "../assets/videoBG.mp4";
-import { useAuth0 } from "@auth0/auth0-react"; // Import useAuth0
+import { useAuth0 } from "@auth0/auth0-react";
 import { Auth0Provider } from "@auth0/auth0-react";
 
 const domain = process.env.REACT_APP_AUTH0_DOMAIN;
@@ -16,6 +16,7 @@ const Main = () => {
       },
     });
   };
+
   return (
     <Auth0Provider
       domain={domain}
@@ -35,4 +36,5 @@ const Main = () => {
   );
 };
 
+// Move the export statement here, at the top level of the module
 export default Main;
