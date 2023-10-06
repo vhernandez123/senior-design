@@ -7,9 +7,14 @@ const domain = process.env.REACT_APP_AUTH0_DOMAIN;
 const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
 
 const Main = () => {
-  const { loginWithRedirect } = useAuth0(); // Get Auth0 hook
+  const { loginWithRedirect } = useAuth0();
+
   const handleLogin = () => {
-    loginWithRedirect();
+    loginWithRedirect({
+      authorizationParams: {
+        redirect_uri: `${window.location.origin}/landing`,
+      },
+    });
   };
   return (
     <Auth0Provider
@@ -29,4 +34,5 @@ const Main = () => {
     </Auth0Provider>
   );
 };
+
 export default Main;
