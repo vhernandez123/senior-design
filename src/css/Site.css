@@ -1,0 +1,25 @@
+/* Sticky Footer styles */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Main content container */
+  .main-content {
+    flex-grow: 1;
+  }
+  
+  /* Footer styles */
+  .footer {
+    background-color: #01B636; /* Green background color */
+    color: #fff; /* White text color */
+    padding: 20px; /* Adjust padding as needed */
+    text-align: center; /* Center-align the content */
+  }
+  

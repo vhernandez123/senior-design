@@ -1,13 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import "normalize.css";
 
+const root = ReactDOM.createRoot(document.getElementById("root"));
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-
-    <App />
-
+  <Router>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      {/* <Route path="/home" element={<Home />} />
+      <Route path="/signup" element={<Signup />} /> */}
+    </Routes>
+  </Router>
 );
-
-
