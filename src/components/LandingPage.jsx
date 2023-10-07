@@ -1,11 +1,12 @@
 import React from "react";
 import Spongebob from "../assets/Spongebob.mp4";
-
+import LogoutButton from "../components/logout.js";
 const LandingPage = () => {
   return (
     <div className="main">
-      <div className="overlay"></div>
+         <LogoutButton />
       <video src={Spongebob} autoPlay loop muted />
+
     </div>
   );
 };
