@@ -6,7 +6,10 @@ function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <h1 className="navbar-logo">Pet Logger</h1>
+        <a href="/" className="navbar-logo" style={{ textDecoration: "none" }}>
+          <h1 style={{ color: "white" }}>Pet Logger</h1>
+        </a>
+
         <ul className="nav-menu">
           <li className="nav-item">
             <Button
