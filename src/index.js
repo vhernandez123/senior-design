@@ -5,7 +5,7 @@ import { Auth0Provider } from '@auth0/auth0-react'; // Import Auth0Provider
 import App from './App'; // Import your main application component
 import Main from './components/Main.jsx'; // Import your Main component
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import LandingPage from './components/LandingPage.jsx';
+import Home from './components/Home.js';
 
 const domain = process.env.REACT_APP_AUTH0_DOMAIN;
 const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
@@ -21,7 +21,7 @@ ReactDOM.render(
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/app" element={<App />} />
-          <Route path="/landing" element={<LandingPage />} /> {/* Add this route */}
+          <Route path="/home" element={<Home />} /> {/* Add this route */}
         </Routes>
       </Router>
     </Auth0Provider>

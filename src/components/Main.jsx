@@ -12,7 +12,7 @@ const Main = () => {
   const handleLogin = () => {
     loginWithRedirect({
       authorizationParams: {
-        redirect_uri: `${window.location.origin}/landing`,
+        redirect_uri: `${window.location.origin}/home` ,
       },
     });
   };
