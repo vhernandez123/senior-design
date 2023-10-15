@@ -1,7 +1,7 @@
 import React from "react";
 import "../css/Navbar.css"; // Import your CSS file
 import { Avatar, Button } from "@mui/material";
-
+import LogoutButton from "../components/logout.js";
 function Navbar() {
   return (
     <nav className="navbar">
@@ -35,8 +35,8 @@ function Navbar() {
               Find Vets Now
             </Button>
           </li>
-          <Avatar style={{ fontSize: "15px" }} variant="contained">
-            Login
+          <Avatar style={{ fontSize: "8px" }} variant="contained">
+            <LogoutButton />
           </Avatar>
         </ul>
       </div>
