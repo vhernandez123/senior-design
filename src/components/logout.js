@@ -6,12 +6,13 @@ const LogoutButton=()=>{
         isAuthenticated &&(
         <button style={
         {
-         width:'70%',
-         padding: '20px',
+         padding: '15px',
          cursor:"pointer",
-         backgroundColor:"green"
+         fontSize:'14px',
+         backgroundColor:"gold"
         }} onClick={()=>logout()}>
-Sign out
+log
+out
         </button>
     ))
 }
