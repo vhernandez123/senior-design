@@ -1,24 +1,86 @@
 /* Sticky Footer styles */
 html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 
-  body {
-    display: flex;
-    flex-direction: column;
-  }
+body {
+  display: flex;
+  flex-direction: column;
+}
 
-  /* Main content container */
-  .main-content {
-    flex-grow: 1;
-  }
+/* Main content container */
+.main-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center-align the content horizontally */
+}
 
-  /* Footer styles */
-  .footer {
-    background-color: #01B636; /* Green background color */
-    color: #fff; /* White text color */
-    padding: 20px; /* Adjust padding as needed */
-    text-align: center; /* Center-align the content */
-  }
+/* Video container */
+.video-container {
+  height: 60vh; /* Adjust the height as needed */
+  position: relative; /* Relative position for stacking elements */
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Maintain aspect ratio and cover container */
+}
+
+/* Footer styles */
+.footer {
+  background-color: #01B636; /* Green background color */
+  color: #fff; /* White text color */
+  padding: 20px; /* Adjust padding as needed */
+  text-align: center;
+  width: 100%;
+  position: absolute; /* Stick to the bottom of the viewport */
+  bottom: 0;
+}
+/* Add this CSS to create a green box around the text */
+.green-box {
+  background-color: #01B636; /* Green background color */
+  color: #fff; /* White text color */
+  padding: 20px; /* Adjust padding as needed */
+  border-radius: 10px; /* Rounded corners for the box */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+  margin: 20px 0; /* Add some spacing around the box */
+  text-align: center; /* Center-align the content */
+  font-size: 18px; /* Adjust the font size as needed */
+}
+
+/* Update your existing styles for the text */
+.welcome-messages {
+  text-align: center;
+  margin-top: 40px;
+  padding: 20px;
+}
+
+.welcome-message {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #01B636;
+}
+
+.sub-message,
+.final-message {
+  font-size: 18px; /* Adjust the font size as needed */
+  margin-bottom: 10px;
+}
+.image-container {
+  display: flex;
+  justify-content: center; /* Center-align the images horizontally */
+  margin: 20px 0; /* Add spacing below the green box */
+}
+
+.image {
+  max-width: 50%; /* Adjust the width of the images as needed */
+  margin: 0 10px; /* Add spacing between the images */
+}
+
+
+
