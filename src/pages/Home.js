@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../project_components/Navbar";
+import Navbar from "../project_components/navbar.js";
 import Footer from "../project_components/Footer";
 import DataTable from "../project_components/HomeTable";
 import "../App.css";

@@ -21,6 +21,17 @@ app.get("/GetAllPets", (req, res) => {
   });
 });
 
+app.get("/GetAllUsers", (req, res) => {
+  queries.getAllUsers((err, users) => {
+    if (err) {
+      console.error("Error retrieving user data:", err);
+      res.status(500).json({ error: "Error retrieving user data" });
+    } else {
+      res.status(200).json(users);
+    }
+  });
+});
+
 app.post("/InsertPet", (req, res) => {
   const petData = req.body;
   queries.insertPet(petData, (err, result) => {
@@ -30,6 +41,18 @@ app.post("/InsertPet", (req, res) => {
     } else {
       console.log("Pet data inserted successfully");
       res.status(201).json({ message: "Pet data inserted successfully" });
+    }
+  });
+});
+app.delete("/RemovePet/:petId", (req, res) => {
+  const petId = req.params.petId;
+  queries.removePet(petId, (err, result) => {
+    if (err) {
+      console.error("Error removing pet:", err);
+      res.status(500).json({ error: "Error removing pet" });
+    } else {
+      console.log("Pet removed successfully");
+      res.status(200).json({ message: "Pet removed successfully" });
     }
   });
 });

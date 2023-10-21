@@ -15,16 +15,26 @@ const DataTable = () => {
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
-    // Fetch data from your API endpoint when the component mounts
     Axios.get("http://localhost:4000/GetAllPets")
       .then((response) => {
-        // Assuming your API returns an array of pet data
         setRows(response.data);
       })
       .catch((error) => {
         console.error("Error fetching pet data:", error);
       });
   }, []);
+
+  const handleRemovePet = (index, petId) => {
+    Axios.delete(`http://localhost:4000/RemovePet/${petId}`)
+      .then((response) => {
+        const updatedRows = [...rows];
+        updatedRows.splice(index, 1);
+        setRows(updatedRows);
+      })
+      .catch((error) => {
+        console.error("Error removing pet:", error);
+      });
+  };
 
   return (
     <TableContainer
@@ -43,18 +53,7 @@ const DataTable = () => {
               Microchip Number
             </TableCell>
             <TableCell className="table-header-cell">Food</TableCell>
-            <TableCell className="table-header-cell" align="right" colSpan={2}>
-              <Button
-                href="/AddPet"
-                variant="contained"
-                className="custom-button"
-              >
-                Add New Pet
-              </Button>
-              <Button variant="contained" className="custom-button">
-                Remove a Pet
-              </Button>
-            </TableCell>
+            <TableCell className="table-header-cell">Actions</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -69,10 +68,27 @@ const DataTable = () => {
                 {row.petMicrochipNum}
               </TableCell>
               <TableCell className="table-cell">{row.petFood}</TableCell>
+              <TableCell className="table-cell">
+                <Button
+                  variant="contained"
+                  className="custom-button"
+                  onClick={() => handleRemovePet(index, row.petId)}
+                >
+                  Remove
+                </Button>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
+      <Button
+        href="/AddPet"
+        variant="contained"
+        className="custom-button"
+        style={{ margin: "1rem" }}
+      >
+        Add New Pet
+      </Button>
     </TableContainer>
   );
 };

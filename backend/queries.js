@@ -4,10 +4,10 @@ const cors = require("cors");
 require("dotenv/config");
 
 const db = mysql.createConnection({
-  user: "root",
-  host: "127.0.0.1",
-  password: "ROCKf13@",
-  database: "PetLogger",
+  user: "admin",
+  host: "pet-app-4160.cdfommd6aile.us-east-1.rds.amazonaws.com",
+  password: "4160Seniordesign",
+  database: "mydb",
 });
 
 db.connect((err) => {
@@ -19,13 +19,13 @@ db.connect((err) => {
 });
 
 function getAllPets(callback) {
-  const sql = "SELECT * FROM mydb.pet";
+  const sql = "SELECT * FROM Pet";
   db.query(sql, callback);
 }
 
 function insertPet(petData, callback) {
   const sql =
-    "INSERT INTO mydb.pet (petName, petBreed, petAge, petColor, petWeight, petMicrochipNum, petFood) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    "INSERT INTO Pet (petName, petBreed, petAge, petColor, petWeight, petMicrochipNum, petFood, Owner_ownerId) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
   const values = [
     petData.petName,
     petData.petBreed,
@@ -34,11 +34,23 @@ function insertPet(petData, callback) {
     petData.petWeight,
     petData.petMicrochipNum,
     petData.petFood,
+    petData.Owner_ownerId,
   ];
   db.query(sql, values, callback);
+}
+
+function getAllUsers(callback) {
+  const query = "SELECT userId, userFirstName, userLastName FROM User";
+  db.query(query, callback);
+}
+function removePet(petId, callback) {
+  const sql = "DELETE FROM Pet WHERE petId = ?";
+  db.query(sql, petId, callback);
 }
 
 module.exports = {
   getAllPets,
   insertPet,
+  getAllUsers,
+  removePet,
 };
