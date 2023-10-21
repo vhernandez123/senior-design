@@ -3,13 +3,18 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+  background-color: #bcefcb;
 }
 
 body {
   display: flex;
   flex-direction: column;
 }
-
+/* Main content container on the first landing page to ensure they stay together */
+.CenterLog{
+  background-color:rgba(171, 162, 118, 0.6);
+  border-radius: 10%;
+}
 /* Main content container */
 .main-content {
   flex-grow: 1;
@@ -63,7 +68,12 @@ video {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 20px;
-  color: #01B636;
+  color: #056d24;
+  background-color:rgba(171, 160, 105, 0.6);
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 20%;
+  
 }
 
 .sub-message,
@@ -78,8 +88,8 @@ video {
 }
 
 .image {
-  max-width: 50%; /* Adjust the width of the images as needed */
-  margin: 0 10px; /* Add spacing between the images */
+  max-width: 60%; /* Adjust the width of the images as needed */
+  margin: 0 15px; /* Add spacing between the images */
 }
 
 

@@ -31,12 +31,17 @@ const Main = () => {
         <div className="overlay"></div>
         <video src={videoBG} autoPlay loop muted />
         <div className="content">
+        <div className="CenterLog">
+        <p className="welcome-message">
+        Welcome to Pet Logger, where your furry friends deserve the best!
+      </p>
           <button className="centered-button" onClick={handleLogin}>
             Login
           </button>
-          <p className="welcome-message">
-        Welcome to Pet Logger, where your furry friends deserve the best!
-      </p>
+          <h1 className="welcome-message">
+            To Begin logging, please login!
+          </h1>
+          </div>
         </div>
         <div className="content">
 </div>

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Axios from "axios";
 import {
   Table,
   TableBody,
@@ -12,85 +13,83 @@ import {
 import { auto } from "@popperjs/core";
 
 const DataTable = () => {
-  const rows = [
-    {
-      data1: "Max",
-      data2: "Brown",
-      data3: "Labrador Retriever",
-      data4: "Male",
-      data5: "01/15/2018",
-      data6: "75 lbs",
-      data7: "Yes",
-      data8: "Dog",
-      data9: "None",
-    },
-    {
-      data1: "Bella",
-      data2: "White",
-      data3: "Poodle",
-      data4: "Female",
-      data5: "04/22/2019",
-      data6: "10 lbs",
-      data7: "No",
-      data8: "Dog",
-      data9: "Pollen",
-    },
-    {
-      data1: "Charlie",
-      data2: "Black",
-      data3: "German Shepherd",
-      data4: "Male",
-      data5: "08/05/2017",
-      data6: "80 lbs",
-      data7: "Yes",
-      data8: "Dog",
-      data9: "Dust",
-    },
-  ];
+  const [rows, setRows] = useState([]);
+
+  useEffect(() => {
+    Axios.get("http://localhost:4000/GetAllPets")
+      .then((response) => {
+        setRows(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching pet data:", error);
+      });
+  }, []);
+
+  const handleRemovePet = (index, petId) => {
+    Axios.delete(`http://localhost:4000/RemovePet/${petId}`)
+      .then((response) => {
+        const updatedRows = [...rows];
+        updatedRows.splice(index, 1);
+        setRows(updatedRows);
+      })
+      .catch((error) => {
+        console.error("Error removing pet:", error);
+      });
+  };
 
   return (
     <TableContainer
       component={Paper}
-      style={{ maxWidth: "90%", maxHeight: "100%", margin: auto }}
+      style={{ maxWidth: "90%", maxHeight: "100%", margin: "auto" }}
     >
-      <Table size="medium">
+      <Table size="medium" className="custom-table">
         <TableHead>
-          <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell>Color</TableCell>
-            <TableCell>Breed</TableCell>
-            <TableCell>Sex</TableCell>
-            <TableCell>Birthday</TableCell>
-            <TableCell>Weight</TableCell>
-            <TableCell>Insurance</TableCell>
-            <TableCell>Species</TableCell>
-            <TableCell>Allergies</TableCell>
-            <TableCell align="right" colSpan={2}>
-              <Button variant="contained" color="primary">
-                Add a Pet
-              </Button>
-              <Button variant="contained" color="primary">
-                Remove a Pet
-              </Button>
+          <TableRow className="table-header-row">
+            <TableCell className="table-header-cell">Name</TableCell>
+            <TableCell className="table-header-cell">Breed</TableCell>
+            <TableCell className="table-header-cell">Age</TableCell>
+            <TableCell className="table-header-cell">Color</TableCell>
+            <TableCell className="table-header-cell">Weight</TableCell>
+            <TableCell className="table-header-cell">
+              Microchip Number
             </TableCell>
+            <TableCell className="table-header-cell">Food</TableCell>
+            <TableCell className="table-header-cell">Actions</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row, index) => (
-            <TableRow key={index}>
-              <TableCell>{row.data1}</TableCell>
-              <TableCell>{row.data2}</TableCell>
-              <TableCell>{row.data3}</TableCell>
-              <TableCell>{row.data4}</TableCell>
-              <TableCell>{row.data5}</TableCell>
-              <TableCell>{row.data6}</TableCell>
-              <TableCell>{row.data7}</TableCell>
-              <TableCell>{row.data8}</TableCell>
-              <TableCell>{row.data9}</TableCell>
+            <TableRow key={index} className="table-row">
+              <TableCell className="table-cell">{row.petName}</TableCell>
+              <TableCell className="table-cell">{row.petBreed}</TableCell>
+              <TableCell className="table-cell">{row.petAge}</TableCell>
+              <TableCell className="table-cell">{row.petColor}</TableCell>
+              <TableCell className="table-cell">{row.petWeight}</TableCell>
+              <TableCell className="table-cell">
+                {row.petMicrochipNum}
+              </TableCell>
+              <TableCell className="table-cell">{row.petFood}</TableCell>
+              <TableCell className="table-cell">
+                <Button
+                  variant="contained"
+                  className="custom-button"
+                  onClick={() => handleRemovePet(index, row.petId)}
+                >
+                  Remove
+                </Button>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
+      <Button
+        href="/AddPet"
+        variant="contained"
+        className="custom-button"
+        style={{ margin: "1rem" }}
+      >
+        Add New Pet
+      </Button>
     </TableContainer>
   );
 };

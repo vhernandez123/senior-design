@@ -11,13 +11,11 @@ const Landing = () => {
           Transform your pet's space into a haven of tail-wagging delight.
         </p>
         <p className="sub-message">
-          We've teamed up with top-notch pet experts and groomers to bring you a
-          variety of pampering services and unique pet products. Your beloved
-          pets will have all their needs met right at home. Pet Logger handles
+          Pet Logger handles
           everything, ensuring a pawsome experience for your four-legged family
           members.
         </p>
-        <p className="final-message">Give your pets the love they deserve!</p>
+        <p className="final-message">Give your pets the love and attention they deserve!</p>
       </div>
       <div className="image-container">
         <img src={Cat1} alt="cat1" className="image" />
