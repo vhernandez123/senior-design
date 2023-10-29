@@ -1,7 +1,7 @@
 import React from "react";
-import Navbar from "../project_components/navbar.js";
-import Footer from "../project_components/Footer";
-import DataTable from "../project_components/HomeTable";
+import Navbar from "../components/navbar.js";
+import Footer from "../components/Footer";
+import DataTable from "../components/HomeTable";
 import "../App.css";
 
 function Home() {

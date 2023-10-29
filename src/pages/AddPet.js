@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Button, Paper, TextField, MenuItem } from "@mui/material";
 import Axios from "axios";
 import "../css/AddPet.css";
-import Navbar from "../project_components/navbar";
-import Footer from "../project_components/Footer";
+import Navbar from "../components/navbar";
+import Footer from "../components/Footer";
 
 const AddPet = () => {
   const [petName, setPetName] = useState("");

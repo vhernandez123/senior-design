@@ -2,6 +2,7 @@ import React from "react";
 import "../css/Navbar.css"; // Import your CSS file
 import { Avatar, Button } from "@mui/material";
 import LogoutButton from "../components/logout.js";
+import { useAuth0 } from "@auth0/auth0-react";
 function Navbar() {
   return (
     <nav className="navbar">
