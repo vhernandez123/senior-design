@@ -50,9 +50,9 @@ const UpdateOther = () => {
 
   return (
     <div className="Other">
-      <h2>Other</h2>
       <form onSubmit={handleSubmit}>
-        <Stack spacing={3} direction="column" sx={{ marginBottom: 4 }}>
+        <Stack spacing={3} direction="column" sx={{ marginBottom: 4, marginLeft:4 }}>
+          <h2>Other</h2>
           <FormLabel>
             If you want to include anything else, make note of it here
           </FormLabel>

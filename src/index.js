@@ -12,7 +12,7 @@ import UpdateBathroom from "./pages/UpdateBathroom.js";
 import UpdateBehavior from "./pages/UpdateBehavior.js";
 import UpdateOther from "./pages/UpdateOther.js";
 
-import "normalize.css";
+//import "normalize.css";
 const domain = process.env.REACT_APP_AUTH0_DOMAIN;
 const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
 
