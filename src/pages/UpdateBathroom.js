@@ -39,7 +39,7 @@ const UpdateBathroom = () => {
   return (
     <div className="Update Bathroom">
     <form onSubmit={handleSubmit}>
-    <Stack spacing={3} direction="column" sx={{ marginBottom: 4, marginLeft:4 }}>
+    <Stack spacing={3} direction="column" sx={{ marginBottom: 4, marginLeft:4, marginTop: 4, marginRight: 4}}>
       <h2>Bathroom Habits</h2>
       <FormLabel>How many times did your pet use the bathroom today?</FormLabel>
         <TextField

@@ -53,7 +53,7 @@ const UpdateBehavior = () => {
   return (
     <div className="Update Behavior">
     <form onSubmit={handleSubmit}>
-    <Stack spacing={3} direction="column" sx={{ marginBottom: 4, marginLeft:4}}>
+    <Stack spacing={3} direction="column" sx={{ marginBottom: 4, marginLeft:4, marginTop: 4, marginRight: 4}}>
       <h2>Behaviors</h2>
       <FormLabel>Select any behaviors your pet exhibited today</FormLabel>
       <Stack spacing={3} direction="row" sx={{ marginBottom: 4 }}>

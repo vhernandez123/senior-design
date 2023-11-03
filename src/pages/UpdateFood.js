@@ -42,7 +42,7 @@ const UpdateFood = () => {
   return (
     <div className="UpdateFood">
       <form onSubmit={handleSubmit}>
-      <Stack spacing={3} direction="column" sx={{ marginBottom: 4, marginLeft:4}}>
+      <Stack spacing={3} direction="column" sx={{ marginBottom: 4, marginLeft:4, marginTop: 4, marginRight: 4}}>
         <h2>Food Habits</h2>
         <FormLabel>What did your pet eat today?</FormLabel>
         <Stack spacing={3} direction="row" sx={{ marginBottom: 4 }}>
