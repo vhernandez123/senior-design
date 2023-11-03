@@ -104,14 +104,22 @@ const UpdateBehavior = () => {
       <FormControlLabel name="other" checked={other} control={<Checkbox />} label="other" />
     </FormGroup>
 
-      <Button
-        variant="outlined"
-        color="secondary"
-        type="submit"
-        className="button"
-      >
-        Next
-      </Button>
+    <Button
+          variant="outlined"
+          color="secondary"
+          type="submit"
+          className="button"
+        >
+          Save
+        </Button>
+        <Button
+          variant="outlined"
+          color="secondary"
+          className="button"
+          href="./UpdateOther"
+        >
+          Next
+        </Button>
       </Stack>
     </form>
   </div>

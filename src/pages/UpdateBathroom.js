@@ -13,6 +13,7 @@ import {
   Radio
 } from "@mui/material";
 
+
 const UpdateBathroom = () => {
   const [bathroomTimes, setBathroomTimes] = useState("0");
   const [poopState, setPoopState] = useState("");
@@ -77,13 +78,21 @@ const UpdateBathroom = () => {
         />
 
       <Button
-        variant="outlined"
-        color="secondary"
-        type="submit"
-        className="button"
-      >
-        Next
-      </Button>
+          variant="outlined"
+          color="secondary"
+          type="submit"
+          className="button"
+        >
+          Save
+        </Button>
+        <Button
+          variant="outlined"
+          color="secondary"
+          className="button"
+          href="./UpdateBehavior"
+        >
+          Next
+        </Button>
       </Stack>
     </form>
   </div>

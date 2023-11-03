@@ -12,12 +12,19 @@ import {
   RadioGroup,
   Radio
 } from "@mui/material";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
+import UpdateBathroom from "./UpdateBathroom.js";
+
+<Router><Routes>
+  <Route path="/UpdateBathroom" element={<UpdateBathroom />} />
+</Routes></Router>
 
 const UpdateFood = () => {
   const [foodType, setFoodType] = useState("Food type");
   //const [foodTypeError, setFoodTypeError] = useState(false)
   const [foodAmt, setFoodAmt] = useState("0");
-  const [foodUnit, setFoodUnit] = useState("unit");
+  const [foodUnit, setFoodUnit] = useState("");
   const [drank, setDrank] = useState("0");
   const [ateBad, setAteBad] = useState("");
   const [ateBadDesc, setAteBadDesc] = useState("");
@@ -93,6 +100,14 @@ const UpdateFood = () => {
           color="secondary"
           type="submit"
           className="button"
+        >
+          Save
+        </Button>
+        <Button
+          variant="outlined"
+          color="secondary"
+          className="button"
+          href="./UpdateBathroom"
         >
           Next
         </Button>

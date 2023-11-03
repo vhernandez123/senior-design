@@ -29,17 +29,12 @@ ReactDOM.render(
           <Route path="/app" element={<App />} />
           <Route path="/home" element={<Home />} /> {/* Add this route */}
           <Route path="/AddPet" element={<AddPet />} />
-          <Route path="UpdateForm" element={
-           <div>
-            <UpdateFood/>
-            <hr/>
-            <UpdateBathroom/>
-            <hr/>
-            <UpdateBehavior/>
-            <hr/>
-            <UpdateOther/>
-           </div> 
-          }/>
+          <Route path="/UpdateForm" element={<UpdateFood/>}/>
+           <Route path="/UpdateBathroom" element={<UpdateBathroom />} />
+           <Route path="/UpdateBehavior" element={<UpdateBehavior />} />
+           <Route path="/UpdateOther" element={<UpdateOther />} />
+
+
         </Routes>
       </Router>
     </Auth0Provider>
