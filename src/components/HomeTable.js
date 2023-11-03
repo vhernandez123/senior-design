@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
+import { Link } from "react-router-dom";
 import {
   Table,
   TableBody,
@@ -77,6 +78,13 @@ const DataTable = () => {
                 >
                   Remove
                 </Button>
+              </TableCell>
+              <TableCell className="table-cell">
+                <Link to={`/pet/${row.petId}`}>
+                  <Button variant="contained" className="custom-button">
+                    View Pet
+                  </Button>
+                </Link>
               </TableCell>
             </TableRow>
           ))}

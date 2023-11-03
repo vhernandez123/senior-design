@@ -1,0 +1,30 @@
+.pet-details-container {
+    background-color: #f3f3f3;
+    padding: 30px;
+    border-radius: 15px;
+    margin: 20px auto;
+    max-width: 800px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .pet-info {
+    text-align: left;
+  }
+  
+  .pet-name {
+    color: #333;
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+  
+  .pet-properties p {
+    font-size: 20px;
+    margin: 10px 0;
+    color: #555;
+  }
+  
+  .property-label {
+    font-weight: bold;
+    color: #ff6b6b;
+  }
+  

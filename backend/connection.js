@@ -56,6 +56,22 @@ app.delete("/RemovePet/:petId", (req, res) => {
     }
   });
 });
+app.get("/GetPet/:petId", (req, res) => {
+  const { petId } = req.params;
+
+  queries.getPetById(petId, (err, result) => {
+    if (err) {
+      console.error("Error retrieving pet by ID:", err);
+      res.status(500).json({ error: "Error retrieving pet by ID" });
+    } else {
+      if (result.length === 0) {
+        res.status(404).json({ error: "Pet not found" });
+      } else {
+        res.status(200).json(result[0]);
+      }
+    }
+  });
+});
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {

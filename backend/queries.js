@@ -48,9 +48,15 @@ function removePet(petId, callback) {
   db.query(sql, petId, callback);
 }
 
+function getPetById(petId, callback) {
+  const sql = "SELECT * FROM Pet WHERE petId = ?";
+  db.query(sql, petId, callback);
+}
+
 module.exports = {
   getAllPets,
   insertPet,
   getAllUsers,
   removePet,
+  getPetById,
 };
