@@ -14,11 +14,11 @@ import {
 } from "@mui/material";
 
 const UpdateFood = () => {
-  const [foodType, setFoodType] = useState("");
+  const [foodType, setFoodType] = useState("Food type");
   //const [foodTypeError, setFoodTypeError] = useState(false)
-  const [foodAmt, setFoodAmt] = useState("");
-  const [foodUnit, setFoodUnit] = useState("");
-  const [drank, setDrank] = useState("");
+  const [foodAmt, setFoodAmt] = useState("0");
+  const [foodUnit, setFoodUnit] = useState("unit");
+  const [drank, setDrank] = useState("0");
   const [ateBad, setAteBad] = useState("");
   const [ateBadDesc, setAteBadDesc] = useState("");
 

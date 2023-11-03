@@ -14,10 +14,10 @@ import {
 } from "@mui/material";
 
 const UpdateBathroom = () => {
-  const [bathroomTimes, setBathroomTimes] = useState("");
+  const [bathroomTimes, setBathroomTimes] = useState("0");
   const [poopState, setPoopState] = useState("");
   const [urineState, setUrineState] = useState("");
-  const [vomitAmt, setVomitAmt] = useState("");
+  const [vomitAmt, setVomitAmt] = useState("0");
 
   function handleSubmit(e) {
     // Prevent the browser from reloading the page
