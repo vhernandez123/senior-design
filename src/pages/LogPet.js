@@ -177,68 +177,72 @@ const LogPet = () => {
         );
       case 1:
         return (
-          <div className="form">
-            <div class="step step-2">
-              <Navbar />
-              <Typography variant="h6">Bathroom Activity</Typography>
-              <TextField
-                label="How many times did your pet use the bathroom today?"
-                fullWidth
-                type="number"
-                name="bathroomFrequency"
-                value={formData.bathroomFrequency}
-                onChange={handleInputChange}
-              />
-              <br />
-              <br />
-              <Typography variant="subtitle1">
-                Select the attributes that best describe your pet’s bathroom
-                production today:
-              </Typography>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={formData.bathroomDescription.includes("runnyPoop")}
-                    onChange={handleBathroomAttributesChange}
-                    name="runnyPoop"
-                  />
-                }
-                label="Runny poop"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={formData.bathroomDescription.includes(
-                      "chunkyPoop"
-                    )}
-                    onChange={handleBathroomAttributesChange}
-                    name="chunkyPoop"
-                  />
-                }
-                label="Chunky poop"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={formData.bathroomDescription.includes(
-                      "offColorUrine"
-                    )}
-                    onChange={handleBathroomAttributesChange}
-                    name="offColorUrine"
-                  />
-                }
-                label="Off-color urine"
-              />
-              <br />
-              <br />
-              <TextField
-                label="How many times did your pet vomit today?"
-                fullWidth
-                type="number"
-                name="vomitFrequency"
-                value={formData.vomitFrequency}
-                onChange={handleInputChange}
-              />
+          <div>
+            <Navbar />
+            <div className="form">
+              <div class="step step-2">
+                <Typography variant="h6">Bathroom Activity</Typography>
+                <TextField
+                  label="How many times did your pet use the bathroom today?"
+                  fullWidth
+                  type="number"
+                  name="bathroomFrequency"
+                  value={formData.bathroomFrequency}
+                  onChange={handleInputChange}
+                />
+                <br />
+                <br />
+                <Typography variant="subtitle1">
+                  Select the attributes that best describe your pet’s bathroom
+                  production today:
+                </Typography>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={formData.bathroomDescription.includes(
+                        "runnyPoop"
+                      )}
+                      onChange={handleBathroomAttributesChange}
+                      name="runnyPoop"
+                    />
+                  }
+                  label="Runny poop"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={formData.bathroomDescription.includes(
+                        "chunkyPoop"
+                      )}
+                      onChange={handleBathroomAttributesChange}
+                      name="chunkyPoop"
+                    />
+                  }
+                  label="Chunky poop"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={formData.bathroomDescription.includes(
+                        "offColorUrine"
+                      )}
+                      onChange={handleBathroomAttributesChange}
+                      name="offColorUrine"
+                    />
+                  }
+                  label="Off-color urine"
+                />
+                <br />
+                <br />
+                <TextField
+                  label="How many times did your pet vomit today?"
+                  fullWidth
+                  type="number"
+                  name="vomitFrequency"
+                  value={formData.vomitFrequency}
+                  onChange={handleInputChange}
+                />
+              </div>
             </div>
           </div>
         );

@@ -1,6 +1,6 @@
 import React from "react";
 import "../css/Navbar.css"; // Import your CSS file
-import { Avatar, Button } from "@mui/material";
+import { Button } from "@mui/material";
 import LogoutButton from "../components/logout.js";
 import { useAuth0 } from "@auth0/auth0-react";
 function Navbar() {
@@ -38,9 +38,7 @@ function Navbar() {
               Find Vets Now
             </Button>
           </li>
-          <Avatar style={{ fontSize: "8px" }} variant="contained">
-            <LogoutButton />
-          </Avatar>
+          <LogoutButton />
         </ul>
       </div>
     </nav>
