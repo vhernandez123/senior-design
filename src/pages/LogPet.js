@@ -70,168 +70,176 @@ const LogPet = () => {
       case 0:
         return (
           <div>
+            {" "}
             <Navbar />
-            <Typography variant="h6">Food</Typography>
-            <TextField
-              label="What did your pet eat today? (Food Type)"
-              fullWidth
-              name="foodType"
-              value={formData.foodType}
-              onChange={handleInputChange}
-            />
-            <br />
-            <br />
-            <TextField
-              label="How much did your pet eat? (Number)"
-              fullWidth
-              type="number"
-              name="foodNumber"
-              value={formData.foodNumber}
-              onChange={handleInputChange}
-            />
-            <br />
-            <br />
-            <FormControl fullWidth>
-              <InputLabel>What unit? (oz/lbs/g)</InputLabel>
-              <Select
-                value={formData.foodUnit}
-                onChange={handleInputChange}
-                name="foodUnit"
-              >
-                <MenuItem value="oz">oz</MenuItem>
-                <MenuItem value="lbs">lbs</MenuItem>
-                <MenuItem value="g">g</MenuItem>
-              </Select>
-            </FormControl>
-            <br />
-            <br />
-            <Typography variant="h6">Treats</Typography>
-            <TextField
-              label="What treats did your pet eat today? (Treat Type)"
-              fullWidth
-              name="treatType"
-              value={formData.treatType}
-              onChange={handleInputChange}
-            />
-            <br />
-            <br />
-            <TextField
-              label="How many treats?"
-              fullWidth
-              type="number"
-              name="treatNumber"
-              value={formData.treatNumber}
-              onChange={handleInputChange}
-            />
-            <br />
-            <br />
-            <FormControl fullWidth>
-              <InputLabel>What unit? (oz/lbs/g/treats)</InputLabel>
-              <Select
-                value={formData.treatUnit}
-                onChange={handleInputChange}
-                name="treatUnit"
-              >
-                <MenuItem value="oz">oz</MenuItem>
-                <MenuItem value="lbs">lbs</MenuItem>
-                <MenuItem value="g">g</MenuItem>
-                <MenuItem value="treats">treats</MenuItem>
-              </Select>
-            </FormControl>
-            <br />
-            <br />
-            <TextField
-              label="How many times did your pet drink water today?"
-              fullWidth
-              type="number"
-              name="waterIntake"
-              value={formData.waterIntake}
-              onChange={handleInputChange}
-            />
-            <br />
-            <br />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={formData.consumedWrong}
+            <div className="form">
+              <div class="step step-1">
+                <Typography variant="h6">Food</Typography>
+                <TextField
+                  label="What did your pet eat today? (Food Type)"
+                  fullWidth
+                  name="foodType"
+                  value={formData.foodType}
                   onChange={handleInputChange}
-                  name="consumedWrong"
                 />
-              }
-              label="Did your pet consume something it wasn’t supposed to?"
-            />
-            {formData.consumedWrong && (
-              <TextField
-                label="If yes, describe it here"
-                fullWidth
-                name="descriptionConsumedWrong"
-                value={formData.descriptionConsumedWrong}
-                onChange={handleInputChange}
-              />
-            )}
+                <br />
+                <br />
+                <TextField
+                  label="How much did your pet eat? (Number)"
+                  fullWidth
+                  type="number"
+                  name="foodNumber"
+                  value={formData.foodNumber}
+                  onChange={handleInputChange}
+                />
+                <br />
+                <br />
+                <FormControl fullWidth>
+                  <InputLabel>What unit? (oz/lbs/g)</InputLabel>
+                  <Select
+                    value={formData.foodUnit}
+                    onChange={handleInputChange}
+                    name="foodUnit"
+                  >
+                    <MenuItem value="oz">oz</MenuItem>
+                    <MenuItem value="lbs">lbs</MenuItem>
+                    <MenuItem value="g">g</MenuItem>
+                  </Select>
+                </FormControl>
+                <br />
+                <br />
+                <Typography variant="h6">Treats</Typography>
+                <TextField
+                  label="What treats did your pet eat today? (Treat Type)"
+                  fullWidth
+                  name="treatType"
+                  value={formData.treatType}
+                  onChange={handleInputChange}
+                />
+                <br />
+                <br />
+                <TextField
+                  label="How many treats?"
+                  fullWidth
+                  type="number"
+                  name="treatNumber"
+                  value={formData.treatNumber}
+                  onChange={handleInputChange}
+                />
+                <br />
+                <br />
+                <FormControl fullWidth>
+                  <InputLabel>What unit? (oz/lbs/g)</InputLabel>
+                  <Select
+                    value={formData.treatUnit}
+                    onChange={handleInputChange}
+                    name="treatUnit"
+                  >
+                    <MenuItem value="oz">oz</MenuItem>
+                    <MenuItem value="lbs">lbs</MenuItem>
+                    <MenuItem value="g">g</MenuItem>
+                  </Select>
+                </FormControl>
+                <br />
+                <br />
+                <TextField
+                  label="How many times did your pet drink water today?"
+                  fullWidth
+                  type="number"
+                  name="waterIntake"
+                  value={formData.waterIntake}
+                  onChange={handleInputChange}
+                />
+                <br />
+                <br />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={formData.consumedWrong}
+                      onChange={handleInputChange}
+                      name="consumedWrong"
+                    />
+                  }
+                  label="Did your pet consume something it wasn’t supposed to?"
+                />
+                {formData.consumedWrong && (
+                  <TextField
+                    label="If yes, describe it here"
+                    fullWidth
+                    name="descriptionConsumedWrong"
+                    value={formData.descriptionConsumedWrong}
+                    onChange={handleInputChange}
+                  />
+                )}
+              </div>
+            </div>
           </div>
         );
       case 1:
         return (
-          <div>
-            <Navbar />
-            <Typography variant="h6">Bathroom Activity</Typography>
-            <TextField
-              label="How many times did your pet use the bathroom today?"
-              fullWidth
-              type="number"
-              name="bathroomFrequency"
-              value={formData.bathroomFrequency}
-              onChange={handleInputChange}
-            />
-            <br />
-            <br />
-            <Typography variant="subtitle1">
-              Select the attributes that best describe your pet’s bathroom
-              production today:
-            </Typography>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={formData.bathroomDescription.includes("runnyPoop")}
-                  onChange={handleBathroomAttributesChange}
-                  name="runnyPoop"
-                />
-              }
-              label="Runny poop"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={formData.bathroomDescription.includes("chunkyPoop")}
-                  onChange={handleBathroomAttributesChange}
-                  name="chunkyPoop"
-                />
-              }
-              label="Chunky poop"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={formData.bathroomDescription.includes(
-                    "offColorUrine"
-                  )}
-                  onChange={handleBathroomAttributesChange}
-                  name="offColorUrine"
-                />
-              }
-              label="Off-color urine"
-            />
-            <br />
-            <br />
-            <TextField
-              label="How many times did your pet vomit today?"
-              fullWidth
-              type="number"
-              name="vomitFrequency"
-              value={formData.vomitFrequency}
-              onChange={handleInputChange}
-            />
+          <div className="form">
+            <div class="step step-2">
+              <Navbar />
+              <Typography variant="h6">Bathroom Activity</Typography>
+              <TextField
+                label="How many times did your pet use the bathroom today?"
+                fullWidth
+                type="number"
+                name="bathroomFrequency"
+                value={formData.bathroomFrequency}
+                onChange={handleInputChange}
+              />
+              <br />
+              <br />
+              <Typography variant="subtitle1">
+                Select the attributes that best describe your pet’s bathroom
+                production today:
+              </Typography>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={formData.bathroomDescription.includes("runnyPoop")}
+                    onChange={handleBathroomAttributesChange}
+                    name="runnyPoop"
+                  />
+                }
+                label="Runny poop"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={formData.bathroomDescription.includes(
+                      "chunkyPoop"
+                    )}
+                    onChange={handleBathroomAttributesChange}
+                    name="chunkyPoop"
+                  />
+                }
+                label="Chunky poop"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={formData.bathroomDescription.includes(
+                      "offColorUrine"
+                    )}
+                    onChange={handleBathroomAttributesChange}
+                    name="offColorUrine"
+                  />
+                }
+                label="Off-color urine"
+              />
+              <br />
+              <br />
+              <TextField
+                label="How many times did your pet vomit today?"
+                fullWidth
+                type="number"
+                name="vomitFrequency"
+                value={formData.vomitFrequency}
+                onChange={handleInputChange}
+              />
+            </div>
           </div>
         );
       default:
@@ -240,10 +248,10 @@ const LogPet = () => {
   };
 
   return (
-    <div className="formContainer">
-      <div className="buttonContainer">
+    <div>
+      <div>
         {getStepContent(activeStep)}
-        <div>
+        <div className="logform-button">
           <Button disabled={activeStep === 0} onClick={handleBack}>
             Back
           </Button>

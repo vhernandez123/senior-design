@@ -53,6 +53,7 @@ const PetDetails = () => {
               href="/LogPet"
               variant="contained"
               className="custom-button"
+              style={{ backgroundColor: "#01B636", color: "white" }}
             >
               Log Pet Information
             </Button>

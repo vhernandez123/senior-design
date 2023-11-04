@@ -9,7 +9,7 @@ function Home() {
     <div className="app">
       <Navbar />
       <div className="main-content">
-        <DataTable /> {/* Render the DataTable component */}
+        <DataTable />
       </div>
       <Footer />
     </div>
