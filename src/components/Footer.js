@@ -1,12 +1,39 @@
 import React from "react";
 import "../css/Site.css";
-
-function Footer() {
+import { SiLinkedin } from "react-icons/si";
+import { BsYoutube } from "react-icons/bs";
+import { FaFacebookF } from "react-icons/fa";
+import "../App.css";
+const Footer = () => {
   return (
-    <footer className="footer">
-      &copy; {new Date().getFullYear()} PetLogger
+    <footer>
+      <div className="footer-wrapper">
+        <div className="footer-section-one">
+          <span className="footer-icons">
+            <SiLinkedin />
+            </span >
+            <span  className="footer-icons">
+            <BsYoutube />
+            </span >
+            <span div className="footer-icons">
+            <FaFacebookF />
+          </span >
+        </div>
+        <div className="footer">
+        &copy; {new Date().getFullYear()} PetLogger
+        </div>
+        <div className="footer-section-two">
+          <div className="footer-section-columns">
+            <span>244-5333-7783</span>
+          </div>
+          <div className="footer-section-columns">
+            <span>Terms & Conditions</span>
+            <span>Privacy Policy</span>
+          </div>
+        </div>
+      </div>
     </footer>
   );
-}
+};
 
 export default Footer;

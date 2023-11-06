@@ -35,16 +35,6 @@ video {
   object-fit: cover; /* Maintain aspect ratio and cover container */
 }
 
-/* Footer styles */
-.footer {
-  background-color: #01B636; /* Green background color */
-  color: #fff; /* White text color */
-  padding: 20px; /* Adjust padding as needed */
-  text-align: center;
-  width: 100%;
-  position: absolute; /* Stick to the bottom of the viewport */
-  bottom: 0;
-}
 /* Add this CSS to create a green box around the text */
 .green-box {
   background-color: #01B636; /* Green background color */
