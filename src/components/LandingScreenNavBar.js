@@ -1,7 +1,8 @@
 import React from "react";
 import "../css/LandingScreenNavBar.css";
 import AboutUs from "../components/aboutUs.js";
-import { Button } from "@mui/material";
+import { Avatar, Button } from "@mui/material";
+import LogoutButton from "../components/logout.js";
 function LandingScreenNavBar() {
   return (
     <nav className="navbar">
@@ -13,19 +14,10 @@ function LandingScreenNavBar() {
         href="/AboutUs"
         variant="contained"
         className="custom-button"
-        style={{ margin: "1rem" }}
+        style={{ margin: "1rem", background: "green" }}
       >
         About Us
       </Button>
-        </li>
-        <li className="nav-item">
-          <Button
-            style={{ color: "white" }}
-            href="/Schedule"
-            className="nav-links"
-          >
-            Contact Us
-          </Button>
         </li>
       </ul>
     </div>

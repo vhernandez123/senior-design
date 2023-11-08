@@ -2,7 +2,7 @@ import React from "react";
 import "../css/Site.css";
 import Cat1 from "../images/cat1.jpg";
 import Cat2 from "../images/cat2.jpg";
-
+import Footer from "../components/Footer.js";
 const Landing = () => {
   return (
     <div className="welcome-messages">
@@ -21,7 +21,9 @@ const Landing = () => {
         <img src={Cat1} alt="cat1" className="image" />
         <img src={Cat2} alt="cat2" className="image" />
       </div>
+      <Footer />
     </div>
+    
   );
 };
 

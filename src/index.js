@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./components/Home.js";
 import AddPet from "./pages/AddPet";
 import AboutUs from "./components/aboutUs.js";
-import Contact from "./components/Contact.js";
+import Checklist from "./components/Checklist.js";
 import "normalize.css";
 const domain = process.env.REACT_APP_AUTH0_DOMAIN;
 const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
@@ -27,7 +27,7 @@ ReactDOM.render(
           <Route path="/home" element={<Home />} /> {/* Add this route */}
           <Route path="/AddPet" element={<AddPet />} />
           <Route path="/AboutUs" element={<AboutUs />} />
-          <Route path="/Contact" element={<Contact />} />
+          <Route path="/Checklist" element={<Checklist />} />
         </Routes>
       </Router>
     </Auth0Provider>
