@@ -20,6 +20,18 @@ app.get("/GetAllPets", (req, res) => {
     }
   });
 });
+app.get("/GetLogsByPetId/:petId", (req, res) => {
+  const { petId } = req.params;
+
+  queries.getLogsByPetId(petId, (err, logs) => {
+    if (err) {
+      console.error("Error retrieving logs by petId:", err);
+      res.status(500).json({ error: "Error retrieving logs by petId" });
+    } else {
+      res.status(200).json(logs);
+    }
+  });
+});
 
 app.get("/GetAllUsers", (req, res) => {
   queries.getAllUsers((err, users) => {
@@ -69,6 +81,31 @@ app.get("/GetPet/:petId", (req, res) => {
       } else {
         res.status(200).json(result[0]);
       }
+    }
+  });
+});
+app.post("/InsertLog", (req, res) => {
+  const logData = req.body;
+  queries.insertLog(logData, (err, result) => {
+    if (err) {
+      console.error("Error inserting log data:", err);
+      res.status(500).json({ error: "Error inserting log data" });
+    } else {
+      console.log("Log data inserted successfully");
+      res.status(201).json({ message: "Log data inserted successfully" });
+    }
+  });
+});
+
+app.post("/InsertIllness", (req, res) => {
+  const illnessData = req.body;
+  queries.insertIllness(illnessData, (err, result) => {
+    if (err) {
+      console.error("Error inserting illness data:", err);
+      res.status(500).json({ error: "Error inserting illness data" });
+    } else {
+      console.log("Illness data inserted successfully");
+      res.status(201).json({ message: "Illness data inserted successfully" });
     }
   });
 });

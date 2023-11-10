@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Button,
   Typography,
@@ -7,268 +7,121 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
-  Checkbox,
-  FormControlLabel,
 } from "@mui/material";
+import Axios from "axios";
 import Navbar from "../components/navbar";
 import "../css/LogPet.css";
 
 const LogPet = () => {
-  const [activeStep, setActiveStep] = useState(0);
   const [formData, setFormData] = useState({
     foodType: "",
     foodNumber: "",
-    foodUnit: "oz",
-    treatType: "",
-    treatNumber: "",
-    treatUnit: "treats",
-    waterIntake: "",
-    consumedWrong: false,
-    descriptionConsumedWrong: "",
-    bathroomFrequency: "",
-    bathroomDescription: [],
-    vomitFrequency: "",
+    selectedPetId: "",
+    selectedUnit: "oz",
   });
 
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
+  const [petList, setPetList] = useState([]);
 
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
+  useEffect(() => {
+    Axios.get("http://localhost:4000/GetAllPets")
+      .then((response) => {
+        setPetList(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching pets:", error);
+      });
+  }, []);
 
   const handleInputChange = (event) => {
-    const { name, value, type, checked } = event.target;
-
+    const { name, value } = event.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: value,
     }));
   };
 
-  const handleBathroomAttributesChange = (event) => {
-    const { name, checked } = event.target;
-    let updatedBathroomDescription = [...formData.bathroomDescription];
+  const handleFinish = () => {
+    const logEntry = `Ate  ${formData.foodNumber} ${formData.selectedUnit} of ${formData.foodType} `;
 
-    if (checked) {
-      updatedBathroomDescription.push(name);
-    } else {
-      updatedBathroomDescription = updatedBathroomDescription.filter(
-        (item) => item !== name
-      );
-    }
+    const feedingData = {
+      logDate: new Date().toISOString().split("T")[0],
+      logEntry: logEntry,
+      logFood: formData.foodNumber,
+      Pet_petId: formData.selectedPetId,
+      logFoodUnit: formData.selectedUnit,
+    };
 
-    setFormData((prevData) => ({
-      ...prevData,
-      bathroomDescription: updatedBathroomDescription,
-    }));
-  };
-
-  const getStepContent = (step) => {
-    switch (step) {
-      case 0:
-        return (
-          <div>
-            {" "}
-            <Navbar />
-            <div className="form">
-              <div class="step step-1">
-                <Typography variant="h6">Food</Typography>
-                <TextField
-                  label="What did your pet eat today? (Food Type)"
-                  fullWidth
-                  name="foodType"
-                  value={formData.foodType}
-                  onChange={handleInputChange}
-                />
-                <br />
-                <br />
-                <TextField
-                  label="How much did your pet eat? (Number)"
-                  fullWidth
-                  type="number"
-                  name="foodNumber"
-                  value={formData.foodNumber}
-                  onChange={handleInputChange}
-                />
-                <br />
-                <br />
-                <FormControl fullWidth>
-                  <InputLabel>What unit? (oz/lbs/g)</InputLabel>
-                  <Select
-                    value={formData.foodUnit}
-                    onChange={handleInputChange}
-                    name="foodUnit"
-                  >
-                    <MenuItem value="oz">oz</MenuItem>
-                    <MenuItem value="lbs">lbs</MenuItem>
-                    <MenuItem value="g">g</MenuItem>
-                  </Select>
-                </FormControl>
-                <br />
-                <br />
-                <Typography variant="h6">Treats</Typography>
-                <TextField
-                  label="What treats did your pet eat today? (Treat Type)"
-                  fullWidth
-                  name="treatType"
-                  value={formData.treatType}
-                  onChange={handleInputChange}
-                />
-                <br />
-                <br />
-                <TextField
-                  label="How many treats?"
-                  fullWidth
-                  type="number"
-                  name="treatNumber"
-                  value={formData.treatNumber}
-                  onChange={handleInputChange}
-                />
-                <br />
-                <br />
-                <FormControl fullWidth>
-                  <InputLabel>What unit? (oz/lbs/g)</InputLabel>
-                  <Select
-                    value={formData.treatUnit}
-                    onChange={handleInputChange}
-                    name="treatUnit"
-                  >
-                    <MenuItem value="oz">oz</MenuItem>
-                    <MenuItem value="lbs">lbs</MenuItem>
-                    <MenuItem value="g">g</MenuItem>
-                  </Select>
-                </FormControl>
-                <br />
-                <br />
-                <TextField
-                  label="How many times did your pet drink water today?"
-                  fullWidth
-                  type="number"
-                  name="waterIntake"
-                  value={formData.waterIntake}
-                  onChange={handleInputChange}
-                />
-                <br />
-                <br />
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={formData.consumedWrong}
-                      onChange={handleInputChange}
-                      name="consumedWrong"
-                    />
-                  }
-                  label="Did your pet consume something it wasn’t supposed to?"
-                />
-                {formData.consumedWrong && (
-                  <TextField
-                    label="If yes, describe it here"
-                    fullWidth
-                    name="descriptionConsumedWrong"
-                    value={formData.descriptionConsumedWrong}
-                    onChange={handleInputChange}
-                  />
-                )}
-              </div>
-            </div>
-          </div>
-        );
-      case 1:
-        return (
-          <div>
-            <Navbar />
-            <div className="form">
-              <div class="step step-2">
-                <Typography variant="h6">Bathroom Activity</Typography>
-                <TextField
-                  label="How many times did your pet use the bathroom today?"
-                  fullWidth
-                  type="number"
-                  name="bathroomFrequency"
-                  value={formData.bathroomFrequency}
-                  onChange={handleInputChange}
-                />
-                <br />
-                <br />
-                <Typography variant="subtitle1">
-                  Select the attributes that best describe your pet’s bathroom
-                  production today:
-                </Typography>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={formData.bathroomDescription.includes(
-                        "runnyPoop"
-                      )}
-                      onChange={handleBathroomAttributesChange}
-                      name="runnyPoop"
-                    />
-                  }
-                  label="Runny poop"
-                />
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={formData.bathroomDescription.includes(
-                        "chunkyPoop"
-                      )}
-                      onChange={handleBathroomAttributesChange}
-                      name="chunkyPoop"
-                    />
-                  }
-                  label="Chunky poop"
-                />
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={formData.bathroomDescription.includes(
-                        "offColorUrine"
-                      )}
-                      onChange={handleBathroomAttributesChange}
-                      name="offColorUrine"
-                    />
-                  }
-                  label="Off-color urine"
-                />
-                <br />
-                <br />
-                <TextField
-                  label="How many times did your pet vomit today?"
-                  fullWidth
-                  type="number"
-                  name="vomitFrequency"
-                  value={formData.vomitFrequency}
-                  onChange={handleInputChange}
-                />
-              </div>
-            </div>
-          </div>
-        );
-      default:
-        return null;
-    }
+    Axios.post("http://localhost:4000/InsertLog", feedingData)
+      .then(() => {
+        console.log("Feeding info added successfully");
+      })
+      .catch((error) => {
+        console.error("Error adding feeding info:", error);
+      });
   };
 
   return (
     <div>
-      <div>
-        {getStepContent(activeStep)}
-        <div className="logform-button">
-          <Button disabled={activeStep === 0} onClick={handleBack}>
-            Back
-          </Button>
-          {activeStep === 0 ? (
-            <Button variant="contained" color="primary" onClick={handleNext}>
-              Next
-            </Button>
-          ) : (
-            <Button variant="contained" color="primary" href="/home">
-              Finish
-            </Button>
-          )}
-        </div>
+      <Navbar />
+      <div className="form">
+        <Typography variant="h6">Food</Typography>
+        <TextField
+          label="What did your pet eat today? (Food Type)"
+          fullWidth
+          name="foodType"
+          value={formData.foodType}
+          onChange={handleInputChange}
+        />
+        <br />
+        <br />
+        <TextField
+          label="How many did your pet eat? (Number)"
+          fullWidth
+          type="number"
+          name="foodNumber"
+          value={formData.foodNumber}
+          onChange={handleInputChange}
+        />
+        <br />
+        <br />
+        <FormControl fullWidth>
+          <InputLabel>Select Pet</InputLabel>
+          <Select
+            value={formData.selectedPetId}
+            onChange={handleInputChange}
+            name="selectedPetId"
+          >
+            {petList.map((pet) => (
+              <MenuItem key={pet.petId} value={pet.petId}>
+                {pet.petName}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        <br />
+        <br />
+        <FormControl fullWidth>
+          <InputLabel>Select Unit</InputLabel>
+          <Select
+            value={formData.selectedUnit}
+            onChange={handleInputChange}
+            name="selectedUnit"
+          >
+            <MenuItem value="oz">oz</MenuItem>
+            <MenuItem value="lbs">lbs</MenuItem>
+            <MenuItem value="g">grams</MenuItem>
+          </Select>
+        </FormControl>
+        <br />
+        <br />
+        <Button
+          variant="contained"
+          color="primary"
+          href="/home"
+          onClick={handleFinish}
+        >
+          Finish
+        </Button>
       </div>
     </div>
   );

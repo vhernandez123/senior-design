@@ -9,6 +9,7 @@ import Home from "./components/Home.js";
 import AddPet from "./pages/AddPet";
 import LogPet from "./pages/LogPet";
 import PetDetails from "./pages/PetDetails";
+import LogBathroom from "./pages/LogBathroom.js";
 import "normalize.css";
 const domain = process.env.REACT_APP_AUTH0_DOMAIN;
 const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
@@ -27,7 +28,8 @@ ReactDOM.render(
           <Route path="/home" element={<Home />} /> {/* Add this route */}
           <Route path="/AddPet" element={<AddPet />} />
           <Route path="/pet/:petId" element={<PetDetails />} />
-          <Route path="LogPet" element={<LogPet />} />
+          <Route path="/LogPet" element={<LogPet />} />
+          <Route path="/LogBathroom" element={<LogBathroom />} />
         </Routes>
       </Router>
     </Auth0Provider>
