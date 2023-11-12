@@ -15,7 +15,7 @@ function Navbar() {
               href="/Checklist"
               className="nav-links"
             >
-              Add to Checklist
+              Pet Errands todo
             </Button>
           </li>
           <li className="nav-item">
