@@ -33,7 +33,7 @@ const Home = () => {
   return (
     <div className="checkList-container">
       <Navbar />
-      <div className="home-banner-container">
+      <div className="home-banner-container checkListContain">
         <div class="background-strip">
           <div class="iframe-container">
             <iframe

@@ -23,11 +23,10 @@ body {
 body {
   background-color: #f6f6f6;
 }
-.listName{
+.listName {
   padding-bottom: 80px;
 }
-.home-banner-container{
- 
+.home-banner-container {
   margin-top: 10px;
 }
 
@@ -35,18 +34,16 @@ body {
   position: relative;
   width: 384px;
   height: 480px;
-padding: 30px;
-
+  padding: 30px;
 }
 
 .iframe-container iframe {
   width: 100%;
   height: 100%;
-padding: 5px;
+  padding: 5px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
-
 
 .formcontainer {
   width: 400px;
@@ -54,8 +51,6 @@ padding: 5px;
   border: 1px solid #ddd;
   border-radius: 20px;
   background-color: #99e799;
- 
-  
 }
 
 .formcontainer h2 {
@@ -96,7 +91,6 @@ padding: 5px;
   border-radius: 5px;
   cursor: pointer;
 }
-
 
 .formcontainer input[type="reset"]:hover {
   background-color: #d32f2f;
@@ -178,6 +172,10 @@ nav {
   background-color: rgb(175, 229, 174);
   border-radius: 20px;
 }
+.pt-left {
+  text-align: left;
+  padding: 40px;
+}
 .pic-and-description {
   margin-top: 30px;
   width: 100%;
@@ -190,10 +188,19 @@ nav {
   width: 400px;
   height: 300px;
 }
-.gifDisplayau{
+.gifDisplayau {
   margin-right: 70vh;
   width: 400px;
   height: 300px;
+  padding: 20px;
+}
+.gifDisplayrightside {
+  margin-left: 70vh;
+  width: 400px;
+  height: 300px;
+}
+.checkListContain {
+  padding: 30px;
 }
 .primary-text {
   font-size: clamp(1rem, 3vw, 1.5rem);
@@ -313,11 +320,12 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 2px 30px;
-  background-color: #01b636;
+  background-color: rgba(111, 200, 94, 0.9);
 }
 .footer {
   margin-left: 80vh;
-  color: white;
+  color: rgb(16, 16, 16);
+  font-weight: bolder;
 }
 .footer-logo-container {
   max-width: 110px;

@@ -1,11 +1,12 @@
 /* Navbar styles */
 .navbar {
-    background-color: #01B636;
-    color: #fff;
+  background-color: rgba(88, 159, 75, 1.0);
+    color: #ffffffd3;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 60px;
+    padding:5px;
   }
   
   .navbar-container {

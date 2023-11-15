@@ -11,21 +11,20 @@ const Footer = () => {
         <div className="footer-section-one">
           <span className="footer-icons">
             <SiLinkedin />
-            </span >
-            <span  className="footer-icons">
+          </span>
+          <span className="footer-icons">
             <BsYoutube />
-            </span >
-            <span div className="footer-icons">
+          </span>
+          <span div className="footer-icons">
             <FaFacebookF />
-          </span >
+          </span>
         </div>
         <div className="footer">
-        &copy; {new Date().getFullYear()} PetLogger
+          &copy; {new Date().getFullYear()} PetLogger
         </div>
         <div className="footer-section-two">
           <div className="footer-section-columns">
             <span>Terms & Conditions</span>
-            <span>Privacy Policy</span>
           </div>
         </div>
       </div>
