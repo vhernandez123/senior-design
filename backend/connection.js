@@ -84,6 +84,35 @@ app.get("/GetPet/:petId", (req, res) => {
     }
   });
 });
+app.get("/GetIllnessLogsByPetId/:petId", (req, res) => {
+  const { petId } = req.params;
+
+  queries.getIllnessLogsByPetId(petId, (err, illnessLogs) => {
+    if (err) {
+      console.error("Error retrieving illness logs by petId:", err);
+      res.status(500).json({ error: "Error retrieving illness logs by petId" });
+    } else {
+      res.status(200).json(illnessLogs);
+    }
+  });
+});
+
+// app.get("/GetUser/:userId", (req, res) => {
+//   const { userId } = req.params;
+
+//   queries.getUserbyId(userId, (err, result) => {
+//     if (err) {
+//       console.error("Error retrieving user by ID:", err);
+//       res.status(500).json({ error: "Error retrieving pet by ID" });
+//     } else {
+//       if (result.length === 0) {
+//         res.status(404).json({ error: "User not found" });
+//       } else {
+//         res.status(200).json(result[0]);
+//       }
+//     }
+//   });
+// });
 app.post("/InsertLog", (req, res) => {
   const logData = req.body;
   queries.insertLog(logData, (err, result) => {
@@ -97,15 +126,43 @@ app.post("/InsertLog", (req, res) => {
   });
 });
 
+app.get("/GetAllVets", (req, res) => {
+  queries.getAllVets((err, vets) => {
+    if (err) {
+      console.error("Error fetching vets:", err);
+      res.status(500).json({ error: "Error fetching vets" });
+    } else {
+      res.status(200).json({ vets });
+    }
+  });
+});
+
 app.post("/InsertIllness", (req, res) => {
   const illnessData = req.body;
-  queries.insertIllness(illnessData, (err, result) => {
+  queries.insertPetHasIllness(illnessData, (err, result) => {
     if (err) {
       console.error("Error inserting illness data:", err);
-      res.status(500).json({ error: "Error inserting illness data" });
+      return res
+        .status(500)
+        .json({ error: "Error inserting illness data", details: err.message });
     } else {
       console.log("Illness data inserted successfully");
-      res.status(201).json({ message: "Illness data inserted successfully" });
+      return res.status(201).json({
+        success: true,
+        message: "Illness data inserted successfully",
+        insertedId: result.insertId,
+      });
+    }
+  });
+});
+
+app.get("/GetAllIllnesses", (req, res) => {
+  queries.getAllIllnesses((err, illnesses) => {
+    if (err) {
+      console.error("Error fetching illnesses:", err);
+      res.status(500).json({ error: "Error fetching illnesses" });
+    } else {
+      res.status(200).json({ illnesses });
     }
   });
 });

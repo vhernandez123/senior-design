@@ -43,6 +43,13 @@ function getAllUsers(callback) {
   const query = "SELECT userId, userFirstName, userLastName FROM User";
   db.query(query, callback);
 }
+
+const getAllVets = (callback) => {
+  const query =
+    "SELECT vetinarianID, vetinarianName, vetinarianAddress FROM Vetinarian";
+  db.query(query, callback);
+};
+
 function removePet(petId, callback) {
   const sql = "DELETE FROM Pet WHERE petId = ?";
   db.query(sql, petId, callback);
@@ -52,6 +59,15 @@ function getPetById(petId, callback) {
   const sql = "SELECT * FROM Pet WHERE petId = ?";
   db.query(sql, petId, callback);
 }
+
+function getUserbyId(userId, callback) {
+  const sql = "SELECT * FROM User WHERE userId = ?";
+  db.query(sql, userId, callback);
+}
+const getAllIllnesses = (callback) => {
+  const query = "SELECT * FROM Illness";
+  db.query(query, callback);
+};
 
 function insertLog(logData, callback) {
   const sql =
@@ -68,35 +84,36 @@ function getLogsByPetId(petId, callback) {
   const sql = "SELECT * FROM Logs WHERE Pet_petId = ?";
   db.query(sql, petId, callback);
 }
-function insertIllness(illnessData, callback) {
-  const sql = "INSERT INTO Illness (illnessName) VALUES (?)";
-  const values = [illnessData.illnessName];
-  db.query(sql, values, (error, results) => {
-    if (error) {
-      callback(error);
-    } else {
-      const illnessId = results.insertId;
-      const petIllnessSql =
-        "INSERT INTO Pet_has_Illness (Pet_petId, Illness_illnessId, dateOfDiagnosis, symptoms, Vetinarian_vetinarianID) VALUES (?, ?, ?, ?, ?)";
-      const petIllnessValues = [
-        illnessData.Pet_petId,
-        illnessId,
-        illnessData.dateOfDiagnosis,
-        illnessData.symptoms,
-        illnessData.Vetinarian_vetinarianID,
-      ];
-      db.query(petIllnessSql, petIllnessValues, callback);
-    }
-  });
+function insertPetHasIllness(petHasIllnessData, callback) {
+  const petIllnessSql =
+    "INSERT INTO Pet_has_Illness (Pet_petId, Illness_illnessId, dateOfDiagnosis, symptoms, Vetinarian_vetinarianID) VALUES (?, ?, ?, ?, ?)";
+  const petIllnessValues = [
+    petHasIllnessData.Pet_petId,
+    petHasIllnessData.Illness_illnessId,
+    petHasIllnessData.dateOfDiagnosis,
+    petHasIllnessData.symptoms,
+    petHasIllnessData.Vetinarian_vetinarianID,
+  ];
+
+  db.query(petIllnessSql, petIllnessValues, callback);
+}
+
+function getIllnessLogsByPetId(petId, callback) {
+  const sql = "SELECT * FROM Pet_has_Illness WHERE Pet_petId = ?";
+  db.query(sql, petId, callback);
 }
 
 module.exports = {
   getAllPets,
+  insertPetHasIllness,
+  getAllIllnesses,
+  getAllVets,
   insertPet,
   getAllUsers,
   getLogsByPetId,
+  getIllnessLogsByPetId,
   removePet,
   getPetById,
-  insertIllness,
+  getUserbyId,
   insertLog,
 };

@@ -7,6 +7,9 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
+  Radio,
+  RadioGroup,
+  FormControlLabel,
 } from "@mui/material";
 import Axios from "axios";
 import Navbar from "../components/navbar";
@@ -21,6 +24,9 @@ const LogPet = () => {
   });
 
   const [petList, setPetList] = useState([]);
+  const [drank, setDrank] = useState("0");
+  const [ateBad, setAteBad] = useState("");
+  const [ateBadDesc, setAteBadDesc] = useState("");
 
   useEffect(() => {
     Axios.get("http://localhost:4000/GetAllPets")
@@ -41,15 +47,27 @@ const LogPet = () => {
   };
 
   const handleFinish = () => {
-    const logEntry = `Ate  ${formData.foodNumber} ${formData.selectedUnit} of ${formData.foodType} `;
+    const totalFoodEaten = formData.foodNumber * 1;
+    const totalDrinks = drank * 1;
+
+    const ateBadText =
+      ateBad === "yes"
+        ? `Ate something bad: ${ateBadDesc}.`
+        : "Did not eat something bad.";
+
+    const logEntry = `Ate ${totalFoodEaten} ${formData.selectedUnit} of ${formData.foodType}, 
+      drank ${totalDrinks} times. ${ateBadText}`;
 
     const feedingData = {
       logDate: new Date().toISOString().split("T")[0],
       logEntry: logEntry,
-      logFood: formData.foodNumber,
+      logFood: totalFoodEaten,
       Pet_petId: formData.selectedPetId,
       logFoodUnit: formData.selectedUnit,
+      logDrinks: totalDrinks,
     };
+
+    console.log("Generated log entry:", logEntry);
 
     Axios.post("http://localhost:4000/InsertLog", feedingData)
       .then(() => {
@@ -81,6 +99,35 @@ const LogPet = () => {
           name="foodNumber"
           value={formData.foodNumber}
           onChange={handleInputChange}
+        />
+        <br />
+        <br />
+        <FormControl>How many times did your pet drink today?</FormControl>
+        <br />
+        <br />
+        <TextField
+          type="number"
+          value={drank}
+          onChange={(e) => setDrank(e.target.value)}
+        />
+        <br />
+        <br />
+        <FormControl>
+          Did your pet eat something it wasn't supposed to?
+        </FormControl>
+        <RadioGroup value={ateBad} onChange={(e) => setAteBad(e.target.value)}>
+          <FormControlLabel value="no" control={<Radio />} label="no" />
+          <FormControlLabel value="yes" control={<Radio />} label="yes" />
+        </RadioGroup>
+        <br />
+        <br />
+        <FormControl>If yes, describe it here:</FormControl>
+        <br />
+        <br />
+        <TextField
+          type="text"
+          value={ateBadDesc}
+          onChange={(e) => setAteBadDesc(e.target.value)}
         />
         <br />
         <br />

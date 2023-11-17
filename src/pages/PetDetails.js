@@ -3,12 +3,12 @@ import Axios from "axios";
 import { useParams } from "react-router-dom";
 import "../css/PetDetails.css";
 import Navbar from "../components/navbar";
-import Footer from "../components/Footer";
 import { Button } from "@mui/material";
 
 const PetDetails = () => {
   const [petDetails, setPetDetails] = useState({});
   const [petLogs, setPetLogs] = useState([]);
+  const [petIllnessLogs, setPetIllnessLogs] = useState([]);
   const { petId } = useParams();
 
   const formatLogDate = (logDate) => {
@@ -17,7 +17,6 @@ const PetDetails = () => {
   };
 
   useEffect(() => {
-    // Fetch pet details
     Axios.get(`http://localhost:4000/GetPet/${petId}`)
       .then((response) => {
         setPetDetails(response.data);
@@ -26,13 +25,20 @@ const PetDetails = () => {
         console.error("Error fetching pet details:", error);
       });
 
-    // Fetch logs for the specific pet
     Axios.get(`http://localhost:4000/GetLogsByPetId/${petId}`)
       .then((response) => {
         setPetLogs(response.data);
       })
       .catch((error) => {
         console.error("Error fetching pet logs:", error);
+      });
+
+    Axios.get(`http://localhost:4000/GetIllnessLogsByPetId/${petId}`)
+      .then((response) => {
+        setPetIllnessLogs(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching pet illness logs:", error);
       });
   }, [petId]);
 
@@ -79,7 +85,7 @@ const PetDetails = () => {
           <br></br>
           <h3>Concerned about your pet?</h3>
           <Button
-            href="/LogBathroom"
+            href="/UpdateBathroom"
             variant="contained"
             className="custom-button"
             style={{ backgroundColor: "#01B636", color: "white" }}
@@ -94,6 +100,14 @@ const PetDetails = () => {
           {petLogs.map((log) => (
             <li key={log.logsId}>
               {log.logEntry} on {formatLogDate(log.logDate)}
+            </li>
+          ))}
+        </ul>
+        <ul>
+          {petIllnessLogs.map((illnessLog) => (
+            <li key={illnessLog.illnessLogId}>
+              {illnessLog.symptoms} on{" "}
+              {formatLogDate(illnessLog.dateOfDiagnosis)}
             </li>
           ))}
         </ul>
