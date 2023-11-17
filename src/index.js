@@ -11,10 +11,14 @@ import UpdateFood from "./pages/UpdateFood.js";
 import UpdateBathroom from "./pages/UpdateBathroom.js";
 import UpdateBehavior from "./pages/UpdateBehavior.js";
 import UpdateOther from "./pages/UpdateOther.js";
+import VetFinder from "./pages/VetFinder.js";
+//import { APIProvider } from "@vis.gl/react-google-maps"; //import google maps api
 
 //import "normalize.css";
 const domain = process.env.REACT_APP_AUTH0_DOMAIN;
 const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
+const googleMapsApiKey = process.env.GOOGLE_MAPS_API_KEY;
+
 
 ReactDOM.render(
   <React.StrictMode>
@@ -33,6 +37,10 @@ ReactDOM.render(
            <Route path="/UpdateBathroom" element={<UpdateBathroom />} />
            <Route path="/UpdateBehavior" element={<UpdateBehavior />} />
            <Route path="/UpdateOther" element={<UpdateOther />} />
+           <Route path="/VetFinder" element={<VetFinder/>}/>
+
+           
+           
 
 
         </Routes>
