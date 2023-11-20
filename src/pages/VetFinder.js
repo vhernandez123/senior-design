@@ -1,8 +1,11 @@
 //https://www.youtube.com/watch?v=iOif0eHQbHY
 //adapted for React.js from Javascript
 //"use client";
+
 import * as React from "react";
 import { useState, useRef, useEffect} from "react";
+import {Loader} from '@googlemaps/js-api-loader';
+
 
 import {
     APIProvider,
@@ -38,15 +41,20 @@ import {
     TextField
   } from "@mui/material";
 
+
 const VetFinder = () => {
 //main function
+
+
+    const google = window.google;
+
 
     const placeType="veterinary_care";
     const [markerRef, marker] = useMarkerRef();
     //const mapRef = useRef();
     const placesRef = useRef(null);
     const [inputValue, setInputValue] = useState('312 Meadow Brook Rd, Rochester, MI 48309');
-    const googleMapsApiKey = process.env.googleMapsApiKey;
+    const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAP_API_KEY;
 
       const placesLib = useMapsLibrary('places');
       const mapsLib = useMapsLibrary('maps');
@@ -60,10 +68,48 @@ const VetFinder = () => {
         lng: -83.234103
     });
 
+    /*
+    async function initMap() {
+        // Request libraries when needed, not in the script tag.
+        const { Map } = await window.google.maps.importLibrary("maps");
+        // Short namespaces can be used.
+        map = new Map(document.getElementById("map"), {
+            center: {coordinates},
+            zoom: 14,
+        });
+    }
+
+    */
+    const [gMap, setGMap] = useState(null);
+
+    
+    const loader = new Loader({
+        apiKey: process.env.GOOGLE_MAPS_API_KEY,
+        version: "weekly",
+        libraries: "places,geocoding"
+        //...additionalOptions,
+      });
+      
+      loader
+        .load()
+        .then((google) => {
+           setGMap( new google.maps.Map(document.getElementById("map-div"), {
+                center: {lat: 42.687532,
+                    lng: -83.234103},
+                zoom: 14
+            }))
+        })
+        .catch(e => {
+            // do something
+            console.log("Error loading map: " + e);
+        });
+      console.log(gMap);
+
     //const map = useMap("map"); 
     //map.setCenter(coordinates);
-    const map = useMap("map");
+    //const map = useMap("map");
 
+    /*
     useEffect(() => {
         if (!map) return;
             map.setCenter(coordinates);
@@ -71,15 +117,15 @@ const VetFinder = () => {
     },[map]);
     console.log("map:" + map);
 
-
+*/
     const handleSelect = async value => {
         const results = await geocodeByAddress(value);
         const latLng = await getLatLng(results[0]);
         setAddress(value);
         setCoordinates(latLng);
-        searchNearbyPlaces();   
+        //searchNearbyPlaces();   
     };
-      
+      /*
     function searchNearbyPlaces (){
 
         
@@ -95,8 +141,9 @@ const VetFinder = () => {
         service = new placesLib.PlacesService(map);
         service.nearbySearch({
             location: coordinates,
-            radius: '50',
-            type: [placeType]
+            radius: '1500',
+            type: [placeType],
+            maxResultCount: '5'
         }, callback);    
     }
 
@@ -125,6 +172,8 @@ const VetFinder = () => {
             cell2.innerHTML = `<img width="300" height="300" src="${photoUrl}"/>`
         }
     }
+        */
+    
     return (
         //<APIProvider apiKey="AIzaSyBDUcFZdWRZ5SQOq_q4OYE3DoDhKMRcxgk" libraries={['places']}>
         <Container>
@@ -133,6 +182,7 @@ const VetFinder = () => {
                     <h1>Find Veterinarians</h1>
                 </div>
             <Stack spacing={3} direction="column" sx={{ marginBottom: 4, marginLeft:4, marginTop: 4, marginRight: 4}}>
+            
             <PlacesAutocomplete
                 value={address}
                 onChange={setAddress}
@@ -166,9 +216,9 @@ const VetFinder = () => {
                 )}
             </PlacesAutocomplete>
             </Stack>
-            <APIProvider apiKey="AIzaSyBDUcFZdWRZ5SQOq_q4OYE3DoDhKMRcxgk"><Map id="map" zoom={10} center={coordinates}>
-                <Marker ref={markerRef} position={coordinates} />
-            </Map></APIProvider>
+            <div id="map-div" height="50vh" width='60%'>
+            </div>
+            
             <br/><br/>
             <Table sx={{ minWidth: 650 }} id="places" ref={placesRef}>
                 <TableHead>
@@ -195,6 +245,11 @@ const VetFinder = () => {
       
         </Container>
         //onChange={setInputValue}
+        /*
+        <APIProvider apiKey="AIzaSyBDUcFZdWRZ5SQOq_q4OYE3DoDhKMRcxgk"><Map id="map" zoom={10} center={coordinates}>
+                <Marker ref={markerRef} position={coordinates} />
+            </Map></APIProvider>
+        */
     );
 };
 
