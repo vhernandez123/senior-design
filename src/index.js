@@ -11,7 +11,8 @@ import UpdateFood from "./pages/UpdateFood.js";
 import UpdateBathroom from "./pages/UpdateBathroom.js";
 import UpdateBehavior from "./pages/UpdateBehavior.js";
 import UpdateOther from "./pages/UpdateOther.js";
-import VetFinder from "./pages/VetFinder.js";
+import VetFinder from "./pages/VetFinder_load_only.js";
+import PlaceList from "./components/PlaceList.js";
 //import { APIProvider } from "@vis.gl/react-google-maps"; //import google maps api
 
 //import "normalize.css";
@@ -38,6 +39,7 @@ ReactDOM.render(
            <Route path="/UpdateBehavior" element={<UpdateBehavior />} />
            <Route path="/UpdateOther" element={<UpdateOther />} />
            <Route path="/VetFinder" element={<VetFinder/>}/>
+           <Route path="/PlaceList" element={<PlaceList/>}/>
 
            
            

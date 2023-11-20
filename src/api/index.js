@@ -1,4 +1,6 @@
 import axios from 'axios';
+const cors = require("cors");
+
 
 export const getNearbyPlaces = async (lat, lng) => {
   try {
@@ -16,13 +18,17 @@ export const getNearbyPlaces = async (lat, lng) => {
         },
         headers: {
           'X-Goog-Api-Key': 'AIzaSyBDUcFZdWRZ5SQOq_q4OYE3DoDhKMRcxgk',
-          'X-Goog-FieldMask': 'id,location,formattedAddress,displayName,photos,rating,website,formatted_phone_number,price_level'
+          'X-Goog-FieldMask': 'id,location,formattedAddress,displayName,photos,rating,website,formatted_phone_number,price_level',
+          'Access-Control-Allow-Origin': '*',          
+          "Access-Control-Allow-Methods": '*',
+          'Access-Control-Allow-Headers': '*',
+          'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
         },
     });
     
     return data;
   } catch (error) {
-    console.error(error);
+    console.error("Error fetching nearby places: " + error);
   }
 };
 
@@ -34,11 +40,13 @@ export const getLibraries = async (lat, lng) => {
         },
         headers: {
           'X-Goog-Api-Key': 'AIzaSyBDUcFZdWRZ5SQOq_q4OYE3DoDhKMRcxgk',
+          "Access-Control-Allow-Methods": '*',
+          'Access-Control-Allow-Headers': '*'
         },
     });
     
     return data;
   } catch (error) {
-    console.error(error);
+    console.error("Error fetching Maps libraries: " + error);
   }
 };
