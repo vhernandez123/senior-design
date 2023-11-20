@@ -58,10 +58,9 @@ const Home = () => {
                   id="listname"
                   placeholder="Enter Check List Name"
                 />
-            
     <label for="to_name">Email Reciever </label>
     <input type="text" name="to_name" id="to_name" placeholder="Who are you sending this email to?"/>
-  
+
                 <textarea
                   name="message"
                   id="listinput"

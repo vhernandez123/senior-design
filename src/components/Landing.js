@@ -1,7 +1,5 @@
 import React from "react";
 import "../css/Site.css";
-import Cat1 from "../images/cat1.jpg";
-import Cat2 from "../images/cat2.jpg";
 import Footer from "../components/Footer.js";
 const Landing = () => {
   return (
