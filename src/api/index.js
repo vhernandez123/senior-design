@@ -5,7 +5,8 @@ const cors = require("cors");
 export const getNearbyPlaces = async (lat, lng) => {
   try {
     const {data: {data} }= await axios.get('https://places.googleapis.com/v1/places:searchNearby/json', {
-        params: {
+      withCredentials: false, 
+      params: {
           "locationRestriction": {
             "circle": {
               "center": {
