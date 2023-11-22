@@ -11,7 +11,7 @@ const Home = () => {
           <div class="background-strip">
             <h1 className="primary-heading">Your Pets are the priority</h1>
           </div>
-          <div class="pic-and-description">
+          <div class="pic-and-description cats12">
             <p className="primary-text">
               Our goal is to help pet owners and pet care professionals to
               better understand, monitor, and improve the well-being of pets by

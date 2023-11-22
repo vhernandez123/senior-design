@@ -10,8 +10,12 @@ function Home() {
     <div className="app">
       <Navbar />
       <div className="main-content">
-        <DataTable /> {/* Render the DataTable component */}
-        <img src={CatFoot} alt="cat1" className="catimage" />
+        <div class="dataTableFormatting">
+          <DataTable />
+        </div>
+        <div class="image-container">
+          <img src={CatFoot} alt="cat1" className="catimage" />
+        </div>
       </div>
       <Footer />
     </div>
