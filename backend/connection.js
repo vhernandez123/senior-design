@@ -137,6 +137,17 @@ app.get("/GetAllVets", (req, res) => {
   });
 });
 
+app.get("/GetAllSymptoms", (req, res) => {
+  queries.getAllSymptoms((err, symptoms) => {
+    if (err) {
+      console.error("Error fetching symptoms:", err);
+      res.status(500).json({ error: "Error fetching symptoms" });
+    } else {
+      res.status(200).json({ symptoms });
+    }
+  });
+});
+
 app.post("/InsertIllness", (req, res) => {
   const illnessData = req.body;
   queries.insertPetHasIllness(illnessData, (err, result) => {

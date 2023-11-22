@@ -186,7 +186,15 @@ const UpdateBathroom = () => {
               onClick={handleSubmit} // Use onClick to handle the form submission
               className="button"
             >
-              Finish
+              Save
+            </Button>
+            <Button
+              variant="outlined"
+              href="/UpdateBehavior"
+              color="secondary"
+              className="button"
+            >
+              Next
             </Button>
           </Stack>
         </form>

@@ -72,7 +72,7 @@ const PetDetails = () => {
               <span className="property-label">Food:</span> {petDetails.petFood}
             </p>
           </div>
-          <h3>What has your pet ate today?</h3>
+          <h3>What has your pet eaten today?</h3>
           <Button
             href="/LogPet"
             variant="contained"
@@ -81,8 +81,8 @@ const PetDetails = () => {
           >
             Log Food
           </Button>
-          <br></br>
-          <br></br>
+          <br />
+          <br />
           <h3>Concerned about your pet?</h3>
           <Button
             href="/UpdateBathroom"
@@ -95,22 +95,27 @@ const PetDetails = () => {
         </div>
       </div>
       <div className="pet-logs notepad">
-        <h3>Food logs for {petDetails.petName}</h3>
-        <ul>
-          {petLogs.map((log) => (
-            <li key={log.logsId}>
-              {log.logEntry} on {formatLogDate(log.logDate)}
-            </li>
-          ))}
-        </ul>
-        <ul>
-          {petIllnessLogs.map((illnessLog) => (
-            <li key={illnessLog.illnessLogId}>
-              {illnessLog.symptoms} on{" "}
-              {formatLogDate(illnessLog.dateOfDiagnosis)}
-            </li>
-          ))}
-        </ul>
+        <div className="log-box">
+          <h3>Food logs for {petDetails.petName}</h3>
+          <ul>
+            {petLogs.map((log) => (
+              <li key={log.logsId}>
+                {log.logEntry} on {formatLogDate(log.logDate)}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="log-box">
+          <h3>Illness logs for {petDetails.petName}</h3>
+          <ul>
+            {petIllnessLogs.map((illnessLog) => (
+              <li key={illnessLog.illnessLogId}>
+                {illnessLog.symptoms} on{" "}
+                {formatLogDate(illnessLog.dateOfDiagnosis)}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );

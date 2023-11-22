@@ -69,6 +69,11 @@ const getAllIllnesses = (callback) => {
   db.query(query, callback);
 };
 
+const getAllSymptoms = (callback) => {
+  const query = "SELECT * FROM Symptoms";
+  db.query(query, callback);
+};
+
 function insertLog(logData, callback) {
   const sql =
     "INSERT INTO Logs (logDate, logEntry, Pet_petId, logFood) VALUES (?, ?, ?, ?)";
@@ -105,6 +110,7 @@ function getIllnessLogsByPetId(petId, callback) {
 
 module.exports = {
   getAllPets,
+  getAllSymptoms,
   insertPetHasIllness,
   getAllIllnesses,
   getAllVets,

@@ -9,6 +9,7 @@ import Home from "./components/Home.js";
 import AddPet from "./pages/AddPet";
 import LogPet from "./pages/LogPet";
 import PetDetails from "./pages/PetDetails";
+import UpdateBehavior from "./pages/UpdateBehavior.js";
 import "normalize.css";
 import UpdateBathroom from "./pages/UpdateBathroom.js";
 const domain = process.env.REACT_APP_AUTH0_DOMAIN;
@@ -27,6 +28,7 @@ ReactDOM.render(
           <Route path="/app" element={<App />} />
           <Route path="/home/" element={<Home />} />
           <Route path="/AddPet" element={<AddPet />} />
+          <Route path="/UpdateBehavior" element={<UpdateBehavior />} />
           <Route path="/pet/:petId" element={<PetDetails />} />
           <Route path="/LogPet" element={<LogPet />} />
           <Route path="/UpdateBathroom" element={<UpdateBathroom />} />
