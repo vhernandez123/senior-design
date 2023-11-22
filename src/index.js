@@ -7,7 +7,11 @@ import Main from "./components/Main.jsx"; // Import your Main component
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./components/Home.js";
 import AddPet from "./pages/AddPet";
+import LogPet from "./pages/LogPet";
+import PetDetails from "./pages/PetDetails";
+import UpdateBehavior from "./pages/UpdateBehavior.js";
 import "normalize.css";
+import UpdateBathroom from "./pages/UpdateBathroom.js";
 const domain = process.env.REACT_APP_AUTH0_DOMAIN;
 const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
 
@@ -22,8 +26,12 @@ ReactDOM.render(
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/app" element={<App />} />
-          <Route path="/home" element={<Home />} /> {/* Add this route */}
+          <Route path="/home/" element={<Home />} />
           <Route path="/AddPet" element={<AddPet />} />
+          <Route path="/UpdateBehavior" element={<UpdateBehavior />} />
+          <Route path="/pet/:petId" element={<PetDetails />} />
+          <Route path="/LogPet" element={<LogPet />} />
+          <Route path="/UpdateBathroom" element={<UpdateBathroom />} />
         </Routes>
       </Router>
     </Auth0Provider>
