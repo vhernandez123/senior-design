@@ -53,7 +53,6 @@ function insertPet(petData, callback) {
     petData.petWeight,
     petData.petMicrochipNum,
     petData.petFood,
-    // petData.Owner_ownerId = 1,
     petData.Owner_ownerId,
   ];
   for (let i = 0; i+1 < values.length; i++) {
@@ -63,12 +62,11 @@ function insertPet(petData, callback) {
 }
 
 function getAllUsers(callback) {
-  const query = "SELECT userId, userFirstName, userLastName FROM User where userId=1";
+  const query = "SELECT userId, userFirstName, userLastName FROM User";
   db.query(query, callback);
 }
 function removePet(petId, callback) {
   const sql = "DELETE FROM Pet WHERE petId = ?";
-  petId=toEncrypt(petId);
   db.query(sql, petId, callback);
 }
 
