@@ -16,6 +16,15 @@ app.get("/GetAllPets", (req, res) => {
       console.error("Error retrieving pet data:", err);
       res.status(500).json({ error: "Error retrieving pet data" });
     } else {
+      for (let i = 0; i < result.length; i++) {
+        result[i]['petName'] = queries.toDecrypt(result[i]['petName']);
+        result[i]['petBreed'] = queries.toDecrypt(result[i]['petBreed']);
+        result[i]['petAge'] = queries.toDecrypt(result[i]['petAge']);
+        result[i]['petColor'] = queries.toDecrypt(result[i]['petColor']);
+        result[i]['petWeight'] = queries.toDecrypt(result[i]['petWeight']);
+        result[i]['petMicrochipNum'] = queries.toDecrypt(result[i]['petMicrochipNum']);
+        result[i]['petFood'] = queries.toDecrypt(result[i]['petFood']);
+      }
       res.status(200).json(result);
     }
   });
