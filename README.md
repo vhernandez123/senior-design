@@ -19,6 +19,12 @@ DB_DATABASE=
 
 If you do not wish to use AuthO, you will need to create your own login functionality
 
+## Encryption
+Generate secret key and initialization vector using crypto from Node.js or use the following website \
+https://generate-random.org/encryption-key-generator?count=1&bytes=32&cipher=aes-256-cbc&string=&password=#google_vignette
+
+Secret key must be 32 bytes and the initialization vectore must be 16 bytes
+
 ## Database
 Create MySQL database using database_creation.sql
 
