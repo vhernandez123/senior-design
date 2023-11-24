@@ -11,7 +11,7 @@ import UpdateFood from "./pages/UpdateFood.js";
 import UpdateBathroom from "./pages/UpdateBathroom.js";
 import UpdateBehavior from "./pages/UpdateBehavior.js";
 import UpdateOther from "./pages/UpdateOther.js";
-import VetFinder from "./pages/VetFinder3.js";
+import VetFinder from "./pages/VetFinder4.js";
 import PlaceList from "./components/PlaceList.js";
 //import { APIProvider } from "@vis.gl/react-google-maps"; //import google maps api
 

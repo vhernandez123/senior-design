@@ -1,3 +1,5 @@
+/*global google*/
+
 import React from 'react';
 import { useState, useRef, useEffect} from "react";
 
@@ -13,14 +15,19 @@ import PlacesAutocomplete, {
   getLatLng
 } from "react-places-autocomplete";
 
-const google = window.google;
+//const google = window.google;
 //Cannot read properties of undefined (reading 'maps')
 const {Map} = await google.maps.importLibrary("maps");
+
+
 
 const infoWindow = new google.maps.InfoWindow;
 
 const currentInfoWindow = infoWindow;
 const VetFinder = () => {  
+
+  const googlemapRef = useRef(null);
+
   const [coordinates, setCoordinates] = useState({
     lat: 42.687532,
     lng: -83.234103
@@ -37,10 +44,17 @@ const VetFinder = () => {
     const currentInfoWindow = infoWindow;
 
     
-    const [map, setMap] = useState(new google.maps.Map(document.getElementById('map'), {
-      center: coordinates,
-      zoom: 15
-      }));
+  
+    const [map, setMap] = useState(null)
+      
+      if (isLoaded){
+        setMap(new google.maps.Map(document.getElementById('map'), {
+          center: coordinates,
+          zoom: 15
+          }));
+      }
+      
+
       const handleSelect = async value => {
         const results = await geocodeByAddress(value);
         const latLng = await getLatLng(results[0]);
@@ -127,6 +141,8 @@ function handleLocationError(browserHasGeolocation, infoWindow, coordinates) {
       <GoogleMap
       centerAroundCurrentLocation
       google={this.props.google}
+      ref={this.googlemapRef}
+      id="map"
       >
       
       <Marker onClick={this.onMarkerClick} name={'Current Location'} />

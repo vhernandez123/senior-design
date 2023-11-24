@@ -1,3 +1,4 @@
+/*global google*/
 //100 Days in Kyoto to Create a Web App with Google Maps API
 
 //my imports:
