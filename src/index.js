@@ -8,12 +8,9 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./components/Home.js";
 import AddPet from "./pages/AddPet";
 import VetFinder from "./pages/VetFinder5.js";
-//import { APIProvider } from "@vis.gl/react-google-maps"; //import google maps api
-
-//import "normalize.css";
+import "normalize.css";
 const domain = process.env.REACT_APP_AUTH0_DOMAIN;
 const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
-const googleMapsApiKey = process.env.GOOGLE_MAPS_API_KEY;
 
 
 ReactDOM.render(
