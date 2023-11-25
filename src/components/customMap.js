@@ -3,9 +3,13 @@ import { useState} from "react";
 
 
 
-const Map = () => {
-	const sourceURL = "https://www.google.com/maps/embed/v1/search?key="+process.env.REACT_APP_GOOGLE_MAP_API_KEY+"&q=vet+near+me";
-    console.log(sourceURL);
+const CustomMap = (coordinates) => {
+
+    const latitude = "" + coordinates.lat.toString;
+    const longitude = "" + coordinates.lng.toString;
+    const sourceURL = "https://www.google.com/maps/embed/v1/search?key="+process.env.REACT_APP_GOOGLE_MAP_API_KEY+"&q=vet&center="+latitude+","+longitude;
+
+    console.log(sourceURL, latitude, longitude);
   return (
     <div>
       
@@ -26,4 +30,4 @@ const Map = () => {
   )
 }
 
-export default Map;
+export default CustomMap;

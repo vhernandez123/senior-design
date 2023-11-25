@@ -1,5 +1,6 @@
 import * as React from "react";
 import Map from "../components/Map";
+import CustomMap from "../components/customMap";
 import { useState, useRef} from "react";
 
 import {
@@ -19,6 +20,13 @@ import PlacesAutocomplete, {
 	getLatLng
   } from "react-places-autocomplete";
 
+
+//TO FIX:
+//https://github.com/ryanseddon/react-frame-component
+//https://stackoverflow.com/questions/34743264/how-to-set-iframe-content-of-a-react-component
+
+
+
 const VetFinder4 = () => {
 		//https://github.com/leighhalliday/demo-google-places-react/blob/master/src/App.js
 		const [address, setAddress] = useState("");
@@ -26,6 +34,7 @@ const VetFinder4 = () => {
 			lat: 42.687532,
 			lng: -83.234103
 		}); //changed coordinates to OU coordinates
+		var sourceURL = "";
 
 		//added
 		const [hasPlace, setHasPlace] = useState(null);
@@ -37,7 +46,8 @@ const VetFinder4 = () => {
 		const handleOpen = () => setOpen(true);
 		//const handleClose = () => setOpen(false);
 		const [showMap, setShowMap] = useState(false);
-		const [sourceURL, setSourceURL]=useState("https://www.google.com/maps/embed/v1/search?key="+process.env.REACT_APP_GOOGLE_MAP_API_KEY+"&zoom=12&q=vet+near+me");
+		const [showCustomMap, setShowCustomMap] = useState(false);
+		//const [sourceURL, setSourceURL]=useState("https://www.google.com/maps/embed/v1/search?key="+process.env.REACT_APP_GOOGLE_MAP_API_KEY+"&zoom=12&q=vet+near+me");
 
 		//https://github.com/leighhalliday/demo-google-places-react/blob/master/src/App.js
 		const handleSelect = async value => {
@@ -49,11 +59,6 @@ const VetFinder4 = () => {
 			setLongitude(coordinates.lng); //added
 			setLatitude(coordinates.lat); //added
 		};
-
-		//POETENTIAL FUTURE WORK:: SEARCH NEARBY PLACES, GET PLACE_ID,
-		//THEN ON BUTTON CLICK LOAD A NEW PAGE/POPUP WITH AN EMBEDDED IFRAME MAP OF THAT PLACE
-		// /THOSE PLACES
-
 
 		//added
 		const handleSourceChange = (s) => {
@@ -74,18 +79,18 @@ const VetFinder4 = () => {
 			if (s){
 				if (source == "userInput"){
 					//if the user gave an address
-					setSourceURL("https://www.google.com/maps/embed/v1/search?key="+process.env.REACT_APP_GOOGLE_MAP_API_KEY+"&zoom=12&q=vet&center="+latitude+","+longitude);
+					sourceURL= "https://www.google.com/maps/embed/v1/search?key="+process.env.REACT_APP_GOOGLE_MAP_API_KEY+"&q=vet&center="+latitude+","+longitude;
+					setShowMap(false);
+					setShowCustomMap(true);
 				} else {
-					setSourceURL("https://www.google.com/maps/embed/v1/search?key="+process.env.REACT_APP_GOOGLE_MAP_API_KEY+"&zoom=12&q=vet+near+me");
+					setShowCustomMap(false);
+					setShowMap(true);
 				}
-				console.log(hasPlace, latitude, longitude, sourceURL);
-				setShowMap(true);
+				//console.log(hasPlace, latitude, longitude);
 
 				}
 		}
 		
-		
-
 		return (
 			<div>
 				<Dialog open={open} onClose={handleClose}>
@@ -94,6 +99,7 @@ const VetFinder4 = () => {
 					<DialogContentText>
 						To discover veterenarians in your area, please either select "Use current location" or enter an address to search from. 
 					</DialogContentText>
+					<br/>
 					<InputLabel id="location-source">Select a method</InputLabel>
 						<Select
 							labelId="location-source-label"
@@ -149,7 +155,23 @@ const VetFinder4 = () => {
 >
 				{ //added
 					showMap ? 
-					<Map sourceURL={sourceURL}></Map> 
+					<Map></Map> 
+					: null}
+					{ //added
+					showCustomMap ? 
+					<iframe
+					src={sourceURL}
+					width="640px"
+					//sandbox="aasda"
+					height="320px"
+					id=""
+					className=""
+					//sandbox="allow-scripts allow-same-origin"
+					//sandbox={["allow-same-origin", "allow-scripts"]}
+					//display="block"
+					position="relative"
+					allowFullScreen
+				/>
 					: null}
 					</div>
 			</div>
