@@ -85,10 +85,17 @@ function insertLog(logData, callback) {
   ];
   db.query(sql, values, callback);
 }
+
 function getLogsByPetId(petId, callback) {
   const sql = "SELECT * FROM Logs WHERE Pet_petId = ?";
   db.query(sql, petId, callback);
 }
+
+function getMedicationLogsByPetId(petId, callback) {
+  const sql = "SELECT * FROM Pet_has_Medication WHERE Pet_petId = ?";
+  db.query(sql, petId, callback);
+}
+
 function insertPetHasIllness(petHasIllnessData, callback) {
   const petIllnessSql =
     "INSERT INTO Pet_has_Illness (Pet_petId, Illness_illnessId, dateOfDiagnosis, symptoms, Vetinarian_vetinarianID) VALUES (?, ?, ?, ?, ?)";
@@ -103,13 +110,57 @@ function insertPetHasIllness(petHasIllnessData, callback) {
   db.query(petIllnessSql, petIllnessValues, callback);
 }
 
+function insertPetBehavior(behaviorData, callback) {
+  const behaviorSql =
+    "INSERT INTO PetBehavior (Pet_petId, activity, aggression, behaviorChanges, Symptom_symptomId) VALUES (?, ?, ?, ?, ?)";
+  const behaviorValues = [
+    behaviorData.selectedPetId,
+    behaviorData.activity,
+    behaviorData.aggression,
+    behaviorData.behaviorChanges,
+    behaviorData.selectedSymptomId,
+  ];
+
+  db.query(behaviorSql, behaviorValues, callback);
+}
+
+function insertPetMedication(medicationData, callback) {
+  const medicationSql =
+    "INSERT INTO Pet_has_Medication (Pet_petId, Medication_medicationId, durationInDays, dosage, instructions, Vetinarian_vetinarianID) VALUES (?, ?, ?, ?, ?, ?)";
+  const medicationValues = [
+    medicationData.selectedPetId,
+    medicationData.selectedMedicationId,
+    medicationData.durationInDays,
+    medicationData.dosage,
+    medicationData.instructions,
+    medicationData.selectedVetId,
+  ];
+
+  db.query(medicationSql, medicationValues, callback);
+}
+
 function getIllnessLogsByPetId(petId, callback) {
   const sql = "SELECT * FROM Pet_has_Illness WHERE Pet_petId = ?";
   db.query(sql, petId, callback);
 }
 
+function getBehaviorLogsByPetId(petId, callback) {
+  const sql = "SELECT * FROM PetBehavior WHERE Pet_petId = ?";
+  db.query(sql, petId, callback);
+}
+
+function getMedications(callback) {
+  const sql = "SELECT * FROM Medication";
+  db.query(sql, callback);
+}
+
 module.exports = {
   getAllPets,
+  insertPetMedication,
+  getMedicationLogsByPetId,
+  getMedications,
+  insertPetBehavior,
+  getBehaviorLogsByPetId,
   getAllSymptoms,
   insertPetHasIllness,
   getAllIllnesses,

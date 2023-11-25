@@ -44,6 +44,30 @@ app.get("/GetAllUsers", (req, res) => {
   });
 });
 
+app.get("/GetAllMedications", (req, res) => {
+  queries.getMedications((err, users) => {
+    if (err) {
+      console.error("Error retrieving medication data:", err);
+      res.status(500).json({ error: "Error retrieving medication data" });
+    } else {
+      res.status(200).json(users);
+    }
+  });
+});
+
+app.post("/InsertPetMedication", (req, res) => {
+  const medicationData = req.body;
+
+  queries.insertPetMedication(medicationData, (err) => {
+    if (err) {
+      console.error("Error inserting pet medication:", err);
+      res.status(500).json({ error: "Error inserting pet medication" });
+    } else {
+      res.status(200).json({ message: "Pet medication inserted successfully" });
+    }
+  });
+});
+
 app.post("/InsertPet", (req, res) => {
   const petData = req.body;
   queries.insertPet(petData, (err, result) => {
@@ -97,22 +121,35 @@ app.get("/GetIllnessLogsByPetId/:petId", (req, res) => {
   });
 });
 
-// app.get("/GetUser/:userId", (req, res) => {
-//   const { userId } = req.params;
+app.get("/GetBehaviorLogsByPetId/:petId", (req, res) => {
+  const { petId } = req.params;
 
-//   queries.getUserbyId(userId, (err, result) => {
-//     if (err) {
-//       console.error("Error retrieving user by ID:", err);
-//       res.status(500).json({ error: "Error retrieving pet by ID" });
-//     } else {
-//       if (result.length === 0) {
-//         res.status(404).json({ error: "User not found" });
-//       } else {
-//         res.status(200).json(result[0]);
-//       }
-//     }
-//   });
-// });
+  queries.getBehaviorLogsByPetId(petId, (err, behaviorLogs) => {
+    if (err) {
+      console.error("Error retrieving behavior logs by petId:", err);
+      res
+        .status(500)
+        .json({ error: "Error retrieving behavior logs by petId" });
+    } else {
+      res.status(200).json(behaviorLogs);
+    }
+  });
+});
+
+app.get("/GetMedicationLogsByPetId/:petId", (req, res) => {
+  const { petId } = req.params;
+  queries.getMedicationLogsByPetId(petId, (err, medicationLogs) => {
+    if (err) {
+      console.error("Error retrieving medication logs by petId:", err);
+      res
+        .status(500)
+        .json({ error: "Error retrieving medication logs by petId" });
+    } else {
+      res.status(200).json(medicationLogs);
+    }
+  });
+});
+
 app.post("/InsertLog", (req, res) => {
   const logData = req.body;
   queries.insertLog(logData, (err, result) => {
@@ -122,6 +159,19 @@ app.post("/InsertLog", (req, res) => {
     } else {
       console.log("Log data inserted successfully");
       res.status(201).json({ message: "Log data inserted successfully" });
+    }
+  });
+});
+
+app.post("/InsertPetBehavior", (req, res) => {
+  const behaviorData = req.body;
+  queries.insertPetBehavior(behaviorData, (err, result) => {
+    if (err) {
+      console.error("Error inserting pet behavior:", err);
+      res.status(500).json({ error: "Error inserting pet behavior" });
+    } else {
+      console.log("Pet behavior inserted successfully");
+      res.status(201).json({ message: "Pet behavior inserted successfully" });
     }
   });
 });
