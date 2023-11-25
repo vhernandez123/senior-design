@@ -16,7 +16,6 @@
     "axios": "^1.5.1",
     "bootstrap": "^5.3.1",
     "cors": "^2.8.5",
-    "downshift": "^8.2.3",
     "express": "^4.18.2",
     "mysql": "^2.18.1",
     "mysql2": "^3.6.1",
@@ -29,7 +28,6 @@
     "react-script-hook": "^1.7.2",
     "react-scripts": "^5.0.1",
     "start": "^5.1.0",
-    "use-places-autocomplete": "^4.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
