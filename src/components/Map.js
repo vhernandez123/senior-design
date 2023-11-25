@@ -5,11 +5,13 @@ import { useState} from "react";
 
 const Map = (hasPlace, latitude, longitude) => {
 
-  const [sourceURL, setSourceURL]=useState("https://www.google.com/maps/embed/v1/search?key="+process.env.REACT_APP_GOOGLE_MAP_API_KEY+"&q=vet+near+me");
+	const sourceURL = "https://www.google.com/maps/embed/v1/search?key="+process.env.REACT_APP_GOOGLE_MAP_API_KEY+"&q=vet+near+me";
+
+  		//const [sourceURL, setSourceURL]=useState("https://www.google.com/maps/embed/v1/search?key="+process.env.REACT_APP_GOOGLE_MAP_API_KEY+"&q=vet+near+me");
 		if (hasPlace == true){
-			setSourceURL("https://www.google.com/maps/embed/v1/search?key="+process.env.REACT_APP_GOOGLE_MAP_API_KEY+"&q=vet&center="+latitude+","+longitude);
+			sourceURL = "https://www.google.com/maps/embed/v1/search?key="+process.env.REACT_APP_GOOGLE_MAP_API_KEY+"&q=vet&center="+latitude+","+longitude;
 		}
-    console.log(hasPlace, latitude, longitude, sourceURL);
+    console.log(hasPlace, sourceURL);
   return (
     <div>
       
