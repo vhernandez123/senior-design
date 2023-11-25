@@ -27,11 +27,6 @@ ReactDOM.render(
           <Route path="/home" element={<Home />} /> {/* Add this route */}
           <Route path="/AddPet" element={<AddPet />} />
            <Route path="/VetFinder" element={<VetFinder/>}/>
-
-           
-           
-
-
         </Routes>
       </Router>
     </Auth0Provider>
