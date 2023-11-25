@@ -5,6 +5,7 @@ import {
   TextField,
   Select,
   MenuItem,
+  Stack,
   FormControl,
   InputLabel,
   Radio,
@@ -25,13 +26,14 @@ const UpdateBehavior = () => {
 
   const [petsList, setPetsList] = useState([]);
   const [symptomsList, setSymptomsList] = useState([]);
+  const [activity, setActivity] = useState("active");
+  const [behaviorChanges, setBehaviorChanges] = useState("routine change");
 
   useEffect(() => {
     Axios.get("http://localhost:4000/GetAllSymptoms")
       .then((response) => {
-        console.log("Symptoms data:", response.data);
-        if (Array.isArray(response.data)) {
-          setSymptomsList(response.data);
+        if (Array.isArray(response.data.symptoms)) {
+          setSymptomsList(response.data.symptoms);
         } else {
           console.error("Symptoms data is not an array:", response.data);
         }
@@ -76,15 +78,27 @@ const UpdateBehavior = () => {
   };
 
   const handleFinish = () => {
+    let aggressionExplanation = "";
+
+    if (
+      formData.aggression === "yes" &&
+      formData.aggressionExplanation.trim() !== ""
+    ) {
+      aggressionExplanation = formData.aggressionExplanation.trim();
+    } else {
+      aggressionExplanation = "No signs of aggression";
+    }
+
     const behaviorData = {
-      logDate: new Date().toISOString().split("T")[0],
       selectedPetId: formData.selectedPetId,
       aggression: formData.aggression,
-      aggressionExplanation: formData.aggressionExplanation,
+      aggressionExplanation: aggressionExplanation,
       selectedSymptomId: formData.selectedSymptomId,
+      activity: activity,
+      behaviorChanges: behaviorChanges,
     };
 
-    Axios.post("http://localhost:4000/InsertBehavior", behaviorData)
+    Axios.post("http://localhost:4000/InsertPetBehavior", behaviorData)
       .then(() => {
         console.log("Behavior info added successfully");
       })
@@ -115,20 +129,61 @@ const UpdateBehavior = () => {
         <br />
         <br />
         <FormControl fullWidth>
-          <InputLabel>Select Symptom</InputLabel>
+          <InputLabel>Select a Symptom your pet is Experiencing</InputLabel>
           <Select
             value={formData.selectedSymptomId}
             onChange={handleSymptomChange}
             name="selectedSymptomId"
           >
             {symptomsList.map((symptom) => (
-              <MenuItem key={symptom.symptomId} value={symptom.symptomId}>
-                {symptom.symptomName}
+              <MenuItem key={symptom.SymptomId} value={symptom.SymptomId}>
+                {symptom.symptom_type}
               </MenuItem>
             ))}
           </Select>
         </FormControl>
         <br />
+        <br />
+        <FormControl>Activity Level?</FormControl>
+        <br />
+        <br />
+        <Stack spacing={3} direction="row" sx={{ marginBottom: 4 }}>
+          <RadioGroup
+            value={activity}
+            onChange={(e) => setActivity(e.target.value)}
+          >
+            <FormControlLabel
+              value="active"
+              control={<Radio />}
+              label="Active"
+            />
+            <FormControlLabel value="lazy" control={<Radio />} label="Lazy" />
+            <FormControlLabel value="both" control={<Radio />} label="Both" />
+          </RadioGroup>
+        </Stack>
+        <FormControl>Any Behavior Changes?</FormControl>
+        <Stack spacing={3} direction="row" sx={{ marginBottom: 4 }}>
+          <RadioGroup
+            value={behaviorChanges}
+            onChange={(e) => setBehaviorChanges(e.target.value)}
+          >
+            <FormControlLabel
+              value="routine change"
+              control={<Radio />}
+              label="Routine Change"
+            />
+            <FormControlLabel
+              value="other behavioral change"
+              control={<Radio />}
+              label="Other Behavioral Change"
+            />
+            <FormControlLabel
+              value="no behavioral change"
+              control={<Radio />}
+              label="No Behavioral Change"
+            />
+          </RadioGroup>
+        </Stack>
         <br />
         <FormControl>Any aggression observed?</FormControl>
         <RadioGroup
@@ -145,6 +200,8 @@ const UpdateBehavior = () => {
         {formData.aggression === "yes" && (
           <div>
             <FormControl>Explain aggression:</FormControl>
+            <br />
+            <br />
             <TextField
               type="text"
               value={formData.aggressionExplanation}

@@ -9,6 +9,8 @@ const PetDetails = () => {
   const [petDetails, setPetDetails] = useState({});
   const [petLogs, setPetLogs] = useState([]);
   const [petIllnessLogs, setPetIllnessLogs] = useState([]);
+  const [petBehaviorLogs, setPetBehaviorLogs] = useState([]);
+  const [petMedicationLogs, setPetMedicationLogs] = useState([]);
   const { petId } = useParams();
 
   const formatLogDate = (logDate) => {
@@ -39,6 +41,22 @@ const PetDetails = () => {
       })
       .catch((error) => {
         console.error("Error fetching pet illness logs:", error);
+      });
+
+    Axios.get(`http://localhost:4000/GetMedicationLogsByPetId/${petId}`)
+      .then((response) => {
+        setPetMedicationLogs(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching pet medication logs:", error);
+      });
+
+    Axios.get(`http://localhost:4000/GetBehaviorLogsByPetId/${petId}`)
+      .then((response) => {
+        setPetBehaviorLogs(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching pet behavior logs:", error);
       });
   }, [petId]);
 
@@ -92,6 +110,17 @@ const PetDetails = () => {
           >
             Click Here
           </Button>
+          <br />
+          <br />
+          <h3>Does your pet take any medication?</h3>
+          <Button
+            href="/LogMedication"
+            variant="contained"
+            className="custom-button"
+            style={{ backgroundColor: "#01B636", color: "white" }}
+          >
+            Log it Here
+          </Button>
         </div>
       </div>
       <div className="pet-logs notepad">
@@ -105,6 +134,8 @@ const PetDetails = () => {
             ))}
           </ul>
         </div>
+      </div>
+      <div className="pet-logs notepad">
         <div className="log-box">
           <h3>Illness logs for {petDetails.petName}</h3>
           <ul>
@@ -112,6 +143,37 @@ const PetDetails = () => {
               <li key={illnessLog.illnessLogId}>
                 {illnessLog.symptoms} on{" "}
                 {formatLogDate(illnessLog.dateOfDiagnosis)}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <div className="pet-logs notepad">
+        <div className="log-box">
+          <h3>Behavior logs for {petDetails.petName}</h3>
+          <ul>
+            {petBehaviorLogs.map((behaviorLog) => (
+              <li key={behaviorLog.behaviorLogId}>
+                <p>
+                  Current Activity: {behaviorLog.activity}, Any signs of
+                  aggression: {behaviorLog.aggression === "yes" ? "Yes" : "No"},
+                  Behavior Changes: {behaviorLog.behaviorChanges}
+                </p>
+                <p>Logged on {formatLogDate(behaviorLog.logDate)}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <div className="pet-logs notepad">
+        <div className="log-box">
+          <h3>Medication logs for {petDetails.petName}</h3>
+          <ul>
+            {petMedicationLogs.map((medicationLog) => (
+              <li key={medicationLog.medicationLogId}>
+                Takes {medicationLog.medicationName}{" "}
+                {medicationLog.instructions} for {medicationLog.durationInDays}{" "}
+                days
               </li>
             ))}
           </ul>
