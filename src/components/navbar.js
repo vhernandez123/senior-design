@@ -2,7 +2,7 @@ import React from "react";
 import "../css/Navbar.css"; // Import your CSS file
 import { Button } from "@mui/material";
 import LogoutButton from "../components/logout.js";
-import { useAuth0 } from "@auth0/auth0-react";
+
 function Navbar() {
   return (
     <nav className="navbar">
@@ -17,6 +17,7 @@ function Navbar() {
               href="/Checklist"
               className="nav-links"
             >
+              Pet Errands todo
               Add to ChecklistS
             </Button>
           </li>
@@ -35,9 +36,21 @@ function Navbar() {
               href="/findvets"
               className="nav-links"
             >
-              Find Vets Now
+              Find Vets Near You
             </Button>
           </li>
+          <li>
+          <Button
+        href="/AboutUs"
+        className="nav-links"
+        style={{color: "white"}}
+      >
+        About Us
+      </Button>
+      </li>
+          <Avatar style={{ fontSize: "8px" }} variant="contained">
+            <LogoutButton />
+          </Avatar>
           <LogoutButton />
         </ul>
       </div>

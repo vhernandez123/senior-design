@@ -7,6 +7,8 @@ import Main from "./components/Main.jsx"; // Import your Main component
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./components/Home.js";
 import AddPet from "./pages/AddPet";
+import AboutUs from "./components/aboutUs.js";
+import Checklist from "./components/Checklist.js";
 import VetFinder from "./pages/VetFinder5.js";
 import LogPet from "./pages/LogPet";
 import PetDetails from "./pages/PetDetails";
@@ -31,6 +33,8 @@ ReactDOM.render(
           <Route path="/app" element={<App />} />
           <Route path="/home/" element={<Home />} />
           <Route path="/AddPet" element={<AddPet />} />
+          <Route path="/AboutUs" element={<AboutUs />} />
+          <Route path="/Checklist" element={<Checklist />} />
            <Route path="/VetFinder" element={<VetFinder/>}/>
           <Route path="/UpdateBehavior" element={<UpdateBehavior />} />
           <Route path="/LogMedication" element={<LogMedication />} />

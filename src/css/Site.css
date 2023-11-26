@@ -1,9 +1,15 @@
-/* Sticky Footer styles */
-html, body {
-  height: 100%;
+
+html,
+body {
+  height: 100vh;
   margin: 0;
   padding: 0;
-  background-color: #bcefcb;
+
+    background-image: url(../images/overallBack.jpg) ;
+    background-repeat: repeat-y;
+    background-size: cover;
+  
+  /* THIS WILL CHANGE THE BACKGROUND FOR THE ENTIRE WEBSITE SO KEEP THAT IN MIND*/
 }
 
 body {
@@ -11,8 +17,8 @@ body {
   flex-direction: column;
 }
 /* Main content container on the first landing page to ensure they stay together */
-.CenterLog{
-  background-color:rgba(171, 162, 118, 0.6);
+.CenterLog {
+  background-color: rgba(171, 162, 118, 0.6);
   border-radius: 10%;
 }
 /* Main content container */
@@ -35,19 +41,9 @@ video {
   object-fit: cover; /* Maintain aspect ratio and cover container */
 }
 
-/* Footer styles */
-.footer {
-  background-color: #01B636; /* Green background color */
-  color: #fff; /* White text color */
-  padding: 20px; /* Adjust padding as needed */
-  text-align: center;
-  width: 100%;
-  position: absolute; /* Stick to the bottom of the viewport */
-  bottom: 0;
-}
 /* Add this CSS to create a green box around the text */
 .green-box {
-  background-color: #01B636; /* Green background color */
+  background-color: rgba(88, 159, 75, 1); /* Green background color */
   color: #fff; /* White text color */
   padding: 20px; /* Adjust padding as needed */
   border-radius: 10px; /* Rounded corners for the box */
@@ -63,17 +59,33 @@ video {
   margin-top: 40px;
   padding: 20px;
 }
+.landingpageContain {
+  display: flex;
 
+  justify-content: space-between;
+  margin-left:50vh;
+}
+.iframe-container-landing {
+  flex: 1;
+  display: flex;
+  margin-left: 45vh;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
 .welcome-message {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 20px;
   color: #056d24;
-  background-color:rgba(171, 160, 105, 0.6);
+  background-color: rgba(171, 160, 105, 0.6);
   padding: 20px;
   margin-top: 20px;
   border-radius: 20%;
-  
 }
 
 .sub-message,
@@ -91,6 +103,3 @@ video {
   max-width: 60%; /* Adjust the width of the images as needed */
   margin: 0 15px; /* Add spacing between the images */
 }
-
-
-

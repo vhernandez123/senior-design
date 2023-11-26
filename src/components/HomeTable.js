@@ -42,7 +42,12 @@ const DataTable = () => {
   return (
     <TableContainer
       component={Paper}
-      style={{ maxWidth: "90%", maxHeight: "100%", margin: "auto" }}
+      style={{
+        maxWidth: "90%",
+        maxHeight: "100%",
+        margin: "auto",
+        backgroundColor: "rgba(136, 206, 146, 0.90)",
+      }}
     >
       <TextField label="Search" style={{ margin: "1rem" }} />
       <Table size="medium" className="custom-table">
@@ -74,6 +79,7 @@ const DataTable = () => {
                 {row.petMicrochipNum}
               </TableCell>
               <TableCell className="table-cell">{row.petFood}</TableCell>
+              <TableCell className="table-cell custom-table">
               <TableCell className="table-cell" colSpan={2}>
                 <Button
                   variant="contained"
@@ -108,6 +114,8 @@ const DataTable = () => {
       <Button
         href="/AddPet"
         variant="contained"
+        className="custom-button custom-table"
+        style={{ margin: "1rem" }}
         className="custom-button"
         style={{ backgroundColor: "#01B636", color: "white", margin: "1rem" }}
       >
