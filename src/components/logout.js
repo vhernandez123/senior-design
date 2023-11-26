@@ -4,10 +4,8 @@ import { Button } from "@mui/material";
 const LogoutButton = () => {
   const { logout, isAuthenticated } = useAuth0();
   const directToLogin = () => {
-    localStorage.setItem("isAuthenticated", "false");
     window.location.href = `${window.location.origin}`;
   };
-
   return (
     <>
       {isAuthenticated ? (
@@ -20,12 +18,12 @@ const LogoutButton = () => {
           }}
           onClick={() => logout()}
         >
-          Log out
+          Logout
         </button>
       ) : (
         <button
           style={{
-            padding: "15px",
+            padding: "5px",
             cursor: "pointer",
             fontSize: "14px",
             backgroundColor: "gold",
@@ -35,7 +33,6 @@ const LogoutButton = () => {
           Login
         </button>
       )}
-     
     </>
   );
 };
