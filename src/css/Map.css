@@ -1,6 +1,12 @@
 iframe {
-    width: 640px; /* adjust to your needs */
+    width: 80vw;
     max-width: 100%; /* to make it responsive */
-    height: 340px;
+    height: 70vh;
     max-height: 100%;
+    aspect-ratio: 8/7;
+    margin: auto;
+    align-content: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
   }
