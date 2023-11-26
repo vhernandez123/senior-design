@@ -1,8 +1,4 @@
 import * as React from "react";
-import { useState} from "react";
-
-
-
 
 const Map = () => {
 const sourceURL = "https://www.google.com/maps/embed/v1/search?key="+process.env.REACT_APP_GOOGLE_MAP_API_KEY+"&q=vet+near+me";

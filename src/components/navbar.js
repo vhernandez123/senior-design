@@ -18,22 +18,12 @@ function Navbar() {
               className="nav-links"
             >
               Pet Errands todo
-              Add to ChecklistS
             </Button>
           </li>
           <li className="nav-item">
             <Button
               style={{ color: "white" }}
-              href="/Schedule"
-              className="nav-links"
-            >
-              Schedule Appointment
-            </Button>
-          </li>
-          <li className="nav-item">
-            <Button
-              style={{ color: "white" }}
-              href="/findvets"
+              href="/VetFinder5.js"
               className="nav-links"
             >
               Find Vets Near You
@@ -48,10 +38,11 @@ function Navbar() {
         About Us
       </Button>
       </li>
-          <Avatar style={{ fontSize: "8px" }} variant="contained">
-            <LogoutButton />
-          </Avatar>
-          <LogoutButton />
+      <li>
+      <LogoutButton />
+      </li>
+
+        
         </ul>
       </div>
     </nav>

@@ -35,7 +35,7 @@ ReactDOM.render(
           <Route path="/AddPet" element={<AddPet />} />
           <Route path="/AboutUs" element={<AboutUs />} />
           <Route path="/Checklist" element={<Checklist />} />
-           <Route path="/VetFinder" element={<VetFinder/>}/>
+           <Route path="/VetFinder5" element={<VetFinder/>}/>
           <Route path="/UpdateBehavior" element={<UpdateBehavior />} />
           <Route path="/LogMedication" element={<LogMedication />} />
           <Route path="/pet/:petId" element={<PetDetails />} />

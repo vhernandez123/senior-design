@@ -12,7 +12,6 @@ import {
   Button,
   TextField,
 } from "@mui/material";
-import { auto } from "@popperjs/core";
 
 const DataTable = () => {
   const [rows, setRows] = useState([]);
@@ -79,7 +78,6 @@ const DataTable = () => {
                 {row.petMicrochipNum}
               </TableCell>
               <TableCell className="table-cell">{row.petFood}</TableCell>
-              <TableCell className="table-cell custom-table">
               <TableCell className="table-cell" colSpan={2}>
                 <Button
                   variant="contained"
@@ -112,12 +110,11 @@ const DataTable = () => {
         </TableBody>
       </Table>
       <Button
-        href="/AddPet"
+        component={Link}
+        to="/AddPet"
         variant="contained"
         className="custom-button custom-table"
-        style={{ margin: "1rem" }}
-        className="custom-button"
-        style={{ backgroundColor: "#01B636", color: "white", margin: "1rem" }}
+        style={{ margin: "1rem", backgroundColor: "#01B636", color: "white" }}
       >
         Add New Pet
       </Button>
