@@ -7,9 +7,9 @@ const Map = () => {
     <div >
     <iframe
 				src="https://www.google.com/maps/embed/v1/search?key=AIzaSyBDUcFZdWRZ5SQOq_q4OYE3DoDhKMRcxgk&q=vet+near+me"
-				width="95%"
+				width="500"
 				//sandbox="aasda"
-				height="340vh"
+				height="800"
 				id=""
 				className=""
 				sandbox="allow-scripts allow-same-origin"

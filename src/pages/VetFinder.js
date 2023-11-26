@@ -1,10 +1,38 @@
 import * as React from "react";
 import Map from "../components/Map";
-import Navbar from "../components/navbar.js";
-const VetFinder5 =() => {
+import { useState} from "react";
+
+
+import {
+	Button,
+	Dialog,
+	DialogActions,
+	DialogContent,
+	DialogContentText,
+	DialogTitle,
+	RadioGroup,
+    Radio,
+    FormControlLabel
+  } from "@mui/material";
+
+
+const VetFinder =() => {
+    const [open, setOpen] = React.useState(true);
+    const handleOpen = () => setOpen(true);
+    const [showMap, setShowMap] = useState(false);
+    const [agree, setAgree] = useState(false);
+
+    const handleClose = () => {
+        setOpen(false);
+        //handle clicking button to close dialog
+        if (agree){
+            setShowMap(true);
+            } else {
+                setShowMap(false);
+            }
+    }
     return (
         <div>
-            <Navbar />
             <br/><br/>
             <h2>Veterinarians Near You</h2>
             <br/><br/>
