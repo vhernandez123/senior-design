@@ -1,0 +1,59 @@
+.pet-details-container {
+    background-color: #f3f3f3;
+    padding: 30px;
+    border-radius: 15px;
+    margin: 20px auto;
+    max-width: 800px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .pet-info {
+    text-align: left;
+  }
+  
+  .pet-name {
+    color: #333;
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+  
+  .pet-properties p {
+    font-size: 20px;
+    margin: 10px 0;
+    color: #555;
+  }
+  
+  .property-label {
+    font-weight: bold;
+    color: #ff6b6b;
+  }
+  .notepad {
+    background-color: #f9f6ef; 
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #ccc;
+    font-family: 'Courier New', monospace;
+    margin: 20px auto;
+    max-width: 800px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .notepad h3 {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+  }
+  
+  .notepad ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  .notepad li {
+    padding: 5px 0;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  
