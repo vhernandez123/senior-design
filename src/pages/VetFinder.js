@@ -33,7 +33,7 @@ const VetFinder =() => {
     }
     return (
         <div>
-                 <Navbar />
+            <Navbar />
             <br/><br/>
             <h2>Veterinarians Near You</h2>
             <br/><br/>

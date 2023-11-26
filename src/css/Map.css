@@ -1,0 +1,6 @@
+iframe {
+    width: 640px; /* adjust to your needs */
+    max-width: 100%; /* to make it responsive */
+    height: 340px;
+    max-height: 100%;
+  }
