@@ -65,10 +65,10 @@ ENGINE = InnoDB;
 -- Table `mydb`.`Vetinarian`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Vetinarian` (
-  `vetinarianID` INT NOT NULL AUTO_INCREMENT,
+  `vetinarianId` INT NOT NULL AUTO_INCREMENT,
   `vetinarianName` VARCHAR(45) NOT NULL,
   `vetinarianAddress` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`vetinarianID`))
+  PRIMARY KEY (`vetinarianId`))
 ENGINE = InnoDB;
 
 
@@ -81,11 +81,11 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Pet_has_Medication` (
   `durationInDays` INT NOT NULL,
   `dosage` INT NOT NULL,
   `instructions` VARCHAR(500) NOT NULL,
-  `Vetinarian_vetinarianID` INT NOT NULL,
+  `Vetinarian_vetinarianId` INT NOT NULL,
   PRIMARY KEY (`Pet_petId`, `Medication_medicationId`),
   INDEX `fk_Pet_has_Medication_Medication1_idx` (`Medication_medicationId` ASC) VISIBLE,
   INDEX `fk_Pet_has_Medication_Pet1_idx` (`Pet_petId` ASC) VISIBLE,
-  INDEX `fk_Pet_has_Medication_Vetinarian1_idx` (`Vetinarian_vetinarianID` ASC) VISIBLE,
+  INDEX `fk_Pet_has_Medication_Vetinarian1_idx` (`Vetinarian_vetinarianId` ASC) VISIBLE,
   CONSTRAINT `fk_Pet_has_Medication_Pet1`
     FOREIGN KEY (`Pet_petId`)
     REFERENCES `mydb`.`Pet` (`petId`)
@@ -97,8 +97,8 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Pet_has_Medication` (
     ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Pet_has_Medication_Vetinarian1`
-    FOREIGN KEY (`Vetinarian_vetinarianID`)
-    REFERENCES `mydb`.`Vetinarian` (`vetinarianID`)
+    FOREIGN KEY (`Vetinarian_vetinarianId`)
+    REFERENCES `mydb`.`Vetinarian` (`vetinarianId`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -122,11 +122,11 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Pet_has_Illness` (
   `Illness_illnessId` INT NOT NULL,
   `dateOfDiagnosis` VARCHAR(45) NOT NULL,
   `symptoms` VARCHAR(500) NOT NULL,
-  `Vetinarian_vetinarianID` INT NOT NULL,
+  `Vetinarian_vetinarianId` INT NOT NULL,
   PRIMARY KEY (`Pet_petId`, `Illness_illnessId`),
   INDEX `fk_Pet_has_Illness_Illness1_idx` (`Illness_illnessId` ASC) VISIBLE,
   INDEX `fk_Pet_has_Illness_Pet1_idx` (`Pet_petId` ASC) VISIBLE,
-  INDEX `fk_Pet_has_Illness_Vetinarian1_idx` (`Vetinarian_vetinarianID` ASC) VISIBLE,
+  INDEX `fk_Pet_has_Illness_Vetinarian1_idx` (`Vetinarian_vetinarianId` ASC) VISIBLE,
   CONSTRAINT `fk_Pet_has_Illness_Pet1`
     FOREIGN KEY (`Pet_petId`)
     REFERENCES `mydb`.`Pet` (`petId`)
@@ -138,8 +138,8 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Pet_has_Illness` (
     ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Pet_has_Illness_Vetinarian1`
-    FOREIGN KEY (`Vetinarian_vetinarianID`)
-    REFERENCES `mydb`.`Vetinarian` (`vetinarianID`)
+    FOREIGN KEY (`Vetinarian_vetinarianId`)
+    REFERENCES `mydb`.`Vetinarian` (`vetinarianId`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -150,9 +150,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Owner_has_Vetinarian` (
   `Owner_ownerId` INT NOT NULL,
-  `Vetinarian_vetinarianID` INT NOT NULL,
-  PRIMARY KEY (`Owner_ownerId`, `Vetinarian_vetinarianID`),
-  INDEX `fk_Owner_has_Vetinarian_Vetinarian1_idx` (`Vetinarian_vetinarianID` ASC) VISIBLE,
+  `Vetinarian_vetinarianId` INT NOT NULL,
+  PRIMARY KEY (`Owner_ownerId`, `Vetinarian_vetinarianId`),
+  INDEX `fk_Owner_has_Vetinarian_Vetinarian1_idx` (`Vetinarian_vetinarianId` ASC) VISIBLE,
   INDEX `fk_Owner_has_Vetinarian_Owner1_idx` (`Owner_ownerId` ASC) VISIBLE,
   CONSTRAINT `fk_Owner_has_Vetinarian_Owner1`
     FOREIGN KEY (`Owner_ownerId`)
@@ -160,8 +160,8 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Owner_has_Vetinarian` (
     ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Owner_has_Vetinarian_Vetinarian1`
-    FOREIGN KEY (`Vetinarian_vetinarianID`)
-    REFERENCES `mydb`.`Vetinarian` (`vetinarianID`)
+    FOREIGN KEY (`Vetinarian_vetinarianId`)
+    REFERENCES `mydb`.`Vetinarian` (`vetinarianId`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -172,9 +172,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Pet_has_Vetinarian` (
   `Pet_petId` INT NOT NULL,
-  `Vetinarian_vetinarianID` INT NOT NULL,
-  PRIMARY KEY (`Pet_petId`, `Vetinarian_vetinarianID`),
-  INDEX `fk_Pet_has_Vetinarian_Vetinarian1_idx` (`Vetinarian_vetinarianID` ASC) VISIBLE,
+  `Vetinarian_vetinarianId` INT NOT NULL,
+  PRIMARY KEY (`Pet_petId`, `Vetinarian_vetinarianId`),
+  INDEX `fk_Pet_has_Vetinarian_Vetinarian1_idx` (`Vetinarian_vetinarianId` ASC) VISIBLE,
   INDEX `fk_Pet_has_Vetinarian_Pet1_idx` (`Pet_petId` ASC) VISIBLE,
   CONSTRAINT `fk_Pet_has_Vetinarian_Pet1`
     FOREIGN KEY (`Pet_petId`)
@@ -182,8 +182,8 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Pet_has_Vetinarian` (
     ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Pet_has_Vetinarian_Vetinarian1`
-    FOREIGN KEY (`Vetinarian_vetinarianID`)
-    REFERENCES `mydb`.`Vetinarian` (`vetinarianID`)
+    FOREIGN KEY (`Vetinarian_vetinarianId`)
+    REFERENCES `mydb`.`Vetinarian` (`vetinarianId`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
