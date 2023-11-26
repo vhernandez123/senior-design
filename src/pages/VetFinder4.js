@@ -1,7 +1,9 @@
 import * as React from "react";
 import Map from "../components/Map";
-import CustomMap from "../components/customMap";
+import CustomMap from "../components/CustomMap";
 import { useState, useRef} from "react";
+import { createPortal } from 'react-dom';
+
 
 import {
 	Button,
@@ -22,8 +24,10 @@ import PlacesAutocomplete, {
 
 
 //TO FIX:
+//https://react.dev/reference/react-dom/createPortal
 //https://github.com/ryanseddon/react-frame-component
 //https://stackoverflow.com/questions/34743264/how-to-set-iframe-content-of-a-react-component
+
 
 
 
@@ -159,19 +163,10 @@ const VetFinder4 = () => {
 					: null}
 					{ //added
 					showCustomMap ? 
-					<iframe
-					src={sourceURL}
-					width="640px"
-					//sandbox="aasda"
-					height="320px"
-					id=""
-					className=""
-					//sandbox="allow-scripts allow-same-origin"
-					//sandbox={["allow-same-origin", "allow-scripts"]}
-					//display="block"
-					position="relative"
-					allowFullScreen
-				/>
+					createPortal(
+						<p>This child is placed in the document body.</p>,
+						document.body
+					  )
 					: null}
 					</div>
 			</div>
