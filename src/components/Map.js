@@ -6,13 +6,10 @@ const Map = () => {
   return (
     <div >
     <iframe
-				src="https://www.google.com/maps/embed/v1/search?key=AIzaSyBDUcFZdWRZ5SQOq_q4OYE3DoDhKMRcxgk&q=vet+near+me"
-				width="500"
+				src={sourceURL}
+				width="100%"
 				//sandbox="aasda"
-				height="800"
-				id=""
-				className=""
-				sandbox="allow-scripts allow-same-origin"
+				height="400"
 				//sandbox={["allow-same-origin", "allow-scripts"]}
 				//display="block"
 				position="relative"
