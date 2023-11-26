@@ -8,7 +8,7 @@ const sourceURL = "https://www.google.com/maps/embed/v1/search?key=AIzaSyBDUcFZd
 				src="https://www.google.com/maps/embed/v1/search?key=AIzaSyBDUcFZdWRZ5SQOq_q4OYE3DoDhKMRcxgk&q=vet+near+me"
 				width="95%"
 				//sandbox="aasda"
-				height="340vh"
+				height="640vh"
 				id=""
 				className=""
 				sandbox="allow-scripts allow-same-origin"
