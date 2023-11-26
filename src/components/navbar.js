@@ -23,7 +23,7 @@ function Navbar() {
           <li className="nav-item">
             <Button
               style={{ color: "white" }}
-              href="/VetFinder5.js"
+              href="/VetFinder"
               className="nav-links"
             >
               Find Vets Near You

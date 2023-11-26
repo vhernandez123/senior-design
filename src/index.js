@@ -9,7 +9,7 @@ import Home from "./components/Home.js";
 import AddPet from "./pages/AddPet";
 import AboutUs from "./components/aboutUs.js";
 import Checklist from "./components/Checklist.js";
-import VetFinder from "./pages/VetFinder5.js";
+import VetFinder from "./pages/VetFinder.js";
 import LogPet from "./pages/LogPet";
 import PetDetails from "./pages/PetDetails";
 import UpdateBehavior from "./pages/UpdateBehavior.js";
@@ -35,7 +35,7 @@ ReactDOM.render(
           <Route path="/AddPet" element={<AddPet />} />
           <Route path="/AboutUs" element={<AboutUs />} />
           <Route path="/Checklist" element={<Checklist />} />
-           <Route path="/VetFinder5" element={<VetFinder/>}/>
+           <Route path="/VetFinder" element={<VetFinder/>}/>
           <Route path="/UpdateBehavior" element={<UpdateBehavior />} />
           <Route path="/LogMedication" element={<LogMedication />} />
           <Route path="/pet/:petId" element={<PetDetails />} />
