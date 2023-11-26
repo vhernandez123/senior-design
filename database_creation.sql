@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`User` (
   `userId` INT NOT NULL AUTO_INCREMENT,
   `userFirstName` VARCHAR(45) NOT NULL,
   `userLastName` VARCHAR(45) NOT NULL,
-  `userEmail` VARCHAR(45) NOT NULL,
+  `userEmail` VARCHAR(45) NOT NULL UNIQUE,
   `userPassword` VARCHAR(45) NOT NULL,
   `vetinarian` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`userId`))
@@ -213,7 +213,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`Behavior`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Behavior` (
-  `behaviorId` INT NOT NULL,
+  `behaviorId` INT NOT NULL AUTO_INCREMENT,
   `behaviorType` VARCHAR(45) NULL,
   PRIMARY KEY (`behaviorId`))
 ENGINE = InnoDB;
@@ -277,7 +277,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`Behavior`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Behavior` (
-  `behaviorId` INT NOT NULL,
+  `behaviorId` INT NOT NULL AUTO_INCREMENT,
   `behaviorType` VARCHAR(45) NULL,
   PRIMARY KEY (`behaviorId`))
 ENGINE = InnoDB;
