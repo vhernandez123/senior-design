@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
+import { Link } from "react-router-dom";
 import {
   Table,
   TableBody,
@@ -9,6 +10,7 @@ import {
   TableRow,
   Paper,
   Button,
+  TextField,
 } from "@mui/material";
 import { auto } from "@popperjs/core";
 
@@ -47,6 +49,7 @@ const DataTable = () => {
         backgroundColor: "rgba(136, 206, 146, 0.90)",
       }}
     >
+      <TextField label="Search" style={{ margin: "1rem" }} />
       <Table size="medium" className="custom-table">
         <TableHead>
           <TableRow className="table-header-row">
@@ -59,7 +62,9 @@ const DataTable = () => {
               Microchip Number
             </TableCell>
             <TableCell className="table-header-cell">Food</TableCell>
-            <TableCell className="table-header-cell">Actions</TableCell>
+            <TableCell className="table-header-cell" colSpan={2}>
+              Actions
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -75,13 +80,32 @@ const DataTable = () => {
               </TableCell>
               <TableCell className="table-cell">{row.petFood}</TableCell>
               <TableCell className="table-cell custom-table">
+              <TableCell className="table-cell" colSpan={2}>
                 <Button
                   variant="contained"
                   className="custom-button"
+                  style={{
+                    backgroundColor: "#01B636",
+                    color: "white",
+                    marginRight: "10px", // Adjust the spacing as needed
+                  }}
                   onClick={() => handleRemovePet(index, row.petId)}
                 >
                   Remove
                 </Button>
+                <Link to={`/pet/${row.petId}`}>
+                  <Button
+                    variant="contained"
+                    className="custom-button"
+                    style={{
+                      backgroundColor: "#01B636",
+                      color: "white",
+                      marginLeft: "10px", // Adjust the spacing as needed
+                    }}
+                  >
+                    View Pet
+                  </Button>
+                </Link>
               </TableCell>
             </TableRow>
           ))}
@@ -92,6 +116,8 @@ const DataTable = () => {
         variant="contained"
         className="custom-button custom-table"
         style={{ margin: "1rem" }}
+        className="custom-button"
+        style={{ backgroundColor: "#01B636", color: "white", margin: "1rem" }}
       >
         Add New Pet
       </Button>

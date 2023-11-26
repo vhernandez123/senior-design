@@ -120,7 +120,7 @@ const AddPet = () => {
           <Button
             variant="contained"
             color="primary"
-            href="/"
+            href="/home"
             style={{ backgroundColor: "#01B636", color: "white" }}
             className="button"
             onClick={handleAddPet}
