@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Pet` (
   CONSTRAINT `fk_Pet_Owner`
     FOREIGN KEY (`Owner_ownerId`)
     REFERENCES `mydb`.`User` (`userId`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -89,17 +89,17 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Pet_has_Medication` (
   CONSTRAINT `fk_Pet_has_Medication_Pet1`
     FOREIGN KEY (`Pet_petId`)
     REFERENCES `mydb`.`Pet` (`petId`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Pet_has_Medication_Medication1`
     FOREIGN KEY (`Medication_medicationId`)
     REFERENCES `mydb`.`Medication` (`medicationId`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Pet_has_Medication_Vetinarian1`
     FOREIGN KEY (`Vetinarian_vetinarianID`)
     REFERENCES `mydb`.`Vetinarian` (`vetinarianID`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -130,17 +130,17 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Pet_has_Illness` (
   CONSTRAINT `fk_Pet_has_Illness_Pet1`
     FOREIGN KEY (`Pet_petId`)
     REFERENCES `mydb`.`Pet` (`petId`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Pet_has_Illness_Illness1`
     FOREIGN KEY (`Illness_illnessId`)
     REFERENCES `mydb`.`Illness` (`illnessId`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Pet_has_Illness_Vetinarian1`
     FOREIGN KEY (`Vetinarian_vetinarianID`)
     REFERENCES `mydb`.`Vetinarian` (`vetinarianID`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -157,12 +157,12 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Owner_has_Vetinarian` (
   CONSTRAINT `fk_Owner_has_Vetinarian_Owner1`
     FOREIGN KEY (`Owner_ownerId`)
     REFERENCES `mydb`.`User` (`userId`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Owner_has_Vetinarian_Vetinarian1`
     FOREIGN KEY (`Vetinarian_vetinarianID`)
     REFERENCES `mydb`.`Vetinarian` (`vetinarianID`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -179,12 +179,12 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Pet_has_Vetinarian` (
   CONSTRAINT `fk_Pet_has_Vetinarian_Pet1`
     FOREIGN KEY (`Pet_petId`)
     REFERENCES `mydb`.`Pet` (`petId`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Pet_has_Vetinarian_Vetinarian1`
     FOREIGN KEY (`Vetinarian_vetinarianID`)
     REFERENCES `mydb`.`Vetinarian` (`vetinarianID`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -248,27 +248,27 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Logs` (
   CONSTRAINT `fk_Logs_Pet1`
     FOREIGN KEY (`Pet_petId`)
     REFERENCES `mydb`.`Pet` (`petId`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Logs_Bathroom1`
     FOREIGN KEY (`Bathroom_bathroomId`)
     REFERENCES `mydb`.`Bathroom` (`bathroomId`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Logs_Food1`
     FOREIGN KEY (`Food_foodId`)
     REFERENCES `mydb`.`Food` (`foodId`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Logs_Behavior1`
     FOREIGN KEY (`Behavior_behaviorId`)
     REFERENCES `mydb`.`Behavior` (`behaviorId`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Logs_Pet_has_Illness1`
     FOREIGN KEY (`Pet_has_Illness_Pet_petId` , `Pet_has_Illness_Illness_illnessId`)
     REFERENCES `mydb`.`Pet_has_Illness` (`Pet_petId` , `Illness_illnessId`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
