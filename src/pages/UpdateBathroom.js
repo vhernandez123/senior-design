@@ -183,7 +183,7 @@ const UpdateBathroom = () => {
               variant="outlined"
               href="/home"
               color="secondary"
-              onClick={handleSubmit} // Use onClick to handle the form submission
+              onClick={handleSubmit}
               className="button"
             >
               Save

@@ -16,7 +16,6 @@ function Home() {
     const fetchData = async () => {
       try {
         if (isAuthenticated) {
-          // Assuming userId is available in user.userId, adjust this based on your actual data structure
           const userId = user.userId;
 
           const response = await Axios.get(

@@ -25,7 +25,7 @@ const VetFinder =() => {
 
     const handleClose = () => {
         setOpen(false);
-        //handle clicking button to close dialog
+    
         if (agree){
             setShowMap(true);
             } else {
@@ -60,6 +60,7 @@ const VetFinder =() => {
 					<Button onClick={() => handleClose()}>Submit</Button>
 					</DialogActions>
 				</Dialog>	
+
                 { //added
 					showMap ? 
 					<Map></Map> 
