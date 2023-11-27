@@ -85,7 +85,7 @@ const DataTable = () => {
                   style={{
                     backgroundColor: "#01B636",
                     color: "white",
-                    marginRight: "10px", // Adjust the spacing as needed
+                    marginRight: "10px", 
                   }}
                   onClick={() => handleRemovePet(index, row.petId)}
                 >
@@ -98,7 +98,7 @@ const DataTable = () => {
                     style={{
                       backgroundColor: "#01B636",
                       color: "white",
-                      marginLeft: "10px", // Adjust the spacing as needed
+                      marginLeft: "10px", 
                     }}
                   >
                     View Pet
