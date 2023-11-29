@@ -1,4 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
+import { Button } from "@mui/material";
 
 const LogoutButton = () => {
   const { logout, isAuthenticated } = useAuth0();
@@ -10,27 +11,26 @@ const LogoutButton = () => {
       {isAuthenticated ? (
         <button
           style={{
-            padding: "15px",
+            padding: "5px",
             cursor: "pointer",
             fontSize: "14px",
             backgroundColor: "gold",
           }}
           onClick={() => logout()}
         >
-          Log out
+          Logout
         </button>
       ) : (
         <button
           style={{
-            padding: "15px",
+            padding: "5px",
             cursor: "pointer",
             fontSize: "14px",
             backgroundColor: "gold",
           }}
           onClick={directToLogin}
         >
-          {" "}
-          Login{" "}
+          Login
         </button>
       )}
     </>

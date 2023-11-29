@@ -1,5 +1,4 @@
 import React from "react";
-import BannerImage from "../assets/orangeCat.png";
 import Navbar from "./navbar";
 import Footer from "../components/Footer.js";
 const Home = () => {
@@ -12,14 +11,28 @@ const Home = () => {
             <h1 className="primary-heading">Your Pets are the priority</h1>
           </div>
           <div class="pic-and-description">
-            <p className="primary-text">
-              Our goal is to help pet owners and pet care professionals to
-              better understand, monitor, and improve the well-being of pets by
-              providing a user-friendly platform for logging, analyzing, and
-              visualizing pet behaviors over time.
+            <p className="primary-text pt-left">
+              Adding your pets to your dashboard is as easy as clicking the 'Add
+              Pet' button. Fill in the requested information so you can have a
+              constant frame-of-reference for this pets ongoing health. You can
+              easily edit this information later as well. The information is
+              information that your vets will find useful so having it in one
+              area is ideal!
             </p>
 
-            <img class="catGroup" src={BannerImage} alt="" />
+            <div class="iframe-container gifDisplayrightside ">
+              <iframe
+                src="https://giphy.com/embed/VbnUQpnihPSIgIXuZv"
+                width="384"
+                height="480"
+                frameBorder="0"
+                class="giphy-embed"
+                allowFullScreen
+              ></iframe>
+              <p>
+                <a href="https://giphy.com/gifs/computer-cat-wearing-glasses-VbnUQpnihPSIgIXuZv"></a>
+              </p>
+            </div>
           </div>
           <div class="pic-and-description">
             <div class="iframe-container gifDisplayau">
@@ -44,12 +57,12 @@ const Home = () => {
           </div>
           <div class="pic-and-description">
             <p className="primary-text pt-left">
-              Adding your delets to your dashboard is as easy as clicking the
-              'Add Pet' button. Fill in the requested information so you can
-              have a constant frame-of-reference for this pets ongoing health.
-              You can easily edit this information later as well. The
-              information is information that your vets will find useful so
-              having it in one area is ideal!
+              Adding your pets to your dashboard is as easy as clicking the 'Add
+              Pet' button. Fill in the requested information so you can have a
+              constant frame-of-reference for this pets ongoing health. You can
+              easily edit this information later as well. The information is
+              information that your vets will find useful so having it in one
+              area is ideal!
             </p>
 
             <div class="iframe-container gifDisplayrightside ">

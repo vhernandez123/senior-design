@@ -1,10 +1,15 @@
-/* Sticky Footer styles */
+
 html,
 body {
-  height: 100%;
+  height: 100vh;
   margin: 0;
   padding: 0;
-  background-color: #bcefcb;
+
+    background-image: url(../images/overallBack.jpg) ;
+    background-repeat: repeat-y;
+    background-size: cover;
+  
+  /* THIS WILL CHANGE THE BACKGROUND FOR THE ENTIRE WEBSITE SO KEEP THAT IN MIND*/
 }
 
 body {
@@ -26,29 +31,27 @@ body {
 
 /* Video container */
 .video-container {
-  height: 60vh; /* Adjust the height as needed */
-  position: relative; /* Relative position for stacking elements */
+  height: 60vh; 
+  position: relative; 
 }
 
 video {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Maintain aspect ratio and cover container */
+  object-fit: cover; 
 }
 
-/* Add this CSS to create a green box around the text */
+
 .green-box {
-  background-color: rgba(88, 159, 75, 1); /* Green background color */
-  color: #fff; /* White text color */
-  padding: 20px; /* Adjust padding as needed */
-  border-radius: 10px; /* Rounded corners for the box */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
-  margin: 20px 0; /* Add some spacing around the box */
-  text-align: center; /* Center-align the content */
-  font-size: 18px; /* Adjust the font size as needed */
+  background-color: rgba(88, 159, 75, 1); 
+  color: #fff; 
+  padding: 20px;
+  border-radius: 10px; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+  margin: 20px 0; 
+  text-align: center; 
+  font-size: 18px; 
 }
-
-/* Update your existing styles for the text */
 .welcome-messages {
   text-align: center;
   margin-top: 40px;
@@ -56,12 +59,15 @@ video {
 }
 .landingpageContain {
   display: flex;
-  align-items: center;
+
   justify-content: space-between;
+  margin-left:50vh;
 }
 .iframe-container-landing {
   flex: 1;
-  margin: 15vh;
+  display: flex;
+  margin-left: 45vh;
+  justify-content: space-between;
   box-sizing: border-box;
 }
 iframe {
@@ -82,16 +88,15 @@ iframe {
 
 .sub-message,
 .final-message {
-  font-size: 18px; /* Adjust the font size as needed */
+  font-size: 18px; 
   margin-bottom: 10px;
 }
 .image-container {
   display: flex;
-  justify-content: center; /* Center-align the images horizontally */
-  margin: 20px 0; /* Add spacing below the green box */
+  justify-content: center;
+  margin: 20px 0;
 }
 
 .image {
-  max-width: 60%; /* Adjust the width of the images as needed */
-  margin: 0 15px; /* Add spacing between the images */
-}
+  max-width: 60%;
+  margin: 0 15px;}

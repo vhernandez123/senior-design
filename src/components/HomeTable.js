@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
+import { Link } from "react-router-dom";
 import {
   Table,
   TableBody,
@@ -9,8 +10,8 @@ import {
   TableRow,
   Paper,
   Button,
+  TextField,
 } from "@mui/material";
-import { auto } from "@popperjs/core";
 
 const DataTable = () => {
   const [rows, setRows] = useState([]);
@@ -40,8 +41,14 @@ const DataTable = () => {
   return (
     <TableContainer
       component={Paper}
-      style={{ maxWidth: "90%", maxHeight: "100%", margin: "auto" }}
+      style={{
+        maxWidth: "90%",
+        maxHeight: "100%",
+        margin: "auto",
+        backgroundColor: "rgba(136, 206, 146, 0.90)",
+      }}
     >
+      <TextField label="Search" style={{ margin: "1rem" }} />
       <Table size="medium" className="custom-table">
         <TableHead>
           <TableRow className="table-header-row">
@@ -54,7 +61,9 @@ const DataTable = () => {
               Microchip Number
             </TableCell>
             <TableCell className="table-header-cell">Food</TableCell>
-            <TableCell className="table-header-cell">Actions</TableCell>
+            <TableCell className="table-header-cell" colSpan={2}>
+              Actions
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -69,24 +78,43 @@ const DataTable = () => {
                 {row.petMicrochipNum}
               </TableCell>
               <TableCell className="table-cell">{row.petFood}</TableCell>
-              <TableCell className="table-cell">
+              <TableCell className="table-cell" colSpan={2}>
                 <Button
                   variant="contained"
                   className="custom-button"
+                  style={{
+                    backgroundColor: "#01B636",
+                    color: "white",
+                    marginRight: "10px", 
+                  }}
                   onClick={() => handleRemovePet(index, row.petId)}
                 >
                   Remove
                 </Button>
+                <Link to={`/pet/${row.petId}`}>
+                  <Button
+                    variant="contained"
+                    className="custom-button"
+                    style={{
+                      backgroundColor: "#01B636",
+                      color: "white",
+                      marginLeft: "10px", 
+                    }}
+                  >
+                    View Pet
+                  </Button>
+                </Link>
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
       <Button
-        href="/AddPet"
+        component={Link}
+        to="/AddPet"
         variant="contained"
-        className="custom-button"
-        style={{ margin: "1rem" }}
+        className="custom-button custom-table"
+        style={{ margin: "1rem", backgroundColor: "#01B636", color: "white" }}
       >
         Add New Pet
       </Button>
