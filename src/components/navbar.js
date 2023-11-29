@@ -29,20 +29,9 @@ function Navbar() {
               Find Vets Near You
             </Button>
           </li>
-          <li>
-          <Button
-        href="/AboutUs"
-        className="nav-links"
-        style={{color: "white"}}
-      >
-        About Us
-      </Button>
-      </li>
       <li>
       <LogoutButton />
       </li>
-
-        
         </ul>
       </div>
     </nav>

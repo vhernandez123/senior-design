@@ -110,6 +110,7 @@ const UpdateBehavior = () => {
   return (
     <div>
       <Navbar />
+      <div className="form-container">
       <div className="form">
         <Typography variant="h6">Behavior</Typography>
         <FormControl fullWidth>
@@ -225,6 +226,7 @@ const UpdateBehavior = () => {
         >
           Finish
         </Button>
+      </div>
       </div>
     </div>
   );

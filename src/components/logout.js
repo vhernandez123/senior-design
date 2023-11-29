@@ -30,7 +30,7 @@ const LogoutButton = () => {
           }}
           onClick={directToLogin}
         >
-          Login
+          Logout
         </button>
       )}
     </>

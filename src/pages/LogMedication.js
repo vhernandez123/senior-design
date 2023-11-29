@@ -83,6 +83,7 @@ const LogMedication = () => {
   return (
     <div>
       <Navbar />
+      <div className="form-container">
       <div className="form">
         <Typography variant="h6">Add Medication</Typography>
         <FormControl fullWidth>
@@ -172,6 +173,7 @@ const LogMedication = () => {
         >
           Finish
         </Button>
+      </div>
       </div>
     </div>
   );

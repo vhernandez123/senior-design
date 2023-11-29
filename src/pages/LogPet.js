@@ -81,6 +81,7 @@ const LogPet = () => {
   return (
     <div>
       <Navbar />
+      <div className="form-container">
       <div className="form">
         <Typography variant="h6">Food</Typography>
         <TextField
@@ -170,6 +171,7 @@ const LogPet = () => {
           Finish
         </Button>
       </div>
+    </div>
     </div>
   );
 };

@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import Axios from "axios";
 import Navbar from "../components/navbar";
-
+import "../css/PetDetails.css";
 const UpdateBathroom = () => {
   const [bathroomTimes, setBathroomTimes] = useState("0");
   const [urineState, setUrineState] = useState("");
@@ -107,6 +107,7 @@ const UpdateBathroom = () => {
   return (
     <div>
       <Navbar></Navbar>
+      <div className="form-container">
       <div className="form Update Bathroom">
         <form onSubmit={handleSubmit}>
           <Stack
@@ -198,7 +199,7 @@ const UpdateBathroom = () => {
             </Button>
           </Stack>
         </form>
-      </div>
+      </div></div>
     </div>
   );
 };
