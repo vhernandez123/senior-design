@@ -19,11 +19,11 @@ app.get("/GetAllPets", (req, res) => {
       for (let i = 0; i < result.length; i++) {
         result[i]['petName'] = queries.toDecrypt(result[i]['petName']);
         result[i]['petBreed'] = queries.toDecrypt(result[i]['petBreed']);
+        result[i]['petGender'] = queries.toDecrypt(result[i]['petGender']);
         result[i]['petAge'] = queries.toDecrypt(result[i]['petAge']);
         result[i]['petColor'] = queries.toDecrypt(result[i]['petColor']);
         result[i]['petWeight'] = queries.toDecrypt(result[i]['petWeight']);
         result[i]['petMicrochipNum'] = queries.toDecrypt(result[i]['petMicrochipNum']);
-        result[i]['petFood'] = queries.toDecrypt(result[i]['petFood']);
       }
       res.status(200).json(result);
     }
@@ -196,16 +196,16 @@ app.get("/GetAllVets", (req, res) => {
   });
 });
 
-app.get("/GetAllSymptoms", (req, res) => {
-  queries.getAllSymptoms((err, symptoms) => {
-    if (err) {
-      console.error("Error fetching symptoms:", err);
-      res.status(500).json({ error: "Error fetching symptoms" });
-    } else {
-      res.status(200).json({ symptoms });
-    }
-  });
-});
+// app.get("/GetAllSymptoms", (req, res) => {
+//   queries.getAllSymptoms((err, symptoms) => {
+//     if (err) {
+//       console.error("Error fetching symptoms:", err);
+//       res.status(500).json({ error: "Error fetching symptoms" });
+//     } else {
+//       res.status(200).json({ symptoms });
+//     }
+//   });
+// });
 
 app.post("/InsertIllness", (req, res) => {
   const illnessData = req.body;

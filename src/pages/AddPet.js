@@ -12,7 +12,7 @@ const AddPet = () => {
   const [petColor, setPetColor] = useState("");
   const [petWeight, setPetWeight] = useState("");
   const [petMicrochipNum, setPetMicrochipNum] = useState("");
-  const [petFood, setPetFood] = useState("");
+  const [petGender, setPetGender] = useState("");
 
   const [ownerID, setOwnerID] = useState("");
   const [owners, setOwners] = useState([]);
@@ -31,11 +31,11 @@ const AddPet = () => {
     const petData = {
       petName,
       petBreed,
+      petGender,
       petAge,
       petColor,
       petWeight,
       petMicrochipNum,
-      petFood,
       Owner_ownerId: ownerID,
     };
 
@@ -83,6 +83,13 @@ const AddPet = () => {
           />
           <TextField
             fullWidth
+            label="Gender"
+            value={petGender}
+            onChange={(e) => setPetGender(e.target.value)}
+            margin="normal"
+          />
+          <TextField
+            fullWidth
             label="Age"
             value={petAge}
             onChange={(e) => setPetAge(e.target.value)}
@@ -109,13 +116,7 @@ const AddPet = () => {
             onChange={(e) => setPetMicrochipNum(e.target.value)}
             margin="normal"
           />
-          <TextField
-            fullWidth
-            label="Food"
-            value={petFood}
-            onChange={(e) => setPetFood(e.target.value)}
-            margin="normal"
-          />
+          
 
           <Button
             variant="contained"

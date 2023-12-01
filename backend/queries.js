@@ -44,7 +44,7 @@ function getAllPets(callback) {
 
 function insertPet(petData, callback) {
   const sql =
-    "INSERT INTO Pet (petName, petBreed, petGender, petAge, petColor, petWeight, petMicrochipNum, petFood, Owner_ownerId) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?)";
+    "INSERT INTO Pet (petName, petBreed, petGender, petAge, petColor, petWeight, petMicrochipNum, petFood, User_userId) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?)";
   const values = [
     petData.petName,
     petData.petBreed,
@@ -63,39 +63,39 @@ function insertPet(petData, callback) {
 }
 
 function getAllUsers(callback) {
-  const query = "SELECT userId, userFirstName, userLastName FROM User";
+  const query = "SELECT * FROM User";
   db.query(query, callback);
 }
 
 const getAllVets = (callback) => {
   const query =
-    "SELECT vetinarianID, vetinarianName, vetinarianAddress FROM Vetinarian";
+    "SELECT * FROM Vetinarian";
   db.query(query, callback);
 };
 
-function removePet(petId, callback) {
-  const sql = "DELETE FROM Pet WHERE petId = ?";
+function removePet(petId, userId, callback) {
+  const sql = "DELETE FROM Pet WHERE petID = ? AND User_userID = ?";
   db.query(sql, petId, callback);
 }
 
 function getPetById(petId, callback) {
-  const sql = "SELECT * FROM Pet WHERE petId = ?";
+  const sql = "SELECT * FROM Pet WHERE petID = ?";
   db.query(sql, petId, callback);
 }
 
 function getUserbyId(userId, callback) {
-  const sql = "SELECT * FROM User WHERE userId = ?";
+  const sql = "SELECT * FROM User WHERE userID = ?";
   db.query(sql, userId, callback);
 }
-const getAllIllnesses = (callback) => {
-  const query = "SELECT * FROM Illness";
+const getIllnessesbyPetId = (callback) => {
+  const query = "SELECT * FROM Illness WHERE Logs_Pet_petID = ? And Logs_logID = ?";
   db.query(query, callback);
 };
 
-const getAllSymptoms = (callback) => {
-  const query = "SELECT * FROM Symptoms";
-  db.query(query, callback);
-};
+// const getAllSymptoms = (callback) => {
+//   const query = "SELECT * FROM Symptoms";
+//   db.query(query, callback);
+// };
 
 function insertLog(logData, callback) {
   const sql =
@@ -184,22 +184,18 @@ module.exports = {
   getMedications,
   insertPetBehavior,
   getBehaviorLogsByPetId,
-  getAllSymptoms,
+  // getAllSymptoms,
   insertPetHasIllness,
-  getAllIllnesses,
+  // getAllIllnesses,
   getAllVets,
   insertPet,
   getAllUsers,
   getLogsByPetId,
   getIllnessLogsByPetId,
   removePet,
-<<<<<<< HEAD
   toEncrypt,
-  toDecrypt
-};
-=======
+  toDecrypt,
   getPetById,
   getUserbyId,
   insertLog,
 };
->>>>>>> be16d8a850679a698aacd093d8bb11c51ccb7e6f
