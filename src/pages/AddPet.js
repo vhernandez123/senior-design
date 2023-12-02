@@ -5,6 +5,7 @@ import "../css/AddPet.css";
 import Navbar from "../components/navbar";
 import Footer from "../components/Footer";
 import { useAuth0 } from "@auth0/auth0-react";
+import useUserFinder  from "../components/userFinder.js";
 
 const AddPet = () => {
   const { user, getIdTokenClaims } = useAuth0();
@@ -14,7 +15,7 @@ const AddPet = () => {
   const [petColor, setPetColor] = useState("");
   const [petWeight, setPetWeight] = useState("");
   const [petMicrochipNum, setPetMicrochipNum] = useState("");
-  const [petFood, setPetFood] = useState("");
+  const [petGender, setPetGender] = useState("");
   const [userId, setUserId] = useState(null);
 
   useEffect(() => {
@@ -39,11 +40,11 @@ const AddPet = () => {
       const petData = {
         petName,
         petBreed,
+        petGender,
         petAge,
         petColor,
         petWeight,
         petMicrochipNum,
-        petFood,
         Owner_ownerId: userId,
       };
 
@@ -64,7 +65,8 @@ const AddPet = () => {
           <TextField
             fullWidth
             label="Select Owner"
-            value={`${user?.given_name || ""} ${user?.family_name || ""}`}
+            // value={`${user?.given_name || ""} ${user?.family_name || ""}`}
+            value={`${user?.name }`}
             disabled
             className="select"
           />
@@ -80,6 +82,13 @@ const AddPet = () => {
             label="Breed"
             value={petBreed}
             onChange={(e) => setPetBreed(e.target.value)}
+            margin="normal"
+          />
+          <TextField
+            fullWidth
+            label="Gender"
+            value={petGender}
+            onChange={(e) => setPetGender(e.target.value)}
             margin="normal"
           />
           <TextField
@@ -110,13 +119,7 @@ const AddPet = () => {
             onChange={(e) => setPetMicrochipNum(e.target.value)}
             margin="normal"
           />
-          <TextField
-            fullWidth
-            label="Food"
-            value={petFood}
-            onChange={(e) => setPetFood(e.target.value)}
-            margin="normal"
-          />
+          
 
           <Button
             variant="contained"

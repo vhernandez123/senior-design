@@ -18,8 +18,6 @@ const PetDetails = () => {
     const options = { year: "numeric", month: "short", day: "numeric" };
     return new Date(logDate).toLocaleDateString(undefined, options);
   };
-
-
   //add jspdf import before running (line 7)
   const handleExportToPdf = () => {
     const {
@@ -40,10 +38,13 @@ const PetDetails = () => {
         logDate: formatLogDate(log.logDate),
       })),
       petIllnessLogs: petIllnessLogs.map((illnessLog) => ({
-        symptoms: illnessLog.symptoms,
-        dateOfDiagnosis: formatLogDate(illnessLog.dateOfDiagnosis),
+        symptoms: illnessLog.illnessSymptoms,
+        dateOfDiagnosis: formatLogDate(illnessLog.illnessDateOfDiagnosis),
       })),
       petBehaviorLogs: petBehaviorLogs.map((behaviorLog) => ({
+        // logID:,
+        // petID:,
+        // userID:,
         activity: behaviorLog.activity,
         aggression: behaviorLog.aggression === "yes" ? "Yes" : "No",
         behaviorChanges: behaviorLog.behaviorChanges,

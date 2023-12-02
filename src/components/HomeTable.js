@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import { Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+import { Auth0Provider } from "@auth0/auth0-react";
 import {
   Table,
   TableBody,
@@ -15,16 +17,38 @@ import {
 
 const DataTable = () => {
   const [rows, setRows] = useState([]);
-
+  const { user, getIdTokenClaims } = useAuth0();
+  const [userId, setUserId] = useState(null);
   useEffect(() => {
-    Axios.get("http://localhost:4000/GetAllPets")
-      .then((response) => {
-        setRows(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching pet data:", error);
-      });
-  }, []);
+    const fetchUserId = async () => {
+      try {
+        // Check if user is defined before accessing its properties
+        if (user) {
+          const idToken = await getIdTokenClaims();
+          setUserId(idToken['https://example.com/userId']);
+        }
+      } catch (error) {
+        console.error("Error fetching user ID:", error);
+      }
+    };
+
+    fetchUserId();
+  }, [getIdTokenClaims, user]); 
+  useEffect(() => {
+    const fetchData = async () => {
+      if (user && userId) {
+        try {
+          const response = await Axios.get(`http://localhost:4000/GetAllPetsID/${userId}`);
+          console.log(response.data);
+          setRows(response.data);
+        } catch (error) {
+          console.error("Error finding pet info for this owner:", error);
+        }
+      }
+    };
+
+    fetchData(); 
+  }, [userId, user]);
 
   const handleRemovePet = (index, petId) => {
     Axios.delete(`http://localhost:4000/RemovePet/${petId}`)
@@ -60,7 +84,7 @@ const DataTable = () => {
             <TableCell className="table-header-cell">
               Microchip Number
             </TableCell>
-            <TableCell className="table-header-cell">Food</TableCell>
+            <TableCell className="table-header-cell">Gender</TableCell>
             <TableCell className="table-header-cell" colSpan={2}>
               Actions
             </TableCell>
@@ -77,7 +101,7 @@ const DataTable = () => {
               <TableCell className="table-cell">
                 {row.petMicrochipNum}
               </TableCell>
-              <TableCell className="table-cell">{row.petFood}</TableCell>
+              <TableCell className="table-cell">{row.petGender}</TableCell>
               <TableCell className="table-cell" colSpan={2}>
                 <Button
                   variant="contained"
@@ -85,7 +109,7 @@ const DataTable = () => {
                   style={{
                     backgroundColor: "#01B636",
                     color: "white",
-                    marginRight: "10px", // Adjust the spacing as needed
+                    marginRight: "10px",
                   }}
                   onClick={() => handleRemovePet(index, row.petId)}
                 >
@@ -98,7 +122,7 @@ const DataTable = () => {
                     style={{
                       backgroundColor: "#01B636",
                       color: "white",
-                      marginLeft: "10px", // Adjust the spacing as needed
+                      marginLeft: "10px", 
                     }}
                   >
                     View Pet

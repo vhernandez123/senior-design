@@ -10,8 +10,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get("/GetAllPets", (req, res) => {
-  queries.getAllPets((err, result) => {
+app.get("/GetAllPetsID/:userID", (req, res) => {
+  const { userID } = req.params;
+  queries.getAllPetsbyID(userID, (err, result) => {
     if (err) {
       console.error("Error retrieving pet data:", err);
       res.status(500).json({ error: "Error retrieving pet data" });
@@ -33,27 +34,27 @@ app.get("/GetLogsByPetId/:petId", (req, res) => {
   });
 });
 
-app.get("/GetAllUsers", (req, res) => {
-  queries.getAllUsers((err, users) => {
-    if (err) {
-      console.error("Error retrieving user data:", err);
-      res.status(500).json({ error: "Error retrieving user data" });
-    } else {
-      res.status(200).json(users);
-    }
-  });
-});
+// app.get("/GetAllUsers", (req, res) => {
+//   queries.getAllUsers((err, users) => {
+//     if (err) {
+//       console.error("Error retrieving user data:", err);
+//       res.status(500).json({ error: "Error retrieving user data" });
+//     } else {
+//       res.status(200).json(users);
+//     }
+//   });
+// });
 
-app.get("/GetAllMedications", (req, res) => {
-  queries.getMedications((err, users) => {
-    if (err) {
-      console.error("Error retrieving medication data:", err);
-      res.status(500).json({ error: "Error retrieving medication data" });
-    } else {
-      res.status(200).json(users);
-    }
-  });
-});
+// app.get("/GetAllMedications", (req, res) => {
+//   queries.getMedications((err, users) => {
+//     if (err) {
+//       console.error("Error retrieving medication data:", err);
+//       res.status(500).json({ error: "Error retrieving medication data" });
+//     } else {
+//       res.status(200).json(users);
+//     }
+//   });
+// });
 
 app.post("/InsertPetMedication", (req, res) => {
   const medicationData = req.body;
@@ -176,27 +177,27 @@ app.post("/InsertPetBehavior", (req, res) => {
   });
 });
 
-app.get("/GetAllVets", (req, res) => {
-  queries.getAllVets((err, vets) => {
-    if (err) {
-      console.error("Error fetching vets:", err);
-      res.status(500).json({ error: "Error fetching vets" });
-    } else {
-      res.status(200).json({ vets });
-    }
-  });
-});
+// app.get("/GetAllVets", (req, res) => {
+//   queries.getAllVets((err, vets) => {
+//     if (err) {
+//       console.error("Error fetching vets:", err);
+//       res.status(500).json({ error: "Error fetching vets" });
+//     } else {
+//       res.status(200).json({ vets });
+//     }
+//   });
+// });
 
-app.get("/GetAllSymptoms", (req, res) => {
-  queries.getAllSymptoms((err, symptoms) => {
-    if (err) {
-      console.error("Error fetching symptoms:", err);
-      res.status(500).json({ error: "Error fetching symptoms" });
-    } else {
-      res.status(200).json({ symptoms });
-    }
-  });
-});
+// app.get("/GetAllSymptoms", (req, res) => {
+//   queries.getAllSymptoms((err, symptoms) => {
+//     if (err) {
+//       console.error("Error fetching symptoms:", err);
+//       res.status(500).json({ error: "Error fetching symptoms" });
+//     } else {
+//       res.status(200).json({ symptoms });
+//     }
+//   });
+// });
 
 app.post("/InsertIllness", (req, res) => {
   const illnessData = req.body;
@@ -217,16 +218,16 @@ app.post("/InsertIllness", (req, res) => {
   });
 });
 
-app.get("/GetAllIllnesses", (req, res) => {
-  queries.getAllIllnesses((err, illnesses) => {
-    if (err) {
-      console.error("Error fetching illnesses:", err);
-      res.status(500).json({ error: "Error fetching illnesses" });
-    } else {
-      res.status(200).json({ illnesses });
-    }
-  });
-});
+// app.get("/GetAllIllnesses", (req, res) => {
+//   queries.getAllIllnesses((err, illnesses) => {
+//     if (err) {
+//       console.error("Error fetching illnesses:", err);
+//       res.status(500).json({ error: "Error fetching illnesses" });
+//     } else {
+//       res.status(200).json({ illnesses });
+//     }
+//   });
+// });
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
