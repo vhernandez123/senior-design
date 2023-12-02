@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import { Auth0Provider } from "@auth0/auth0-react";
 import App from "./App";
 import Main from "./components/Main.jsx";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -14,6 +13,7 @@ import LogPet from "./pages/LogPet";
 import PetDetails from "./pages/PetDetails";
 import UpdateBehavior from "./pages/UpdateBehavior.js";
 import "normalize.css";
+import Auth0Bugs from "./components/Auth0Bugs";
 import UpdateBathroom from "./pages/UpdateBathroom.js";
 import LogMedication from "./pages/LogMedication.js";
 const domain = process.env.REACT_APP_AUTH0_DOMAIN;
@@ -21,11 +21,7 @@ const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
 
 ReactDOM.render(
   <React.StrictMode>
-    <Auth0Provider
-      domain={domain}
-      clientId={clientId}
-      redirectUri={window.location.origin}
-    >
+    <Auth0Bugs>
       <Router>
         <Routes>
           <Route path="/" element={<Main />} />
@@ -42,7 +38,7 @@ ReactDOM.render(
           <Route path="/UpdateBathroom" element={<UpdateBathroom />} />
         </Routes>
       </Router>
-    </Auth0Provider>
+    </Auth0Bugs>
   </React.StrictMode>,
   document.getElementById("root")
 );
