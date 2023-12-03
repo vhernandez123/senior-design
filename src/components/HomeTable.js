@@ -22,10 +22,9 @@ const DataTable = () => {
   useEffect(() => {
     const fetchUserId = async () => {
       try {
-        // Check if user is defined before accessing its properties
         if (user) {
           const idToken = await getIdTokenClaims();
-          setUserId(idToken['https://example.com/userId']);
+          setUserId(idToken["https://example.com/userId"]);
         }
       } catch (error) {
         console.error("Error fetching user ID:", error);
@@ -33,12 +32,14 @@ const DataTable = () => {
     };
 
     fetchUserId();
-  }, [getIdTokenClaims, user]); 
+  }, [getIdTokenClaims, user]);
   useEffect(() => {
     const fetchData = async () => {
       if (user && userId) {
         try {
-          const response = await Axios.get(`http://localhost:4000/GetAllPetsID/${userId}`);
+          const response = await Axios.get(
+            `http://localhost:4000/GetAllPetsID/${userId}`
+          );
           console.log(response.data);
           setRows(response.data);
         } catch (error) {
@@ -47,11 +48,11 @@ const DataTable = () => {
       }
     };
 
-    fetchData(); 
+    fetchData();
   }, [userId, user]);
 
-  const handleRemovePet = (index, petId) => {
-    Axios.delete(`http://localhost:4000/RemovePet/${petId}`)
+  const handleRemovePet = (index, petID) => {
+    Axios.delete(`http://localhost:4000/RemovePet/${petID}`)
       .then((response) => {
         const updatedRows = [...rows];
         updatedRows.splice(index, 1);
@@ -111,18 +112,18 @@ const DataTable = () => {
                     color: "white",
                     marginRight: "10px",
                   }}
-                  onClick={() => handleRemovePet(index, row.petId)}
+                  onClick={() => handleRemovePet(index, row.petID)}
                 >
                   Remove
                 </Button>
-                <Link to={`/pet/${row.petId}`}>
+                <Link to={`/pet/${row.petID}`}>
                   <Button
                     variant="contained"
                     className="custom-button"
                     style={{
                       backgroundColor: "#01B636",
                       color: "white",
-                      marginLeft: "10px", 
+                      marginLeft: "10px",
                     }}
                   >
                     View Pet

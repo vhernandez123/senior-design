@@ -5,7 +5,7 @@ import "../css/AddPet.css";
 import Navbar from "../components/navbar";
 import Footer from "../components/Footer";
 import { useAuth0 } from "@auth0/auth0-react";
-import useUserFinder  from "../components/userFinder.js";
+import useUserFinder from "../components/userFinder.js";
 
 const AddPet = () => {
   const { user, getIdTokenClaims } = useAuth0();
@@ -21,10 +21,9 @@ const AddPet = () => {
   useEffect(() => {
     const fetchUserId = async () => {
       try {
-        // Check if user is defined before accessing its properties
         if (user) {
           const idToken = await getIdTokenClaims();
-          setUserId(idToken['https://example.com/userId']);
+          setUserId(idToken["https://example.com/userId"]);
         }
       } catch (error) {
         console.error("Error fetching user ID:", error);
@@ -66,7 +65,7 @@ const AddPet = () => {
             fullWidth
             label="Select Owner"
             // value={`${user?.given_name || ""} ${user?.family_name || ""}`}
-            value={`${user?.name }`}
+            value={`${user?.name}`}
             disabled
             className="select"
           />
@@ -119,7 +118,6 @@ const AddPet = () => {
             onChange={(e) => setPetMicrochipNum(e.target.value)}
             margin="normal"
           />
-          
 
           <Button
             variant="contained"

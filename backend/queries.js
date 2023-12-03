@@ -1,24 +1,32 @@
 const bodyParser = require("body-parser");
 const mysql = require("mysql");
 const cors = require("cors");
-const crypto = require('crypto');
+const crypto = require("crypto");
 require("dotenv/config");
-require('dotenv').config({ path: '../.env' });
+require("dotenv").config({ path: "../.env" });
 
 // encryption/decryption
-const secretKey = Buffer.from(process.env.SECRET_KEY, 'hex');
-const initializationVector = Buffer.from(process.env.IV, 'hex');
+const secretKey = Buffer.from(process.env.SECRET_KEY, "hex");
+const initializationVector = Buffer.from(process.env.IV, "hex");
 
 function toEncrypt(text) {
-  const cipher = crypto.createCipheriv('aes-256-cbc', secretKey, initializationVector);
-  let encrypt = cipher.update(text, 'utf-8', 'hex');
-  encrypt += cipher.final('hex');
+  const cipher = crypto.createCipheriv(
+    "aes-256-cbc",
+    secretKey,
+    initializationVector
+  );
+  let encrypt = cipher.update(text, "utf-8", "hex");
+  encrypt += cipher.final("hex");
   return encrypt;
 }
 function toDecrypt(text) {
-  const decipher = crypto.createDecipheriv('aes-256-cbc', secretKey, initializationVector);
-  let decrypt = decipher.update(text, 'hex', 'utf-8');
-  decrypt += decipher.final('utf-8');
+  const decipher = crypto.createDecipheriv(
+    "aes-256-cbc",
+    secretKey,
+    initializationVector
+  );
+  let decrypt = decipher.update(text, "hex", "utf-8");
+  decrypt += decipher.final("utf-8");
   return decrypt;
 }
 
@@ -51,6 +59,11 @@ function getAllPetsbyID(userID, callback) {
   db.query(sql, values, callback);
 }
 
+function getPetById(petID, callback) {
+  const sql = "SELECT * FROM Pet WHERE petID = ?";
+  db.query(sql, petID, callback);
+}
+
 function insertPet(petData, callback) {
   const sql =
     "INSERT INTO Pet (petName, petBreed, petGender, petAge, petColor, petWeight, petMicrochipNum, User_userID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -67,9 +80,9 @@ function insertPet(petData, callback) {
   db.query(sql, values, callback);
 }
 
-function removePet(petId, callback) {
-  const sql = "DELETE FROM Pet WHERE petId = ?";
-  db.query(sql, petId, callback);
+function removePet(petID, callback) {
+  const sql = "DELETE FROM Pet WHERE petID = ?";
+  db.query(sql, petID, callback);
 }
 
 function getUserbyId(userId, callback) {
@@ -78,19 +91,45 @@ function getUserbyId(userId, callback) {
 }
 
 const getAllIllnesses = (callback) => {
-  const query = "SELECT * FROM Illness WHERE (Logs_logsID = ? AND Logs_Pet_petID = ? AND Logs_Pet_User_userID = ?)";
+  const query =
+    "SELECT * FROM Illness WHERE (Logs_logsID = ? AND Logs_Pet_petID = ? AND Logs_Pet_User_userID = ?)";
   db.query(query, callback);
 };
 
-function insertLog(logData, callback) {
+function insertLog(logData, userId, callback) {
   const sql =
-    "INSERT INTO Logs (logDate, logEntry, Pet_petId, Pet_User_userID) VALUES (?, ?, ?, ?)";
+    "INSERT INTO Logs (logDate, logEntry, Pet_petID, Pet_User_userID) VALUES (?, ?, ?, ?)";
+  const values = [logData.logDate, logData.logEntry, logData.Pet_petID, userId];
+  db.query(sql, values, callback);
+}
+
+function insertFood(foodData, callback) {
+  const sql = `
+    INSERT INTO Food (
+      foodType, 
+      foodAmount, 
+      foodUnit, 
+      foodWater, 
+      foodDanger, 
+      foodDangerDescription, 
+      Logs_logsID, 
+      Logs_Pet_petID, 
+      Logs_Pet_User_userID
+    ) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+
   const values = [
-    logData.logDate,
-    logData.logEntry,
-    logData.Pet_petId,
-    logData.userId
+    foodData.foodType,
+    foodData.foodAmount,
+    foodData.foodUnit,
+    foodData.foodWater,
+    foodData.foodDanger,
+    foodData.foodDangerDescription,
+    foodData.Logs_logsID,
+    foodData.Logs_Pet_petID,
+    foodData.Logs_Pet_User_userID,
   ];
+
   db.query(sql, values, callback);
 }
 
@@ -146,7 +185,7 @@ function insertPetMedication(medicationData, callback) {
     medicationData.dosage,
     medicationData.duration,
     medicationData.instruction,
-    medicationData.vet
+    medicationData.vet,
   ];
 
   db.query(medicationSql, medicationValues, callback);
@@ -162,6 +201,11 @@ function getBehaviorLogsByPetId(petId, callback) {
   db.query(sql, petId, callback);
 }
 
+function getLogById(logsID, callback) {
+  const sql = "SELECT * FROM Logs WHERE logsID = ?";
+  db.query(sql, logsID, callback);
+}
+
 function getMedications(callback) {
   const sql = "SELECT * FROM Medication";
   db.query(sql, callback);
@@ -169,6 +213,10 @@ function getMedications(callback) {
 
 module.exports = {
   getAllPetsbyID,
+  getPetById,
+  insertFood,
+  getLogById,
+  getUserbyId,
   insertPetMedication,
   getMedicationLogsByPetId,
   getMedications,
@@ -182,5 +230,5 @@ module.exports = {
   removePet,
   insertLog,
   toEncrypt,
-  toDecrypt
+  toDecrypt,
 };

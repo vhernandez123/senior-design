@@ -34,6 +34,23 @@ app.get("/GetLogsByPetId/:petId", (req, res) => {
   });
 });
 
+app.get("/GetLog/:logsID", (req, res) => {
+  const { logsID } = req.params;
+
+  queries.getLogById(logsID, (err, log) => {
+    if (err) {
+      console.error("Error retrieving log by logsID:", err);
+      res.status(500).json({ error: "Error retrieving log by logsID" });
+    } else {
+      if (!log) {
+        res.status(404).json({ error: "Log not found" });
+      } else {
+        res.status(200).json(log);
+      }
+    }
+  });
+});
+
 // app.get("/GetAllUsers", (req, res) => {
 //   queries.getAllUsers((err, users) => {
 //     if (err) {
@@ -81,9 +98,9 @@ app.post("/InsertPet", (req, res) => {
     }
   });
 });
-app.delete("/RemovePet/:petId", (req, res) => {
-  const petId = req.params.petId;
-  queries.removePet(petId, (err, result) => {
+app.delete("/RemovePet/:petID", (req, res) => {
+  const petID = req.params.petID;
+  queries.removePet(petID, (err, result) => {
     if (err) {
       console.error("Error removing pet:", err);
       res.status(500).json({ error: "Error removing pet" });
@@ -93,10 +110,10 @@ app.delete("/RemovePet/:petId", (req, res) => {
     }
   });
 });
-app.get("/GetPet/:petId", (req, res) => {
-  const { petId } = req.params;
+app.get("/GetPet/:petID", (req, res) => {
+  const { petID } = req.params;
 
-  queries.getPetById(petId, (err, result) => {
+  queries.getPetById(petID, (err, result) => {
     if (err) {
       console.error("Error retrieving pet by ID:", err);
       res.status(500).json({ error: "Error retrieving pet by ID" });
@@ -153,13 +170,28 @@ app.get("/GetMedicationLogsByPetId/:petId", (req, res) => {
 
 app.post("/InsertLog", (req, res) => {
   const logData = req.body;
-  queries.insertLog(logData, (err, result) => {
+  const userId = logData.userId;
+  queries.insertLog(logData, userId, (err, result) => {
     if (err) {
       console.error("Error inserting log data:", err);
       res.status(500).json({ error: "Error inserting log data" });
     } else {
       console.log("Log data inserted successfully");
       res.status(201).json({ message: "Log data inserted successfully" });
+    }
+  });
+});
+
+app.post("/InsertFood", (req, res) => {
+  const foodData = req.body;
+  const logsID = foodData.Logs_logsID;
+  queries.insertFood(foodData, logsID, (err, result) => {
+    if (err) {
+      console.error("Error inserting food data:", err);
+      res.status(500).json({ error: "Error inserting food data" });
+    } else {
+      console.log("Food data inserted successfully");
+      res.status(201).json({ message: "Food data inserted successfully" });
     }
   });
 });
