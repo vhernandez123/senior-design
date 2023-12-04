@@ -40,7 +40,7 @@ const DataTable = () => {
           const response = await Axios.get(
             `http://localhost:4000/GetAllPetsID/${userId}`
           );
-          console.log(response.data);
+          // console.log(response.data);
           setRows(response.data);
         } catch (error) {
           console.error("Error finding pet info for this owner:", error);

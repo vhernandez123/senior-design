@@ -21,83 +21,83 @@ const PetDetails = () => {
     return new Date(logDate).toLocaleDateString(undefined, options);
   };
   //add jspdf import before running (line 7)
-  const handleExportToPdf = () => {
-    const { petName, petBreed, petAge, petColor, petWeight, petMicrochipNum } =
-      petDetails;
+  // const handleExportToPdf = () => {
+  //   const { petName, petBreed, petAge, petColor, petWeight, petMicrochipNum } =
+  //     petDetails;
 
-    const currentDate = new Date().toLocaleDateString(); // Get the current date
+  //   const currentDate = new Date().toLocaleDateString(); // Get the current date
 
-    const formattedLogs = {
-      petLogs: petLogs.map((log) => ({
-        logEntry: log.logEntry,
-        logDate: formatLogDate(log.logDate),
-      })),
-      petIllnessLogs: petIllnessLogs.map((illnessLog) => ({
-        symptoms: illnessLog.illnessSymptoms,
-        dateOfDiagnosis: formatLogDate(illnessLog.illnessDateOfDiagnosis),
-      })),
-      petBehaviorLogs: petBehaviorLogs.map((behaviorLog) => ({
-        // logID:,
-        // petID:,
-        // userID:,
-        activity: behaviorLog.activity,
-        aggression: behaviorLog.aggression === "yes" ? "Yes" : "No",
-        behaviorChanges: behaviorLog.behaviorChanges,
-        logDate: formatLogDate(behaviorLog.logDate),
-      })),
-      petMedicationLogs: petMedicationLogs.map((medicationLog) => ({
-        medicationName: medicationLog.medicationName,
-        instructions: medicationLog.instructions,
-        durationInDays: medicationLog.durationInDays,
-      })),
-    };
+  //   const formattedLogs = {
+  //     petLogs: petLogs.map((log) => ({
+  //       logEntry: log.logEntry,
+  //       logDate: formatLogDate(log.logDate),
+  //     })),
+  //     petIllnessLogs: petIllnessLogs.map((illnessLog) => ({
+  //       symptoms: illnessLog.illnessSymptoms,
+  //       dateOfDiagnosis: formatLogDate(illnessLog.illnessDateOfDiagnosis),
+  //     })),
+  //     petBehaviorLogs: petBehaviorLogs.map((behaviorLog) => ({
+  //       // logID:,
+  //       // petID:,
+  //       // userID:,
+  //       activity: behaviorLog.activity,
+  //       aggression: behaviorLog.aggression === "yes" ? "Yes" : "No",
+  //       behaviorChanges: behaviorLog.behaviorChanges,
+  //       logDate: formatLogDate(behaviorLog.logDate),
+  //     })),
+  //     petMedicationLogs: petMedicationLogs.map((medicationLog) => ({
+  //       medicationName: medicationLog.medicationName,
+  //       instructions: medicationLog.instructions,
+  //       durationInDays: medicationLog.durationInDays,
+  //     })),
+  //   };
 
-    const petInfoText = `Pet Information:
-      Name: ${petName}
-      Breed: ${petBreed}
-      Age: ${petAge}
-      Color: ${petColor}
-      Weight: ${petWeight}
-      Microchip Number: ${petMicrochipNum}
-      Date Of log: ${currentDate}`;
+  //   const petInfoText = `Pet Information:
+  //     Name: ${petName}
+  //     Breed: ${petBreed}
+  //     Age: ${petAge}
+  //     Color: ${petColor}
+  //     Weight: ${petWeight}
+  //     Microchip Number: ${petMicrochipNum}
+  //     Date Of log: ${currentDate}`;
 
-    const logsText = `
-        Food Logs:
-      ${formattedLogs.petLogs
-        .map((log) => `${log.logDate}: ${log.logEntry}`)
-        .join("\n")}
+  //   const logsText = `
+  //       Food Logs:
+  //     ${formattedLogs.petLogs
+  //       .map((log) => `${log.logDate}: ${log.logEntry}`)
+  //       .join("\n")}
 
-        Illness Logs:
-      ${formattedLogs.petIllnessLogs
-        .map(
-          (illnessLog) =>
-            `${illnessLog.symptoms} on ${illnessLog.dateOfDiagnosis}`
-        )
-        .join("\n")}
+  //       Illness Logs:
+  //     ${formattedLogs.petIllnessLogs
+  //       .map(
+  //         (illnessLog) =>
+  //           `${illnessLog.symptoms} on ${illnessLog.dateOfDiagnosis}`
+  //       )
+  //       .join("\n")}
 
-        Behavior Logs:
-      ${formattedLogs.petBehaviorLogs
-        .map(
-          (behaviorLog) =>
-            `Current Activity: ${behaviorLog.activity}, Any signs of aggression: ${behaviorLog.aggression}, Behavior Changes: ${behaviorLog.behaviorChanges}, Logged on ${behaviorLog.logDate}`
-        )
-        .join("\n")}
+  //       Behavior Logs:
+  //     ${formattedLogs.petBehaviorLogs
+  //       .map(
+  //         (behaviorLog) =>
+  //           `Current Activity: ${behaviorLog.activity}, Any signs of aggression: ${behaviorLog.aggression}, Behavior Changes: ${behaviorLog.behaviorChanges}, Logged on ${behaviorLog.logDate}`
+  //       )
+  //       .join("\n")}
 
-        Medication Logs:
-      ${formattedLogs.petMedicationLogs
-        .map(
-          (medicationLog) =>
-            `Takes ${medicationLog.medicationName} ${medicationLog.instructions} for ${medicationLog.durationInDays} days`
-        )
-        .join("\n")}
-    `;
+  //       Medication Logs:
+  //     ${formattedLogs.petMedicationLogs
+  //       .map(
+  //         (medicationLog) =>
+  //           `Takes ${medicationLog.medicationName} ${medicationLog.instructions} for ${medicationLog.durationInDays} days`
+  //       )
+  //       .join("\n")}
+  //   `;
 
-    const fullText = `${petInfoText}${logsText}`;
+  //   const fullText = `${petInfoText}${logsText}`;
 
-    const pdf = new jsPDF();
-    pdf.text(fullText, 10, 10);
-    pdf.save(`pet_data_${petDetails.petName}_${currentDate}.pdf`);
-  };
+  //   const pdf = new jsPDF();
+  //   pdf.text(fullText, 10, 10);
+  //   pdf.save(`pet_data_${petDetails.petName}_${currentDate}.pdf`);
+  // };
 
   useEffect(() => {
     Axios.get(`http://localhost:4000/GetPet/${petID}`)
@@ -140,7 +140,6 @@ const PetDetails = () => {
     //     console.error("Error fetching pet behavior logs:", error);
     //   });
 
-    console.log(petID);
   }, [petID]);
 
   return (
@@ -170,7 +169,7 @@ const PetDetails = () => {
               {petDetails.petMicrochipNum}
             </p>
           </div>
-          <h3>Log Information about your pet</h3>
+          {/* <h3>Log Information about your pet</h3>
           <Link to={`/log-pet/${petID}`}>
             <Button
               variant="contained"
@@ -190,7 +189,7 @@ const PetDetails = () => {
             onClick={handleExportToPdf}
           >
             Export to PDF
-          </Button>
+          </Button> */}
         </div>
       </div>
       <div><DataTable /></div>
@@ -205,8 +204,8 @@ const PetDetails = () => {
             ))}
           </ul>  
         </div>
-      </div> */}
-      {/* <div className="pet-logs notepad">
+      </div>
+      <div className="pet-logs notepad">
         <div className="log-box">
           <h3>Food logs for {petDetails.petName}</h3>
           <ul>

@@ -61,6 +61,23 @@ app.get("/GetLog/:logsID", (req, res) => {
   });
 });
 
+app.get("GetFoodDetails/:logsID", (req, res) => {
+  const { logsID } = req.params;
+  console.log(logsID);
+  queries.getFoodDetailsbyLogsID(logsID, (err, foodDetails) => {
+    if (err) {
+      console.error("Error retrieving food details by logsID:", err);
+      res.status(500).json({ error: "Error retrieving food details by logsID" });
+    } else {
+      // if (!foodDetails) {
+      //   res.status(404).json({ error: "Log not found" });
+      // } else {
+        console.log(foodDetails);
+        res.status(200).json(foodDetails);
+      // }
+    }
+  });
+});
 // app.get("/GetAllUsers", (req, res) => {
 //   queries.getAllUsers((err, users) => {
 //     if (err) {

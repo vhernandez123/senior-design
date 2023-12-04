@@ -274,4 +274,5 @@ module.exports = {
   insertLog,
   toEncrypt,
   toDecrypt,
+  getFoodDetailsbyLogID
 };

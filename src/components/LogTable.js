@@ -42,7 +42,7 @@ const DataTable = () => {
           const response = await Axios.get(
             `http://localhost:4000/GetLogsByPetId/${petID}`
           );
-          console.log(response.data);
+          // console.log(response.data);
           setRows(response.data);
         } catch (error) {
           console.error("Error finding pet info for this owner:", error);
@@ -79,7 +79,7 @@ const DataTable = () => {
       <Table size="medium" className="custom-table">
         <TableHead>
           <TableRow className="table-header-row">
-            <TableCell className="table-header-cell">LogsID</TableCell>
+            {/* <TableCell className="table-header-cell">LogsID</TableCell> */}
             <TableCell className="table-header-cell">Date</TableCell>
             <TableCell className="table-header-cell">Log Entry</TableCell>
             <TableCell className="table-header-cell" colSpan={2}>
@@ -90,7 +90,7 @@ const DataTable = () => {
         <TableBody>
           {rows.map((row, index) => (
             <TableRow key={index} className="table-row">
-              <TableCell className="table-cell">{row.logsID}</TableCell>
+              {/* <TableCell className="table-cell">{row.logsID}</TableCell> */}
               <TableCell className="table-cell">{row.logDate}</TableCell>
               <TableCell className="table-cell">{row.logEntry}</TableCell>
               <TableCell className="table-cell" colSpan={2}>
@@ -116,10 +116,10 @@ const DataTable = () => {
                       marginLeft: "10px",
                     }}
                   >
-                    Add Details
+                    Details
                   </Button>
                 </Link>
-                <Link to={`/LoggingForms/${row.logsID}/${petID}`}>
+                {/* <Link to={`/LoggingForms/${row.logsID}/${petID}`}>
                   <Button
                     variant="contained"
                     className="custom-button"
@@ -131,7 +131,7 @@ const DataTable = () => {
                   >
                     View Details
                   </Button>
-                </Link>
+                </Link> */}
               </TableCell>
             </TableRow>
           ))}
