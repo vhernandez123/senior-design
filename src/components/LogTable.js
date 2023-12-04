@@ -106,7 +106,7 @@ const DataTable = () => {
                 >
                   Remove
                 </Button> */}
-                <Link to={`/LoggingForms/${row.logsID}`}>
+                <Link to={`/LoggingForms/${row.logsID}/${petID}`}>
                   <Button
                     variant="contained"
                     className="custom-button"
@@ -126,7 +126,7 @@ const DataTable = () => {
       </Table>
       <Button
         component={Link}
-        to="/Log-pet/${petID}"
+        to={`/Log-pet/${petID}`}
         variant="contained"
         className="custom-button custom-table"
         style={{ margin: "1rem", backgroundColor: "#01B636", color: "white" }}
