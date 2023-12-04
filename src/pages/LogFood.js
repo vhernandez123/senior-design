@@ -70,14 +70,15 @@ const LogFood = () => {
 
       const foodData = {
         foodType: formData.foodType,
-        foodAmount: totalFoodEaten,
+        foodAmount: formData.foodNumber,
         foodUnit: formData.selectedUnit,
-        foodWater: totalDrinks,
-        foodDanger: formData.ateBad === "yes" ? 1 : 0,
+        foodWater: formData.drank,
+        // foodDanger: formData.ateBad === "yes" ? 1 : 0,
+        foodDanger: formData.ateBad,
         foodDangerDescription: formData.ateBadDesc,
-        Logs_logsID: logsID || "",
-        Logs_Pet_petID: petID || "",
-        Logs_Pet_User_userID: userId || "",
+        Logs_logsID: logsID,
+        Logs_Pet_petID: petID,
+        Logs_Pet_User_userID: userId,
       };
 
       const response = await Axios.post(

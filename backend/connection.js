@@ -185,8 +185,8 @@ app.post("/InsertLog", (req, res) => {
 
 app.post("/InsertFood", (req, res) => {
   const foodData = req.body;
-  const logsID = foodData.Logs_logsID;
-  queries.insertFood(foodData, logsID, (err, result) => {
+  // const logsID = foodData.Logs_logsID;
+  queries.insertFood(foodData, (err, result) => {
     if (err) {
       console.error("Error inserting food data:", err);
       res.status(500).json({ error: "Error inserting food data" });

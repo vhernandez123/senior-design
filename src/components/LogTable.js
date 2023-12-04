@@ -119,6 +119,19 @@ const DataTable = () => {
                     Add Details
                   </Button>
                 </Link>
+                <Link to={`/LoggingForms/${row.logsID}/${petID}`}>
+                  <Button
+                    variant="contained"
+                    className="custom-button"
+                    style={{
+                      backgroundColor: "#01B636",
+                      color: "white",
+                      marginLeft: "10px",
+                    }}
+                  >
+                    View Details
+                  </Button>
+                </Link>
               </TableCell>
             </TableRow>
           ))}

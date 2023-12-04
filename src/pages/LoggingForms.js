@@ -33,7 +33,7 @@ const LoggingForms = () => {
       <Navbar />
       <div className="pet-details-container">
         <h3>What has your pet eaten today?</h3>
-        <Link to={`/log-food/${logsID}/${petID}/${userID}`}>
+        <Link to={`/log-food/${logsID}/${petID}`}>
           <Button
             variant="contained"
             className="custom-button"

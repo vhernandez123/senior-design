@@ -117,6 +117,16 @@ function removeLog(logId, callback) {
   db.query(sql, logId, callback);
 }
 
+function getLogsByPetId(petId, callback) {
+  const sql = "SELECT * FROM Logs WHERE Pet_petID = ?";
+  db.query(sql, petId, callback);
+}
+
+function getLogById(logsID, callback) {
+  const sql = "SELECT * FROM Logs WHERE logsID = ?";
+  db.query(sql, logsID, callback);
+}
+
 function insertFood(foodData, callback) {
   const sql = `
     INSERT INTO Food (
@@ -147,10 +157,15 @@ function insertFood(foodData, callback) {
   db.query(sql, values, callback);
 }
 
-function getLogsByPetId(petId, callback) {
-  const sql = "SELECT * FROM Logs WHERE Pet_petID = ?";
-  db.query(sql, petId, callback);
+
+
+
+function getFoodDetailsbyLogID(logID, callback) {
+  const sql = "SELECT * FROM Food WHERE Logs_logsID = ?";
+  db.query(sql, logID, callback);
 }
+
+
 
 function getMedicationLogsByPetId(petId, callback) {
   const sql = "SELECT * FROM Pet_has_Medication WHERE Pet_petId = ?";
@@ -213,11 +228,6 @@ function getIllnessLogsByPetId(petId, callback) {
 function getBehaviorLogsByPetId(petId, callback) {
   const sql = "SELECT * FROM Behavior WHERE Pet_petId = ?";
   db.query(sql, petId, callback);
-}
-
-function getLogById(logsID, callback) {
-  const sql = "SELECT * FROM Logs WHERE logsID = ?";
-  db.query(sql, logsID, callback);
 }
 
 function getMedications(callback) {
