@@ -6,6 +6,7 @@ import Navbar from "../components/navbar";
 import { Button } from "@mui/material";
 import jsPDF from "jspdf";
 import { Link } from "react-router-dom";
+import DataTable from "../components/LogTable";
 
 const PetDetails = () => {
   const [petDetails, setPetDetails] = useState({});
@@ -63,7 +64,7 @@ const PetDetails = () => {
     const logsText = `
         Food Logs:
       ${formattedLogs.petLogs
-        .map((log) => `${log.logEntry} on ${log.logDate}`)
+        .map((log) => `${log.logDate}: ${log.logEntry}`)
         .join("\n")}
 
         Illness Logs:
@@ -176,7 +177,7 @@ const PetDetails = () => {
               className="custom-button"
               style={{ backgroundColor: "#01B636", color: "white" }}
             >
-              Begin now
+              Create New Log
             </Button>
           </Link>
           <br />
@@ -192,7 +193,20 @@ const PetDetails = () => {
           </Button>
         </div>
       </div>
-      <div className="pet-logs notepad">
+      <div><DataTable /></div>
+      {/* <div className="pet-logs notepad">
+      < div className="log-box">
+          <h3>Daily Logs for {petDetails.petName}</h3>
+          <ul>
+            {petLogs.map((log) => (
+              <li key={log.logsId}>
+                {log.logEntry} on {formatLogDate(log.logDate)}
+              </li>
+            ))}
+          </ul>  
+        </div>
+      </div> */}
+      {/* <div className="pet-logs notepad">
         <div className="log-box">
           <h3>Food logs for {petDetails.petName}</h3>
           <ul>
@@ -247,7 +261,7 @@ const PetDetails = () => {
             ))}
           </ul>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

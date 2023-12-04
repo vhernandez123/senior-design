@@ -30,6 +30,7 @@ app.get("/GetLogsByPetId/:petId", (req, res) => {
       res.status(500).json({ error: "Error retrieving logs by petId" });
     } else {
       res.status(200).json(logs);
+      console.log(logs);
     }
   });
 });

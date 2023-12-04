@@ -66,7 +66,16 @@ function getPetById(petID, callback) {
 
 function insertPet(petData, callback) {
   const sql =
-    "INSERT INTO Pet (petName, petBreed, petGender, petAge, petColor, petWeight, petMicrochipNum, User_userID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    `INSERT INTO Pet (
+      petName, 
+      petBreed, 
+      petGender, 
+      petAge, 
+      petColor, 
+      petWeight, 
+      petMicrochipNum, 
+      User_userID) 
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
   const values = [
     petData.petName,
     petData.petBreed,
@@ -103,6 +112,11 @@ function insertLog(logData, userId, callback) {
   db.query(sql, values, callback);
 }
 
+function removeLog(logId, callback) {
+  const sql = "DELETE FROM Logs WHERE logsID = ?";
+  db.query(sql, logId, callback);
+}
+
 function insertFood(foodData, callback) {
   const sql = `
     INSERT INTO Food (
@@ -134,7 +148,7 @@ function insertFood(foodData, callback) {
 }
 
 function getLogsByPetId(petId, callback) {
-  const sql = "SELECT * FROM Logs WHERE Pet_petId = ?";
+  const sql = "SELECT * FROM Logs WHERE Pet_petID = ?";
   db.query(sql, petId, callback);
 }
 

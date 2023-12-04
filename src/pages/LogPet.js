@@ -90,7 +90,7 @@ const LogPet = () => {
           href={`/LoggingForms/${logsID}/${petID}`}
           onClick={handleFinish}
         >
-          Start Logging
+          Add Log
         </Button>
       </div>
     </div>
