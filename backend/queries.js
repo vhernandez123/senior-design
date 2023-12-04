@@ -86,6 +86,9 @@ function insertPet(petData, callback) {
     petData.petMicrochipNum,
     petData.Owner_ownerId,
   ];
+  // for (let i = 0; i + 1 < values.length; i++) {
+  //   values[i] = toEncrypt(values[i]);
+  // }
   db.query(sql, values, callback);
 }
 
@@ -105,10 +108,23 @@ const getAllIllnesses = (callback) => {
   db.query(query, callback);
 };
 
-function insertLog(logData, userId, callback) {
+function insertLog(logData, callback) {
   const sql =
-    "INSERT INTO Logs (logDate, logEntry, Pet_petID, Pet_User_userID) VALUES (?, ?, ?, ?)";
-  const values = [logData.logDate, logData.logEntry, logData.Pet_petID, userId];
+    `INSERT INTO Logs (
+      logDate, 
+      logEntry, 
+      Pet_petID, 
+      Pet_User_userID) 
+      VALUES (?, ?, ?, ?)`;
+  const values = [
+    logData.logDate, 
+    logData.logEntry, 
+    logData.Pet_petID, 
+    logData.userId
+  ];
+  // for (let i = 0; i+2 < values.length; i++) {
+  //   values[i] = toEncrypt(values[i]);
+  // }
   db.query(sql, values, callback);
 }
 
@@ -153,19 +169,16 @@ function insertFood(foodData, callback) {
     foodData.Logs_Pet_petID,
     foodData.Logs_Pet_User_userID,
   ];
-
+  // for (let i = 0; i+3 < values.length; i++) {
+  //   values[i] = toEncrypt(values[i]);
+  // }
   db.query(sql, values, callback);
 }
-
-
-
 
 function getFoodDetailsbyLogID(logID, callback) {
   const sql = "SELECT * FROM Food WHERE Logs_logsID = ?";
   db.query(sql, logID, callback);
 }
-
-
 
 function getMedicationLogsByPetId(petId, callback) {
   const sql = "SELECT * FROM Pet_has_Medication WHERE Pet_petId = ?";
@@ -184,7 +197,9 @@ function insertPetHasIllness(petHasIllnessData, callback) {
     petHasIllnessData.illnessSymptoms,
     petHasIllnessData.illnessVet,
   ];
-
+  // for (let i = 3; i < values.length; i++) {
+  //   values[i] = toEncrypt(values[i]);
+  // }
   db.query(petIllnessSql, petIllnessValues, callback);
 }
 
@@ -199,7 +214,9 @@ function insertPetBehavior(behaviorData, callback) {
     behaviorData.aggression,
     behaviorData.behaviorChanges,
   ];
-
+  // for (let i = 3; i < values.length; i++) {
+  //   values[i] = toEncrypt(values[i]);
+  // }
   db.query(behaviorSql, behaviorValues, callback);
 }
 
@@ -214,9 +231,11 @@ function insertPetMedication(medicationData, callback) {
     medicationData.dosage,
     medicationData.duration,
     medicationData.instruction,
-    medicationData.vet,
+    medicationData.vet
   ];
-
+  // for (let i = 3; i < values.length; i++) {
+  //   values[i] = toEncrypt(values[i]);
+  // }
   db.query(medicationSql, medicationValues, callback);
 }
 

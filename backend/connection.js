@@ -17,6 +17,15 @@ app.get("/GetAllPetsID/:userID", (req, res) => {
       console.error("Error retrieving pet data:", err);
       res.status(500).json({ error: "Error retrieving pet data" });
     } else {
+      // for (let i = 0; i < result.length; i++) {
+      //   result[i]['petName'] = queries.toDecrypt(result[i]['petName']);
+      //   result[i]['petBreed'] = queries.toDecrypt(result[i]['petBreed']);
+      //   result[i]['petGender'] = queries.toDecrypt(result[i]['petGender']);
+      //   result[i]['petAge'] = queries.toDecrypt(result[i]['petAge']);
+      //   result[i]['petColor'] = queries.toDecrypt(result[i]['petColor']);
+      //   result[i]['petWeight'] = queries.toDecrypt(result[i]['petWeight']);
+      //   result[i]['petMicrochipNum'] = queries.toDecrypt(result[i]['petMicrochipNum']);
+      // }
       res.status(200).json(result);
     }
   });
@@ -171,8 +180,7 @@ app.get("/GetMedicationLogsByPetId/:petId", (req, res) => {
 
 app.post("/InsertLog", (req, res) => {
   const logData = req.body;
-  const userId = logData.userId;
-  queries.insertLog(logData, userId, (err, result) => {
+  queries.insertLog(logData, (err, result) => {
     if (err) {
       console.error("Error inserting log data:", err);
       res.status(500).json({ error: "Error inserting log data" });

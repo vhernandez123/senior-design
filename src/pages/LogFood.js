@@ -25,9 +25,7 @@ const LogFood = () => {
     ateBadDesc: "",
   });
   const { logsID, petID } = useParams();
-
   const [userId, setUserId] = useState(null);
-
   const { user, getIdTokenClaims } = useAuth0();
 
   useEffect(() => {

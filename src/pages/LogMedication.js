@@ -12,6 +12,8 @@ import {
 import Axios from "axios";
 import Navbar from "../components/navbar";
 import "../css/LogPet.css";
+import { useParams } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const LogMedication = () => {
   const [formData, setFormData] = useState({
@@ -22,10 +24,27 @@ const LogMedication = () => {
     instructions: "",
     vetinarianId: "",
   });
-
+  const { logsID, petID } = useParams();
+  const [userId, setUserId] = useState(null);
+  const { user, getIdTokenClaims } = useAuth0();
   const [petsList, setPetsList] = useState([]);
   const [vetList, setVetList] = useState([]);
   const [medicationsList, setMedicationsList] = useState([]);
+
+  useEffect(() => {
+    const fetchUserId = async () => {
+      try {
+        if (user) {
+          const idToken = await getIdTokenClaims();
+          setUserId(idToken["https://example.com/userId"]);
+        }
+      } catch (error) {
+        console.error("Error fetching user ID:", error);
+      }
+    };
+
+    fetchUserId();
+  }, [getIdTokenClaims, user]);
 
   useEffect(() => {
     Axios.get("http://localhost:4000/GetAllPets")
@@ -63,12 +82,14 @@ const LogMedication = () => {
 
   const handleFinish = () => {
     const medicationData = {
-      selectedPetId: formData.selectedPetId,
-      selectedMedicationId: formData.selectedMedicationId,
-      durationInDays: formData.durationInDays,
+      logID: logsID,
+      petID: petID,
+      userID: userId,
+      name: formData.selectedMedicationId, // change to medication name
       dosage: formData.dosage,
-      instructions: formData.instructions,
-      selectedVetId: formData.selectedVetId,
+      duration: formData.durationInDays,
+      instruction: formData.instructions,
+      vet: formData.selectedVetId // change to vet name
     };
 
     Axios.post("http://localhost:4000/InsertPetMedication", medicationData)
