@@ -134,6 +134,7 @@ const UpdateBehavior = () => {
   return (
     <div>
       <Navbar />
+      <div className="form-container">
       <div className="form">
         <Typography variant="h6">Behavior</Typography>
         <br />
@@ -216,6 +217,7 @@ const UpdateBehavior = () => {
             Finish
           </Button>
         </Link>
+      </div>
       </div>
     </div>
   );

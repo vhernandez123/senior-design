@@ -207,60 +207,65 @@ const PetDetails = () => {
           </ul>  
         </div>
       </div>
-      <div className="pet-logs notepad">
-        <div className="log-box">
-          <h3>Food logs for {petDetails.petName}</h3>
-          <ul>
-            {petLogs.map((log) => (
-              <li key={log.logsId}>
-                {log.logEntry} on {formatLogDate(log.logDate)}
-              </li>
-            ))}
-          </ul>
+      <div className="PetDetailsSpan">
+        <div className="pet-logs notepad">
+          <div className="log-box">
+            <h3>Food logs for {petDetails.petName}</h3>
+            <ul>
+              {petLogs.map((log) => (
+                <li key={log.logsId}>
+                  {log.logEntry} on {formatLogDate(log.logDate)}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <div className="pet-logs notepad">
+          <div className="log-box">
+            <h3>Illness logs for {petDetails.petName}</h3>
+            <ul>
+              {petIllnessLogs.map((illnessLog) => (
+                <li key={illnessLog.illnessLogId}>
+                  {illnessLog.symptoms} on{" "}
+                  {formatLogDate(illnessLog.dateOfDiagnosis)}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
-      <div className="pet-logs notepad">
-        <div className="log-box">
-          <h3>Illness logs for {petDetails.petName}</h3>
-          <ul>
-            {petIllnessLogs.map((illnessLog) => (
-              <li key={illnessLog.illnessLogId}>
-                {illnessLog.symptoms} on{" "}
-                {formatLogDate(illnessLog.dateOfDiagnosis)}
-              </li>
-            ))}
-          </ul>
+      <div className="PetDetailsSpan">
+        <div className="pet-logs notepad">
+          <div className="log-box">
+            <h3>Behavior logs for {petDetails.petName}</h3>
+            <ul>
+              {petBehaviorLogs.map((behaviorLog) => (
+                <li key={behaviorLog.behaviorLogId}>
+                  <p>
+                    Current Activity: {behaviorLog.activity}, Any signs of
+                    aggression:{" "}
+                    {behaviorLog.aggression === "yes" ? "Yes" : "No"}, Behavior
+                    Changes: {behaviorLog.behaviorChanges}
+                  </p>
+                  <p>Logged on {formatLogDate(behaviorLog.logDate)}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-      </div>
-      <div className="pet-logs notepad">
-        <div className="log-box">
-          <h3>Behavior logs for {petDetails.petName}</h3>
-          <ul>
-            {petBehaviorLogs.map((behaviorLog) => (
-              <li key={behaviorLog.behaviorLogId}>
-                <p>
-                  Current Activity: {behaviorLog.activity}, Any signs of
-                  aggression: {behaviorLog.aggression === "yes" ? "Yes" : "No"},
-                  Behavior Changes: {behaviorLog.behaviorChanges}
-                </p>
-                <p>Logged on {formatLogDate(behaviorLog.logDate)}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-      <div className="pet-logs notepad">
-        <div className="log-box">
-          <h3>Medication logs for {petDetails.petName}</h3>
-          <ul>
-            {petMedicationLogs.map((medicationLog) => (
-              <li key={medicationLog.medicationLogId}>
-                Takes {medicationLog.medicationName}{" "}
-                {medicationLog.instructions} for {medicationLog.durationInDays}{" "}
-                days
-              </li>
-            ))}
-          </ul>
+        <div className="pet-logs notepad">
+          <div className="log-box">
+            <h3>Medication logs for {petDetails.petName}</h3>
+            <ul>
+              {petMedicationLogs.map((medicationLog) => (
+                <li key={medicationLog.medicationLogId}>
+                  Takes {medicationLog.medicationName}{" "}
+                  {medicationLog.instructions} for{" "}
+                  {medicationLog.durationInDays} days
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div> */}
     </div>

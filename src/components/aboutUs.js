@@ -1,10 +1,10 @@
 import React from "react";
-import Navbar from "./navbar";
+import LandingScreenNavBar from "./LandingScreenNavBar";
 import Footer from "../components/Footer.js";
 const Home = () => {
   return (
     <div className="home-container">
-      <Navbar />
+      <LandingScreenNavBar/>
       <div className="home-banner-container">
         <div className="home-text-section">
           <div class="background-strip">

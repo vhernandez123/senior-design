@@ -52,6 +52,7 @@ ReactDOM.render(
             path="/UpdateBathroom/:logsID/:petID"
             element={<UpdateBathroom />}
           />
+
         </Routes>
       </Router>
     </Auth0Bugs>

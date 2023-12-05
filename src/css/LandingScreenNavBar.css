@@ -1,18 +1,12 @@
-/* LandingScreenNavBar.css */
-
-/* Update the background color to make the navbar a darker grey */
 .navbar-gray {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     z-index: 1;
-    background: rgba(80, 80, 80, 0.7); /* Darker grey background with 70% opacity */
-    /* Add other styles as needed */
+    background: rgba(80, 80, 80, 0.7); 
+
   }
- 
-  
-  /* Container for the buttons */
   .button-container {
     display: flex;
     flex-direction: column;
@@ -20,71 +14,42 @@
     justify-content: center;
     height: 100%;
   }
-  
   .nav-button {
-    margin-top: 10px; /* Add spacing between buttons */
+    margin-top: 10px; 
   }
-  
   .navbar-logo-gray {
-    font-size: 2.5rem; /* Increase font size for a more prominent logo */
-    font-weight: bold; /* Add bold styling for emphasis */
-    color: #ffffff; /* White text color */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a text shadow for a cool effect */
-    /* Add other styles as needed */
-  }
-  
-  .nav-menu-gray {
-    /* Add styles for the menu, if necessary */
-  }
-  
-  .nav-item-gray {
-    /* Add styles for each menu item, if necessary */
-  }
-  
-  .nav-links-gray {
-    color: white; /* Text color for the links */
-    /* Add other styles as needed */
-  }
-  
-  /* Styles for the "Pet" part */
-  .pet-text {
-    color: #ffffff; /* White text color for "Pet" */
-  }
-  
-  /* Styles for the "Logger" part */
-  .logger-text {
-    color: #01B636; /* Green text color for "Logger" */
-    /* You can adjust the color code to your preferred shade of green */
-  }
-  
-  .navbar-logo-gray ::first-letter {
-    color: #ffffff; /* White text color for the first letter of "Pet" */
-  }
-  
-  /* Style for the first letter of "Logger" */
-  .navbar-logo-gray ::first-letter + ::first-letter {
-    color: #01B636; /* Green text color for the first letter of "Logger" */
-    /* You can adjust the color code to your preferred shade of green */
-  }
-/* LandingScreenNavBar.css */
+    font-size: 2.5rem; 
+    font-weight: bold; 
+    color: #ffffff; 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 
-/* Update the background color to make the navbar a darker grey */
+  }
+  .nav-links-gray {
+    color: white; 
+
+  }
+  .pet-text {
+    color: #ffffff; 
+  }
+  .logger-text {
+    color: #01B636; 
+  }
+  .navbar-logo-gray ::first-letter {
+    color: #ffffff; 
+  }
+  .navbar-logo-gray ::first-letter + ::first-letter {
+    color: #01B636; 
+  }
+
 .navbar-gray {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     z-index: 1;
-    background: rgba(80, 80, 80, 0.7); /* Darker grey background with 70% opacity */
-    /* Add other styles as needed */
+    background: rgba(80, 80, 80, 0.7); 
+
   }
-  
-  /* Container for the navbar */
-  .navbar-container-gray {
-    /* Add styles for the navbar container, if necessary */
-  }
-  
-  /* Container for the buttons */
   .button-container {
     display: flex;
     flex-direction: column;
@@ -92,50 +57,14 @@
     justify-content: center;
     height: 100%;
   }
-  
   .nav-button {
-    margin-top: 10px; /* Add spacing between buttons */
+    margin-top: 10px; 
   }
-  
+
   .navbar-logo-gray {
-    font-size: 2.5rem; /* Increase font size for a more prominent logo */
-    font-weight: bold; /* Add bold styling for emphasis */
-    color: #ffffff; /* White text color */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a text shadow for a cool effect */
-    /* Add other styles as needed */
-  }
+    font-size: 2.5rem; 
+    font-weight: bold; 
+    color: #ffffff; 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
   
-  .nav-menu-gray {
-    /* Add styles for the menu, if necessary */
   }
-  
-  .nav-item-gray {
-    /* Add styles for each menu item, if necessary */
-  }
-  
-  .nav-links-gray {
-    color: white; /* Text color for the links */
-    /* Add other styles as needed */
-  }
-  
-  /* Styles for the "Pet" part */
-  .pet-text {
-    color: #ffffff; /* White text color for "Pet" */
-  }
-  
-  /* Styles for the "Logger" part */
-  .logger-text {
-    color: #01B636; /* Green text color for "Logger" */
-    /* You can adjust the color code to your preferred shade of green */
-  }
-  
-  .navbar-logo-gray ::first-letter {
-    color: #ffffff; /* White text color for the first letter of "Pet" */
-  }
-  
-  /* Style for the first letter of "Logger" */
-  .navbar-logo-gray ::first-letter + ::first-letter {
-    color: #01B636; /* Green text color for the first letter of "Logger" */
-    /* You can adjust the color code to your preferred shade of green */
-  }
-    

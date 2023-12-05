@@ -1,59 +1,139 @@
 .pet-details-container {
-    background-color: #f3f3f3;
-    padding: 30px;
-    border-radius: 15px;
-    margin: 20px auto;
-    max-width: 800px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f3f3f3;
+  padding: 30px;
+  border-radius: 15px;
+  margin: 20px auto;
+  max-width: 800px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.pet-info {
+  max-width: 400px;
+  margin-right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.pet-name {
+  color: #333;
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+.pet-properties {
+  margin-top: 10px;
+}
+.pet-properties p {
+  font-size: 20px;
+  margin: 10px;
+  color: #111010;
+}
+
+.property-label {
+  font-weight: bold;
+  color: #0e0c09;
+
+  display: inline-block;
+  width: 80px;
+}
+.notepad {
+  background-color: #f9f6ef;
+  border-radius: 15px;
+  padding: 20px;
+  margin: 20px 0;
+  border: 1px solid #ccc;
+  font-family: "Courier New", monospace;
+  margin: 20px auto;
+  max-width: 800px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.notepad h3 {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  font-size: 1.5em;
+}
+
+.notepad ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.notepad li {
+  padding: 5px 0;
+  border-bottom: 1px solid #ccc;
+}
+.pet-details-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  background-color: rgba(88, 159, 75, 0.2);
+}
+.log-box {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin: 20px;
+
+  border-radius: 5px;
+  background-color: #b6faca;
+}
+
+.custom-button {
+  margin-top: 10px;
+}
+
+.pet-info {
+  max-width: 400px;
+  margin-right: 20px;
+}
+.pet-logs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.log-box h3 {
+  color: #01b636;
+}
+
+.log-box ul {
+  list-style-type: none;
+  padding: 0;
+}
+.notepad {
+  flex: 1;
+  background-color: rgba(103, 232, 103, 0.3);
+}
+.log-box li {
+  margin-bottom: 5px;
+}
+.log-box h3 {
+  color: #01b636;
+}
+.PetDetailsSpan {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 10px;
+}
+.log-box ul {
+  list-style-type: none;
+  padding: 0;
+}
+@media (max-width: 768px) {
+  .pet-details-container {
+    flex-direction: column;
   }
-  
+
   .pet-info {
-    text-align: left;
-  }
-  
-  .pet-name {
-    color: #333;
-    font-size: 36px;
-    margin-bottom: 20px;
-  }
-  
-  .pet-properties p {
-    font-size: 20px;
-    margin: 10px 0;
-    color: #555;
-  }
-  
-  .property-label {
-    font-weight: bold;
-    color: #ff6b6b;
+    max-width: none;
+    margin-right: 0;
   }
   .notepad {
-    background-color: #f9f6ef; 
-    border-radius: 15px;
-    padding: 20px;
-    margin: 20px 0;
-    border: 1px solid #ccc;
-    font-family: 'Courier New', monospace;
-    margin: 20px auto;
-    max-width: 800px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
   }
-  
-  .notepad h3 {
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 5px;
-    margin-bottom: 10px;
-    font-size: 1.5em;
-  }
-  
-  .notepad ul {
-    list-style: none;
-    padding-left: 0;
-  }
-  
-  .notepad li {
-    padding: 5px 0;
-    border-bottom: 1px solid #ccc;
-  }
-  
-  
+}

@@ -2,6 +2,7 @@ import * as React from "react";
 import Map from "../components/Map";
 import { useState} from "react";
 import Navbar from "../components/navbar";
+import "../css/VetFinder.css"; //import css file
 
 import {
 	Button,
@@ -24,7 +25,7 @@ const VetFinder =() => {
 
     const handleClose = () => {
         setOpen(false);
-        //handle clicking button to close dialog
+    
         if (agree){
             setShowMap(true);
             } else {
@@ -33,7 +34,8 @@ const VetFinder =() => {
     }
     return (
         <div>
-                 <Navbar />
+            <Navbar />
+            <div className="content-container">
             <br/><br/>
             <h2>Veterinarians Near You</h2>
             <br/><br/>
@@ -58,14 +60,15 @@ const VetFinder =() => {
 					<Button onClick={() => handleClose()}>Submit</Button>
 					</DialogActions>
 				</Dialog>	
-                <br/><br/>
+
                 { //added
 					showMap ? 
 					<Map></Map> 
 					: <div>
-                        <h3>Allow browser location access to see the map</h3>
+                        <h4>Allow browser location access to see the map</h4>
                         <Button onClick={() => handleOpen()}>Grant Access</Button>
                         </div>}
+            </div>
         </div>
     )
 }

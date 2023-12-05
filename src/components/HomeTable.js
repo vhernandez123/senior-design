@@ -122,7 +122,8 @@ const DataTable = () => {
                     style={{
                       backgroundColor: "#01B636",
                       color: "white",
-                      marginLeft: "10px",
+
+                      marginLeft: "10px", 
                     }}
                   >
                     View Pet
