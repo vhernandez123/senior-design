@@ -14,6 +14,7 @@ import Navbar from "../components/navbar";
 import "../css/LogPet.css";
 import { useParams } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import { Link } from "react-router-dom";
 
 const LogFood = () => {
   const [formData, setFormData] = useState({
@@ -175,14 +176,11 @@ const LogFood = () => {
         />
         <br />
         <br />
-        <Button
-          variant="contained"
-          color="primary"
-          href="/home"
-          onClick={handleFinish}
-        >
-          Finish
-        </Button>
+        <Link to={`/LoggingForms/${logsID}/${petID}`}>
+          <Button variant="contained" color="primary" onClick={handleFinish}>
+            Finish
+          </Button>
+        </Link>
       </div>
     </div>
   );

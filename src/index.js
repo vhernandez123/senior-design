@@ -33,8 +33,14 @@ ReactDOM.render(
           <Route path="/AboutUs" element={<AboutUs />} />
           <Route path="/Checklist" element={<Checklist />} />
           <Route path="/VetFinder" element={<VetFinder />} />
-          <Route path="/UpdateBehavior" element={<UpdateBehavior />} />
-          <Route path="/LogMedication" element={<LogMedication />} />
+          <Route
+            path="/UpdateBehavior/:logsID/:petID"
+            element={<UpdateBehavior />}
+          />
+          <Route
+            path="/LogMedication/:logsID/:petID"
+            element={<LogMedication />}
+          />
           <Route path="/pet/:petID" element={<PetDetails />} />
           <Route
             path="/LoggingForms/:logsID/:petID"
@@ -42,7 +48,10 @@ ReactDOM.render(
           />
           <Route path="/log-pet/:petID" element={<LogPet />} />
           <Route path="/log-food/:logsID/:petID" element={<LogFood />} />
-          <Route path="/UpdateBathroom" element={<UpdateBathroom />} />
+          <Route
+            path="/UpdateBathroom/:logsID/:petID"
+            element={<UpdateBathroom />}
+          />
         </Routes>
       </Router>
     </Auth0Bugs>

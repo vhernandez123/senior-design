@@ -1,35 +1,23 @@
 import React, { useState, useEffect } from "react";
-import {
-  Button,
-  Typography,
-  TextField,
-  Select,
-  MenuItem,
-  Stack,
-  FormControl,
-  InputLabel,
-} from "@mui/material";
+import { Button, Typography, TextField } from "@mui/material";
 import Axios from "axios";
 import Navbar from "../components/navbar";
 import "../css/LogPet.css";
 import { useParams } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import { Link } from "react-router-dom";
 
 const LogMedication = () => {
   const [formData, setFormData] = useState({
-    selectedPetId: "",
-    selectedMedicationId: "",
-    durationInDays: "",
+    name: "",
     dosage: "",
+    duration: "",
     instructions: "",
-    vetinarianId: "",
+    vet: "",
   });
   const { logsID, petID } = useParams();
   const [userId, setUserId] = useState(null);
   const { user, getIdTokenClaims } = useAuth0();
-  const [petsList, setPetsList] = useState([]);
-  const [vetList, setVetList] = useState([]);
-  const [medicationsList, setMedicationsList] = useState([]);
 
   useEffect(() => {
     const fetchUserId = async () => {
@@ -46,32 +34,6 @@ const LogMedication = () => {
     fetchUserId();
   }, [getIdTokenClaims, user]);
 
-  useEffect(() => {
-    Axios.get("http://localhost:4000/GetAllPets")
-      .then((response) => {
-        setPetsList(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching pets:", error);
-      });
-
-    Axios.get("http://localhost:4000/GetAllVets")
-      .then((response) => {
-        setVetList(response.data.vets);
-      })
-      .catch((error) => {
-        console.error("Error fetching vets:", error);
-      });
-
-    Axios.get("http://localhost:4000/GetAllMedications")
-      .then((response) => {
-        setMedicationsList(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching medications:", error);
-      });
-  }, []);
-
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({
@@ -82,17 +44,17 @@ const LogMedication = () => {
 
   const handleFinish = () => {
     const medicationData = {
-      logID: logsID,
-      petID: petID,
-      userID: userId,
-      name: formData.selectedMedicationId, // change to medication name
+      Logs_logsID: logsID || "",
+      Logs_Pet_petID: petID,
+      Logs_Pet_User_userID: userId,
+      name: formData.name,
       dosage: formData.dosage,
-      duration: formData.durationInDays,
-      instruction: formData.instructions,
-      vet: formData.selectedVetId // change to vet name
+      duration: formData.duration,
+      instruction: formData.instructions, // Changed to match the function parameter
+      vet: formData.vet,
     };
 
-    Axios.post("http://localhost:4000/InsertPetMedication", medicationData)
+    Axios.post("http://localhost:4000/InsertMedication", medicationData)
       .then(() => {
         console.log("Medication info added successfully");
       })
@@ -106,48 +68,30 @@ const LogMedication = () => {
       <Navbar />
       <div className="form">
         <Typography variant="h6">Add Medication</Typography>
-        <FormControl fullWidth>
-          <InputLabel>Select Pet</InputLabel>
-          <Select
-            value={formData.selectedPetId}
-            onChange={handleInputChange}
-            name="selectedPetId"
-          >
-            {petsList.map((pet) => (
-              <MenuItem key={pet.petId} value={pet.petId}>
-                {pet.petName}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-
         <br />
         <br />
-        <FormControl fullWidth>
-          <InputLabel>Select Medication</InputLabel>
-          <Select
-            value={formData.selectedMedicationId}
-            onChange={handleInputChange}
-            name="selectedMedicationId"
-          >
-            {medicationsList.map((medication) => (
-              <MenuItem
-                key={medication.medicationId}
-                value={medication.medicationId}
-              >
-                {medication.medicationName}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+        <TextField
+          label="Medication Name"
+          value={formData.name}
+          onChange={handleInputChange}
+          name="name"
+        />
+        <br />
+        <br />
+        <TextField
+          label="Vet Name"
+          value={formData.vet}
+          onChange={handleInputChange}
+          name="vet"
+        />
         <br />
         <br />
         <TextField
           label="How many days?"
           type="number"
-          value={formData.durationInDays}
+          value={formData.duration}
           onChange={handleInputChange}
-          name="durationInDays"
+          name="duration"
         />
         <br />
         <br />
@@ -169,30 +113,11 @@ const LogMedication = () => {
         />
         <br />
         <br />
-        <FormControl fullWidth>
-          <InputLabel>Select Vet</InputLabel>
-          <Select
-            value={formData.selectedVetId}
-            onChange={handleInputChange}
-            name="selectedVetId"
-          >
-            {vetList.map((vet) => (
-              <MenuItem key={vet.vetinarianID} value={vet.vetinarianID}>
-                {vet.vetinarianName}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <br />
-        <br />
-        <Button
-          variant="contained"
-          color="primary"
-          href="/home"
-          onClick={handleFinish}
-        >
-          Finish
-        </Button>
+        <Link to={`/LoggingForms/${logsID}/${petID}`}>
+          <Button variant="contained" color="primary" onClick={handleFinish}>
+            Finish
+          </Button>
+        </Link>
       </div>
     </div>
   );

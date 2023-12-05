@@ -1,203 +1,135 @@
-import * as React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
-  TextField,
   Button,
-  FormLabel,
-  Stack,
-  Select,
-  MenuItem,
+  Typography,
+  TextField,
   FormControl,
   InputLabel,
 } from "@mui/material";
 import Axios from "axios";
 import Navbar from "../components/navbar";
+import "../css/LogPet.css";
+import { useParams } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+import { Link } from "react-router-dom";
 
 const UpdateBathroom = () => {
-  const [bathroomTimes, setBathroomTimes] = useState("0");
-  const [urineState, setUrineState] = useState("");
-  const [vomitAmt, setVomitAmt] = useState("0");
-  const [petList, setPetList] = useState([]);
-  const [vetList, setVetList] = useState([]);
-  const [illnessList, setIllnessList] = useState([]);
   const [formData, setFormData] = useState({
-    selectedPetId: "",
-    selectedVetId: "",
-    selectedIllnessId: "",
+    bathroomNumber: "",
+    bathroomPoop: "",
+    bathroomUrine: "",
+    bathroomVomit: "0",
   });
 
+  const { petID, logsID } = useParams();
+  const [userId, setUserId] = useState(null);
+  const { user, getIdTokenClaims } = useAuth0();
+
   useEffect(() => {
-    Axios.get("http://localhost:4000/GetAllPets")
-      .then((response) => {
-        setPetList(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching pets:", error);
-      });
-
-    Axios.get("http://localhost:4000/GetAllVets")
-      .then((response) => {
-        setVetList(response.data.vets);
-      })
-      .catch((error) => {
-        console.error("Error fetching vets:", error);
-      });
-
-    Axios.get("http://localhost:4000/GetAllIllnesses")
-      .then((response) => {
-        console.log(response.data);
-        setIllnessList(response.data.illnesses);
-      })
-      .catch((error) => {
-        console.error("Error fetching illnesses:", error);
-      });
-  }, []);
-
-  function handleSubmit(e) {
-    e.preventDefault();
-
-    const illnessData = {
-      Pet_petId: formData.selectedPetId,
-      Vetinarian_vetinarianID: formData.selectedVetId,
-      Illness_illnessId: formData.selectedIllnessId,
-      dateOfDiagnosis: new Date().toISOString().split("T")[0],
-      symptoms: `Bathroom times: ${bathroomTimes}, Urine: ${urineState}, Vomited: ${vomitAmt}`,
+    const fetchUserId = async () => {
+      try {
+        if (user) {
+          const idToken = await getIdTokenClaims();
+          setUserId(idToken["https://example.com/userId"]);
+        }
+      } catch (error) {
+        console.error("Error fetching user ID:", error);
+      }
     };
 
-    Axios.post("http://localhost:4000/InsertIllness", illnessData)
-      .then((response) => {
-        const illnessId = response.data.insertId;
-
-        if (illnessId) {
-          const petHasIllnessData = {
-            Pet_petId: formData.selectedPetId,
-            Illness_illnessId: illnessId,
-            dateOfDiagnosis: new Date().toISOString().split("T")[0],
-            symptoms: `Bathroom times: ${bathroomTimes}, Urine: ${urineState}, Vomited: ${vomitAmt}`,
-            Vetinarian_vetinarianID: formData.selectedVetId,
-          };
-
-          Axios.post(
-            "http://localhost:4000/InsertPetHasIllness",
-            petHasIllnessData
-          )
-            .then(() => {
-              console.log("Pet_has_Illness data added successfully");
-            })
-            .catch((error) => {
-              console.error("Error adding Pet_has_Illness data:", error);
-            });
-        } else {
-          console.error("Error: illnessId is null or undefined");
-        }
-      })
-      .catch((error) => {
-        console.error("Error adding illness info:", error);
-      });
-  }
+    fetchUserId();
+  }, [getIdTokenClaims, user]);
 
   const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    console.log("event:", event);
+    const { name, value } = event?.target || event;
+    if (name) {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: String(value),
+      }));
+    }
+  };
+
+  const handleFinish = async () => {
+    try {
+      const bathroomData = {
+        bathroomNumber: formData.bathroomNumber,
+        bathroomPoop: formData.bathroomPoop,
+        bathroomUrine: formData.bathroomUrine,
+        bathroomVomit: formData.bathroomVomit,
+        Logs_logsID: logsID || "", // Provide a default value if logsID is null or undefined
+        Logs_Pet_petID: petID,
+        Logs_Pet_User_userID: userId,
+      };
+
+      const response = await Axios.post(
+        "http://localhost:4000/insertBathroomData",
+        bathroomData
+      );
+    } catch (error) {
+      console.error("Error adding bathroom info to Bathroom table:", error);
+    }
   };
 
   return (
     <div>
-      <Navbar></Navbar>
-      <div className="form Update Bathroom">
-        <form onSubmit={handleSubmit}>
-          <Stack
-            spacing={3}
-            direction="column"
-            sx={{
-              marginBottom: 4,
-              marginLeft: 4,
-              marginTop: 4,
-              marginRight: 4,
-            }}
-          >
-            <h2>Bathroom Habits</h2>
-            <FormLabel>
-              How many times did your pet use the bathroom today?
-            </FormLabel>
-            <TextField
-              type="number"
-              onChange={(e) => setBathroomTimes(e.target.value)}
-              value={bathroomTimes}
-            />
-            <FormLabel>Select the illness (if any)</FormLabel>
-            <Stack spacing={3} direction="row" sx={{ marginBottom: 4 }}>
-              <FormControl fullWidth>
-                <InputLabel>Select Illness</InputLabel>
-                <Select
-                  value={formData.selectedIllnessId}
-                  onChange={handleInputChange}
-                  name="selectedIllnessId"
-                >
-                  {illnessList.map((illness) => (
-                    <MenuItem key={illness.illnessId} value={illness.illnessId}>
-                      {illness.illnessName}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Stack>
-            <FormLabel>How many times did your pet vomit today?</FormLabel>
-            <TextField
-              type="number"
-              onChange={(e) => setVomitAmt(e.target.value)}
-              value={vomitAmt}
-            />
-            <FormControl fullWidth>
-              <InputLabel>Select Pet</InputLabel>
-              <Select
-                value={formData.selectedPetId}
-                onChange={handleInputChange}
-                name="selectedPetId"
-              >
-                {petList.map((pet) => (
-                  <MenuItem key={pet.petId} value={pet.petId}>
-                    {pet.petName}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-            <FormControl fullWidth>
-              <InputLabel>Select Vet</InputLabel>
-              <Select
-                value={formData.selectedVetId}
-                onChange={handleInputChange}
-                name="selectedVetId"
-              >
-                {vetList.map((vet) => (
-                  <MenuItem key={vet.vetinarianID} value={vet.vetinarianID}>
-                    {vet.vetinarianName}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-            <Button
-              variant="outlined"
-              href="/home"
-              color="secondary"
-              onClick={handleSubmit} // Use onClick to handle the form submission
-              className="button"
-            >
-              Save
-            </Button>
-            <Button
-              variant="outlined"
-              href="/UpdateBehavior"
-              color="secondary"
-              className="button"
-            >
-              Next
-            </Button>
-          </Stack>
-        </form>
+      <Navbar />
+      <div className="form">
+        <Typography variant="h6">Bathroom</Typography>
+        <TextField
+          label="Number of times used the bathroom"
+          fullWidth
+          type="number"
+          name="bathroomNumber"
+          value={formData.bathroomNumber}
+          onChange={handleInputChange}
+        />
+        <br />
+        <br />
+        <TextField
+          label="Description of poop (if any)"
+          fullWidth
+          name="bathroomPoop"
+          value={formData.bathroomPoop}
+          onChange={handleInputChange}
+        />
+        <br />
+        <br />
+        <TextField
+          label="Description of urine (if any)"
+          fullWidth
+          name="bathroomUrine"
+          value={formData.bathroomUrine}
+          onChange={handleInputChange}
+        />
+        <br />
+        <br />
+        <FormControl>
+          <br />
+          <br />
+          <InputLabel>How many times did your pet vomit today?</InputLabel>
+          <TextField
+            type="number"
+            name="bathroomVomit"
+            value={formData.bathroomVomit}
+            onChange={handleInputChange}
+          />
+        </FormControl>
+        <br />
+        <br />
+
+        <Button variant="contained" color="primary" onClick={handleFinish}>
+          Save
+        </Button>
+
+        <br />
+        <br />
+        <Link to={`/UpdateBehavior/${logsID}/${petID}`}>
+          <Button variant="contained" color="primary" onClick={handleFinish}>
+            Next
+          </Button>
+        </Link>
       </div>
     </div>
   );

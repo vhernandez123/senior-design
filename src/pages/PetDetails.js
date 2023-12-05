@@ -11,6 +11,7 @@ import DataTable from "../components/LogTable";
 const PetDetails = () => {
   const [petDetails, setPetDetails] = useState({});
   const [petLogs, setPetLogs] = useState([]);
+  const [foodLogs, setFoodLogs] = useState([]);
   const [petIllnessLogs, setPetIllnessLogs] = useState([]);
   const [petBehaviorLogs, setPetBehaviorLogs] = useState([]);
   const [petMedicationLogs, setPetMedicationLogs] = useState([]);
@@ -139,7 +140,6 @@ const PetDetails = () => {
     //   .catch((error) => {
     //     console.error("Error fetching pet behavior logs:", error);
     //   });
-
   }, [petID]);
 
   return (
@@ -192,7 +192,9 @@ const PetDetails = () => {
           </Button> */}
         </div>
       </div>
-      <div><DataTable /></div>
+      <div>
+        <DataTable />
+      </div>
       {/* <div className="pet-logs notepad">
       < div className="log-box">
           <h3>Daily Logs for {petDetails.petName}</h3>

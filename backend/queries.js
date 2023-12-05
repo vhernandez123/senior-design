@@ -65,8 +65,7 @@ function getPetById(petID, callback) {
 }
 
 function insertPet(petData, callback) {
-  const sql =
-    `INSERT INTO Pet (
+  const sql = `INSERT INTO Pet (
       petName, 
       petBreed, 
       petGender, 
@@ -109,18 +108,17 @@ const getAllIllnesses = (callback) => {
 };
 
 function insertLog(logData, callback) {
-  const sql =
-    `INSERT INTO Logs (
+  const sql = `INSERT INTO Logs (
       logDate, 
       logEntry, 
       Pet_petID, 
       Pet_User_userID) 
       VALUES (?, ?, ?, ?)`;
   const values = [
-    logData.logDate, 
-    logData.logEntry, 
-    logData.Pet_petID, 
-    logData.userId
+    logData.logDate,
+    logData.logEntry,
+    logData.Pet_petID,
+    logData.userId,
   ];
   // for (let i = 0; i+2 < values.length; i++) {
   //   values[i] = toEncrypt(values[i]);
@@ -175,9 +173,29 @@ function insertFood(foodData, callback) {
   db.query(sql, values, callback);
 }
 
-function getFoodDetailsbyLogID(logID, callback) {
-  const sql = "SELECT * FROM Food WHERE Logs_logsID = ?";
-  db.query(sql, logID, callback);
+// function getFoodDetailsbyLogID(logID, callback) {
+//   const sql = "SELECT * FROM Food WHERE Logs_logsID = ?";
+//   db.query(sql, logID, callback);
+// }
+
+function getFoodDetailsbyLogs_Pet_petID(Logs_Pet_petID, callback) {
+  const sql = "SELECT * FROM Food WHERE Logs_Pet_petID = ?";
+  db.query(sql, Logs_Pet_petID, callback);
+}
+
+function getBehaviorDetailsbyLogs_Pet_petID(Logs_Pet_petID, callback) {
+  const sql = "SELECT * FROM Behavior WHERE Logs_Pet_petID = ?";
+  db.query(sql, Logs_Pet_petID, callback);
+}
+
+function getBathroomDetailsbyLogs_Pet_petID(Logs_Pet_petID, callback) {
+  const sql = "SELECT * FROM Bathroom WHERE Logs_Pet_petID = ?";
+  db.query(sql, Logs_Pet_petID, callback);
+}
+
+function getMedicationDetailsbyLogs_Pet_petID(Logs_Pet_petID, callback) {
+  const sql = "SELECT * FROM Medication WHERE Logs_Pet_petID = ?";
+  db.query(sql, Logs_Pet_petID, callback);
 }
 
 function getMedicationLogsByPetId(petId, callback) {
@@ -185,34 +203,31 @@ function getMedicationLogsByPetId(petId, callback) {
   db.query(sql, petId, callback);
 }
 
-function insertPetHasIllness(petHasIllnessData, callback) {
-  const petIllnessSql =
-    "INSERT INTO Illness (Logs_logsID, Logs_Pet_petID, Logs_Pet_User_userID, illnessInitialDate, illnessDateOfDiagnosis, illnessSymptoms, illnessVet) VALUES (?, ?, ?, ?, ?, ?, ?)";
-  const petIllnessValues = [
-    petHasIllnessData.logID,
-    petHasIllnessData.petID,
-    petHasIllnessData.userID,
-    petHasIllnessData.illnessInitialDate,
-    petHasIllnessData.illnessDateDiagnosis,
-    petHasIllnessData.illnessSymptoms,
-    petHasIllnessData.illnessVet,
+function insertBathroomData(bathroomData, callback) {
+  const bathroomSql =
+    "INSERT INTO Bathroom ( bathroomNumber, bathroomPoop, bathroomUrine, bathroomVomit, Logs_logsID, Logs_Pet_petID, Logs_Pet_User_userID) VALUES (?, ?, ?, ?, ?, ?, ?)";
+  const bathroomValues = [
+    bathroomData.bathroomNumber,
+    bathroomData.bathroomPoop,
+    bathroomData.bathroomUrine,
+    bathroomData.bathroomVomit,
+    bathroomData.Logs_logsID,
+    bathroomData.Logs_Pet_petID,
+    bathroomData.Logs_Pet_User_userID,
   ];
-  // for (let i = 3; i < values.length; i++) {
-  //   values[i] = toEncrypt(values[i]);
-  // }
-  db.query(petIllnessSql, petIllnessValues, callback);
-}
 
+  db.query(bathroomSql, bathroomValues, callback);
+}
 function insertPetBehavior(behaviorData, callback) {
   const behaviorSql =
-    "INSERT INTO PetBehavior (Logs_logsID, Logs_Pet_petID, Logs_Pet_User_userID, behaviorActivity, behaviorAggression, behaviorChanges) VALUES (?, ?, ?, ?, ?, ?)";
+    "INSERT INTO Behavior ( behaviorActivity, behaviorAggression, behaviorChanges, Logs_logsID, Logs_Pet_petID, Logs_Pet_User_userID) VALUES ( ?, ?, ?, ?, ?, ?)";
   const behaviorValues = [
-    behaviorData.logID,
-    behaviorData.petID,
-    behaviorData.userID,
     behaviorData.activity,
     behaviorData.aggression,
     behaviorData.behaviorChanges,
+    behaviorData.Logs_logsID,
+    behaviorData.Logs_Pet_petID,
+    behaviorData.Logs_Pet_User_userID,
   ];
   // for (let i = 3; i < values.length; i++) {
   //   values[i] = toEncrypt(values[i]);
@@ -221,21 +236,30 @@ function insertPetBehavior(behaviorData, callback) {
 }
 
 function insertPetMedication(medicationData, callback) {
-  const medicationSql =
-    "INSERT INTO Pet_has_Medication (Logs_logsID, Logs_Pet_petID, Logs_Pet_User_userID, medicationName, medicationDosage, medicationDuration, medicationInstructions, medicationVet) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+  const medicationSql = `
+    INSERT INTO Medication (
+      medicationName,
+      medicationDosage,
+      medicationDuration,
+      medicationInstructions,
+      medicationVet,
+      Logs_logsID,
+      Logs_Pet_petID,
+      Logs_Pet_User_userID
+    ) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+
   const medicationValues = [
-    medicationData.logID,
-    medicationData.petID,
-    medicationData.userID,
     medicationData.name,
     medicationData.dosage,
     medicationData.duration,
     medicationData.instruction,
-    medicationData.vet
+    medicationData.vet,
+    medicationData.Logs_logsID,
+    medicationData.Logs_Pet_petID,
+    medicationData.Logs_Pet_User_userID,
   ];
-  // for (let i = 3; i < values.length; i++) {
-  //   values[i] = toEncrypt(values[i]);
-  // }
+
   db.query(medicationSql, medicationValues, callback);
 }
 
@@ -265,7 +289,7 @@ module.exports = {
   getMedications,
   insertPetBehavior,
   getBehaviorLogsByPetId,
-  insertPetHasIllness,
+  insertBathroomData,
   getAllIllnesses,
   insertPet,
   getLogsByPetId,
@@ -274,5 +298,8 @@ module.exports = {
   insertLog,
   toEncrypt,
   toDecrypt,
-  getFoodDetailsbyLogID
+  getBathroomDetailsbyLogs_Pet_petID,
+  getMedicationDetailsbyLogs_Pet_petID,
+  getBehaviorDetailsbyLogs_Pet_petID,
+  getFoodDetailsbyLogs_Pet_petID,
 };

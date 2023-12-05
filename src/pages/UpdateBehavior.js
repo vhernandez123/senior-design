@@ -15,6 +15,9 @@ import {
 import Axios from "axios";
 import Navbar from "../components/navbar";
 import "../css/LogPet.css";
+import { useParams } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+import { Link } from "react-router-dom";
 
 const UpdateBehavior = () => {
   const [formData, setFormData] = useState({
@@ -24,16 +27,33 @@ const UpdateBehavior = () => {
     selectedSymptomId: "",
   });
 
-  const [petsList, setPetsList] = useState([]);
-  const [symptomsList, setSymptomsList] = useState([]);
   const [activity, setActivity] = useState("active");
   const [behaviorChanges, setBehaviorChanges] = useState("routine change");
+
+  const { logsID, petID } = useParams();
+  const { user, getIdTokenClaims } = useAuth0();
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    const fetchUserId = async () => {
+      try {
+        if (user) {
+          const idToken = await getIdTokenClaims();
+          setUserId(idToken["https://example.com/userId"]);
+        }
+      } catch (error) {
+        console.error("Error fetching user ID:", error);
+      }
+    };
+
+    fetchUserId();
+  }, [getIdTokenClaims, user]);
 
   useEffect(() => {
     Axios.get("http://localhost:4000/GetAllSymptoms")
       .then((response) => {
         if (Array.isArray(response.data.symptoms)) {
-          setSymptomsList(response.data.symptoms);
+          // Handle symptoms data
         } else {
           console.error("Symptoms data is not an array:", response.data);
         }
@@ -46,7 +66,7 @@ const UpdateBehavior = () => {
   useEffect(() => {
     Axios.get("http://localhost:4000/GetAllPets")
       .then((response) => {
-        setPetsList(response.data);
+        // Handle pets data
       })
       .catch((error) => {
         console.error("Error fetching pets:", error);
@@ -80,11 +100,12 @@ const UpdateBehavior = () => {
   const handleFinish = () => {
     let aggressionExplanation = "";
 
-    if (
-      formData.aggression === "yes" &&
-      formData.aggressionExplanation.trim() !== ""
-    ) {
-      aggressionExplanation = formData.aggressionExplanation.trim();
+    if (formData.aggression === "yes") {
+      // If aggression is observed, use the provided explanation
+      aggressionExplanation =
+        formData.aggressionExplanation.trim() !== ""
+          ? formData.aggressionExplanation.trim()
+          : "No signs of aggression";
     } else {
       aggressionExplanation = "No signs of aggression";
     }
@@ -96,6 +117,9 @@ const UpdateBehavior = () => {
       selectedSymptomId: formData.selectedSymptomId,
       activity: activity,
       behaviorChanges: behaviorChanges,
+      Logs_logsID: logsID,
+      Logs_Pet_petID: petID,
+      Logs_Pet_User_userID: userId,
     };
 
     Axios.post("http://localhost:4000/InsertPetBehavior", behaviorData)
@@ -112,36 +136,6 @@ const UpdateBehavior = () => {
       <Navbar />
       <div className="form">
         <Typography variant="h6">Behavior</Typography>
-        <FormControl fullWidth>
-          <InputLabel>Select Pet</InputLabel>
-          <Select
-            value={formData.selectedPetId}
-            onChange={handlePetChange}
-            name="selectedPetId"
-          >
-            {petsList.map((pet) => (
-              <MenuItem key={pet.petId} value={pet.petId}>
-                {pet.petName}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <br />
-        <br />
-        <FormControl fullWidth>
-          <InputLabel>Select a Symptom your pet is Experiencing</InputLabel>
-          <Select
-            value={formData.selectedSymptomId}
-            onChange={handleSymptomChange}
-            name="selectedSymptomId"
-          >
-            {symptomsList.map((symptom) => (
-              <MenuItem key={symptom.SymptomId} value={symptom.SymptomId}>
-                {symptom.symptom_type}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
         <br />
         <br />
         <FormControl>Activity Level?</FormControl>
@@ -217,14 +211,11 @@ const UpdateBehavior = () => {
           </div>
         )}
         <br />
-        <Button
-          variant="contained"
-          color="primary"
-          href="/home"
-          onClick={handleFinish}
-        >
-          Finish
-        </Button>
+        <Link to={`/LoggingForms/${logsID}/${petID}`}>
+          <Button variant="contained" color="primary" onClick={handleFinish}>
+            Finish
+          </Button>
+        </Link>
       </div>
     </div>
   );

@@ -44,6 +44,60 @@ app.get("/GetLogsByPetId/:petId", (req, res) => {
   });
 });
 
+app.get("/GetFoodLogsByPetID/:Logs_Pet_petID", (req, res) => {
+  const { Logs_Pet_petID } = req.params;
+
+  queries.getFoodDetailsbyLogs_Pet_petID(Logs_Pet_petID, (err, logs) => {
+    if (err) {
+      console.error("Error retrieving logs by petId:", err);
+      res.status(500).json({ error: "Error retrieving logs by petId" });
+    } else {
+      res.status(200).json(logs);
+      // console.log(logs);
+    }
+  });
+});
+
+app.get("/GetMedicationLogsByPetID/:Logs_Pet_petID", (req, res) => {
+  const { Logs_Pet_petID } = req.params;
+
+  queries.getMedicationDetailsbyLogs_Pet_petID(Logs_Pet_petID, (err, logs) => {
+    if (err) {
+      console.error("Error retrieving logs by petId:", err);
+      res.status(500).json({ error: "Error retrieving logs by petId" });
+    } else {
+      res.status(200).json(logs);
+      // console.log(logs);
+    }
+  });
+});
+
+app.get("/GetBathroomLogsByPetID/:Logs_Pet_petID", (req, res) => {
+  const { Logs_Pet_petID } = req.params;
+
+  queries.getBathroomDetailsbyLogs_Pet_petID(Logs_Pet_petID, (err, logs) => {
+    if (err) {
+      console.error("Error retrieving logs by petId:", err);
+      res.status(500).json({ error: "Error retrieving logs by petId" });
+    } else {
+      res.status(200).json(logs);
+    }
+  });
+});
+
+app.get("/GetBehaviorogsByPetID/:Logs_Pet_petID", (req, res) => {
+  const { Logs_Pet_petID } = req.params;
+
+  queries.getBehaviorDetailsbyLogs_Pet_petID(Logs_Pet_petID, (err, logs) => {
+    if (err) {
+      console.error("Error retrieving logs by petId:", err);
+      res.status(500).json({ error: "Error retrieving logs by petId" });
+    } else {
+      res.status(200).json(logs);
+    }
+  });
+});
+
 app.get("/GetLog/:logsID", (req, res) => {
   const { logsID } = req.params;
 
@@ -67,13 +121,15 @@ app.get("GetFoodDetails/:logsID", (req, res) => {
   queries.getFoodDetailsbyLogsID(logsID, (err, foodDetails) => {
     if (err) {
       console.error("Error retrieving food details by logsID:", err);
-      res.status(500).json({ error: "Error retrieving food details by logsID" });
+      res
+        .status(500)
+        .json({ error: "Error retrieving food details by logsID" });
     } else {
       // if (!foodDetails) {
       //   res.status(404).json({ error: "Log not found" });
       // } else {
-        console.log(foodDetails);
-        res.status(200).json(foodDetails);
+      console.log(foodDetails);
+      res.status(200).json(foodDetails);
       // }
     }
   });
@@ -100,7 +156,7 @@ app.get("GetFoodDetails/:logsID", (req, res) => {
 //   });
 // });
 
-app.post("/InsertPetMedication", (req, res) => {
+app.post("/InsertMedication", (req, res) => {
   const medicationData = req.body;
 
   queries.insertPetMedication(medicationData, (err) => {
@@ -257,19 +313,19 @@ app.post("/InsertPetBehavior", (req, res) => {
 //   });
 // });
 
-app.post("/InsertIllness", (req, res) => {
-  const illnessData = req.body;
-  queries.insertPetHasIllness(illnessData, (err, result) => {
+app.post("/insertBathroomData", (req, res) => {
+  const bathroomData = req.body;
+  queries.insertBathroomData(bathroomData, (err, result) => {
     if (err) {
-      console.error("Error inserting illness data:", err);
+      console.error("Error inserting bathroom data:", err);
       return res
         .status(500)
-        .json({ error: "Error inserting illness data", details: err.message });
+        .json({ error: "Error inserting bathroom data", details: err.message });
     } else {
-      console.log("Illness data inserted successfully");
+      console.log("Bathroom data inserted successfully");
       return res.status(201).json({
         success: true,
-        message: "Illness data inserted successfully",
+        message: "Bathroom data inserted successfully",
         insertedId: result.insertId,
       });
     }
