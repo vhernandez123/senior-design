@@ -179,16 +179,6 @@ const LoggingForms = () => {
               {petDetails.petMicrochipNum}
             </p>
           </div>
-          <h3>Log Information about your pet</h3>
-          <Link to={`/log-pet/${petID}`}>
-            <Button
-              variant="contained"
-              className="custom-button"
-              style={{ backgroundColor: "#01B636", color: "white" }}
-            >
-              Create New Log
-            </Button>
-          </Link>
           <br />
           <br />
           <h4>Export info to PDF</h4>

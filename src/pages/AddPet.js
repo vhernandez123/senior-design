@@ -63,7 +63,7 @@ const AddPet = () => {
         <Paper elevation={3} className="paper">
           <TextField
             fullWidth
-            label="Select Owner"
+            label="Owner"
             // value={`${user?.given_name || ""} ${user?.family_name || ""}`}
             value={`${user?.name}`}
             disabled
@@ -92,7 +92,7 @@ const AddPet = () => {
           />
           <TextField
             fullWidth
-            label="Age"
+            label="Age "
             value={petAge}
             onChange={(e) => setPetAge(e.target.value)}
             margin="normal"
@@ -106,7 +106,7 @@ const AddPet = () => {
           />
           <TextField
             fullWidth
-            label="Weight"
+            label="Weight (Ibs)"
             value={petWeight}
             onChange={(e) => setPetWeight(e.target.value)}
             margin="normal"
