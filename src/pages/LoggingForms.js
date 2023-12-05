@@ -3,12 +3,10 @@ import { useState, useEffect } from "react";
 import Axios from "axios";
 import "../css/PetDetails.css";
 import Navbar from "../components/navbar";
-import pdfVetSend from "../components/pdfVetSend.js";
 import { Button } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Auth0Provider } from "@auth0/auth0-react";
 import jsPDF from "jspdf";
 
 const LoggingForms = () => {
@@ -159,27 +157,6 @@ const LoggingForms = () => {
       <div className="pet-details-container">
         <div className="pet-info">
           <h2 className="pet-name">{petDetails.petName}</h2>
-          <div className="pet-properties">
-            <p>
-              <span className="property-label">Breed:</span>{" "}
-              {petDetails.petBreed}
-            </p>
-            <p>
-              <span className="property-label">Age:</span> {petDetails.petAge}
-            </p>
-            <p>
-              <span className="property-label">Color:</span>{" "}
-              {petDetails.petColor}
-            </p>
-            <p>
-              <span className="property-label">Weight:</span>{" "}
-              {petDetails.petWeight}
-            </p>
-            <p>
-              <span className="property-label">Microchip Number:</span>{" "}
-              {petDetails.petMicrochipNum}
-            </p>
-          </div>
           <br />
           <br />
           <h4>Export info to PDF</h4>
@@ -191,9 +168,7 @@ const LoggingForms = () => {
           >
             Export to PDF
           </Button>
-          
         </div>
-   
       </div>
       <div className="pet-details-container">
         <h3>What has your pet eaten today?</h3>

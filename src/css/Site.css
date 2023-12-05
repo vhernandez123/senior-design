@@ -43,7 +43,7 @@ video {
 
 /* Add this CSS to create a green box around the text */
 .green-box {
-  background-color: rgba(88, 159, 75, 1); /* Green background color */
+  background-color: rgba(88, 159, 75, .6); /* Green background color */
   color: #fff; /* White text color */
   padding: 20px; /* Adjust padding as needed */
   border-radius: 10px; /* Rounded corners for the box */

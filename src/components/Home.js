@@ -61,7 +61,7 @@ function Home() {
           <DataTable />
         </div>
         <div class="image-container">
-          <img src={CatFoot} alt="cat1" className="catimage" />
+          <img class="bottom-image"src={CatFoot} alt="cat1" className="catimage" />
         </div>
       </div>
       <Footer />

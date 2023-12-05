@@ -75,7 +75,6 @@ const DataTable = () => {
         backgroundColor: "rgba(136, 206, 146, 0.90)",
       }}
     >
-      <TextField label="Search" style={{ margin: "1rem" }} />
       <Table size="medium" className="custom-table">
         <TableHead>
           <TableRow className="table-header-row">
