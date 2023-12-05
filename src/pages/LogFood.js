@@ -70,11 +70,10 @@ const LogFood = () => {
       const foodData = {
         foodType: formData.foodType,
         foodAmount: formData.foodNumber,
-        foodUnit: formData.selectedUnit,
-        foodWater: formData.drank,
-        // foodDanger: formData.ateBad === "yes" ? 1 : 0,
-        foodDanger: formData.ateBad,
-        foodDangerDescription: formData.ateBadDesc,
+        foodUnit: formData.selectedUnit|| "",
+        foodWater: formData.drank || "",
+        foodDanger: formData.ateBad || "nothing bad was eaten",
+        foodDangerDescription: formData.ateBadDesc || "",
         Logs_logsID: logsID,
         Logs_Pet_petID: petID,
         Logs_Pet_User_userID: userId,
@@ -101,9 +100,12 @@ const LogFood = () => {
     <div>
       <Navbar />
       <div className="form">
-        <Typography variant="h6">Food</Typography>
+      <Typography variant="h6" style={{ padding: '10px', color:'red', fontWeight:'bolder' }}>
+  Food (All Fields Required)
+</Typography>
+
         <TextField
-          label="What did your pet eat today? (Food Type)"
+          label="What did your pet eat today? (Food Brand and indicate dry or wet food)"
           fullWidth
           name="foodType"
           value={formData.foodType}
@@ -112,7 +114,7 @@ const LogFood = () => {
         <br />
         <br />
         <TextField
-          label="How many did your pet eat? (Number)"
+          label="How much did your pet eat? (Number)"
           fullWidth
           type="number"
           name="foodNumber"
@@ -132,7 +134,9 @@ const LogFood = () => {
             }
           >
             <FormControlLabel value="oz" control={<Radio />} label="oz" />
-            <FormControlLabel value="lbs" control={<Radio />} label="cans" />
+            <FormControlLabel value="cans" control={<Radio />} label="cans" />
+            <FormControlLabel value="cups" control={<Radio />} label="cups" />
+            <FormControlLabel value="Ibs" control={<Radio />} label="Ibs" />
             <FormControlLabel value="g" control={<Radio />} label="grams" />
           </RadioGroup>
         </FormControl>
@@ -164,7 +168,7 @@ const LogFood = () => {
         </RadioGroup>
         <br />
         <br />
-        <FormControl>If yes, describe it here, else type N/A:</FormControl>
+        <FormControl>If yes, describe it here:</FormControl>
         <br />
         <br />
         <TextField
