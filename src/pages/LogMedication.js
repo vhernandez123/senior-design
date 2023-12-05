@@ -49,7 +49,7 @@ const LogMedication = () => {
       Logs_Pet_User_userID: userId,
       name: formData.name,
       dosage: formData.dosage,
-      duration: formData.duration || "flea and tick which is about every 30-60",
+      duration: formData.duration || "flea and tick",
       instruction: formData.instructions, // Changed to match the function parameter
       vet: formData.vet,
     };

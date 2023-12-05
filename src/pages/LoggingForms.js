@@ -170,26 +170,25 @@ const LoggingForms = () => {
           </Button>
         </div>
       </div>
-      <div className="pet-details-container">
+      <div className="pet-details-container-forms1">
         <h3>What has your pet eaten today?</h3>
         <Link to={`/log-food/${logsID}/${petID}`}>
           <Button
             variant="contained"
-            className="custom-button"
-            style={{ backgroundColor: "#01B636", color: "white" }}
+            className="pet-details-item "
+            style={{ backgroundColor: "#01B636", color: "white",margin:"10px" }}
           >
             Log Food
           </Button>
         </Link>
-
         <br />
         <br />
         <h3>Concerned about your pet?</h3>
         <Link to={`/UpdateBathroom/${logsID}/${petID}`}>
           <Button
             variant="contained"
-            className="custom-button"
-            style={{ backgroundColor: "#01B636", color: "white" }}
+            className="pet-details-item "
+            style={{ backgroundColor: "#01B636", color: "white",margin:"10px" }}
           >
             Click Here
           </Button>
@@ -202,13 +201,14 @@ const LoggingForms = () => {
         <Link to={`/LogMedication/${logsID}/${petID}`}>
           <Button
             variant="contained"
-            className="custom-button"
-            style={{ backgroundColor: "#01B636", color: "white" }}
+            className="pet-details-item "
+            style={{ backgroundColor: "#01B636", color: "white",margin:"10px" }}
           >
             Log it Here
           </Button>
         </Link>
       </div>
+      <div className="pet-logs-container">
       <div className="pet-logs notepad">
         <div className="log-box">
           <h3>Daily log for {petDetails.petName}</h3>
@@ -291,6 +291,7 @@ const LoggingForms = () => {
             ))}
           </ul>
         </div>
+      </div>
       </div>
     </div>
   );

@@ -62,7 +62,7 @@ const LogPet = () => {
       );
       console.log("Feeding info added to Logs table successfully");
 
-      window.location.href = `/LoggingForms/${response.data.logsID}/${petID}`;
+      window.location.href = `/pet/${petID}`;
     } catch (error) {
       console.error("Error posting log data:", error);
     }
@@ -72,29 +72,31 @@ const LogPet = () => {
     <div>
       <Navbar />
       <div className="form-container">
-      <div className="form">
-        <Typography variant="h6">Logging Information</Typography>
-        <TextField
-          label="What are you logging about your pet?"
-          fullWidth
-          name="logEntry"
-          value={formData.logEntry || ""}
-          onChange={handleInputChange}
-          variant="outlined"
-        />
-        <br />
-        <br />
+        <div className="form">
+          <Typography variant="h6" style={{ marginBottom: "20px" }}>
+            Logging Information
+          </Typography>
+          <TextField
+            label="What are you logging about your pet?"
+            fullWidth
+            name="logEntry"
+            value={formData.logEntry || ""}
+            onChange={handleInputChange}
+            variant="outlined"
+          />
+          <br />
+          <br />
 
-        <Button
-          variant="contained"
-          color="primary"
-          href={`/pet/${petID}`}
-          onClick={handleFinish}
-        >
-          Add Log
-        </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            href={`/pet/${petID}`}
+            onClick={handleFinish}
+          >
+            Add Log
+          </Button>
+        </div>
       </div>
-    </div>
     </div>
   );
 };

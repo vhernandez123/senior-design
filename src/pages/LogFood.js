@@ -100,7 +100,7 @@ const LogFood = () => {
     <div>
       <Navbar />
       <div className="form">
-      <Typography variant="h6" style={{ padding: '10px', color:'red', fontWeight:'bolder' }}>
+      <Typography variant="h6" style={{ padding: '10px', fontWeight:'bolder' }}>
   Food (All Fields Required)
 </Typography>
 

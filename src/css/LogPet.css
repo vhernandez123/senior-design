@@ -1,14 +1,14 @@
 .form {
   max-width: 1000px;
-  margin-top: 10vh;
-  margin-left: 1vh;
+  margin: 10vh auto;
   font-family: Arial, sans-serif;
-  background-color: rgba(208, 249, 201, 0.909);
+  background-color: rgba(218, 236, 216, 0.83);
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 80%;
   border: 1px solid #ccc;
+  font-weight:'bolder';
 }
 .logform-button {
   display: flex;
