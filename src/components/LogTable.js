@@ -14,11 +14,13 @@ import {
   Button,
   TextField,
 } from "@mui/material";
+import { useParams } from "react-router-dom";
 
 const DataTable = () => {
   const [rows, setRows] = useState([]);
   const { user, getIdTokenClaims } = useAuth0();
   const [userId, setUserId] = useState(null);
+  const { petID } = useParams();
   useEffect(() => {
     const fetchUserId = async () => {
       try {
@@ -38,7 +40,7 @@ const DataTable = () => {
       if (user && userId) {
         try {
           const response = await Axios.get(
-            `http://localhost:4000/GetAllPetsID/${userId}`
+            `http://localhost:4000/GetLogsByPetId/${petID}`
           );
           // console.log(response.data);
           setRows(response.data);
@@ -49,19 +51,19 @@ const DataTable = () => {
     };
 
     fetchData();
-  }, [userId, user]);
+  }, [userId, user,]);
 
-  const handleRemovePet = (index, petID) => {
-    Axios.delete(`http://localhost:4000/RemovePet/${petID}`)
-      .then((response) => {
-        const updatedRows = [...rows];
-        updatedRows.splice(index, 1);
-        setRows(updatedRows);
-      })
-      .catch((error) => {
-        console.error("Error removing pet:", error);
-      });
-  };
+//   const handleRemovePet = (index, petID) => {
+//     Axios.delete(`http://localhost:4000/RemovePet/${petID}`)
+//       .then((response) => {
+//         const updatedRows = [...rows];
+//         updatedRows.splice(index, 1);
+//         setRows(updatedRows);
+//       })
+//       .catch((error) => {
+//         console.error("Error removing pet:", error);
+//       });
+//   };
 
   return (
     <TableContainer
@@ -76,15 +78,9 @@ const DataTable = () => {
       <Table size="medium" className="custom-table">
         <TableHead>
           <TableRow className="table-header-row">
-            <TableCell className="table-header-cell">Name</TableCell>
-            <TableCell className="table-header-cell">Breed</TableCell>
-            <TableCell className="table-header-cell">Age</TableCell>
-            <TableCell className="table-header-cell">Color</TableCell>
-            <TableCell className="table-header-cell">Weight</TableCell>
-            <TableCell className="table-header-cell">
-              Microchip Number
-            </TableCell>
-            <TableCell className="table-header-cell">Gender</TableCell>
+            {/* <TableCell className="table-header-cell">LogsID</TableCell> */}
+            <TableCell className="table-header-cell">Date</TableCell>
+            <TableCell className="table-header-cell">Log Entry</TableCell>
             <TableCell className="table-header-cell" colSpan={2}>
               Actions
             </TableCell>
@@ -93,17 +89,11 @@ const DataTable = () => {
         <TableBody>
           {rows.map((row, index) => (
             <TableRow key={index} className="table-row">
-              <TableCell className="table-cell">{row.petName}</TableCell>
-              <TableCell className="table-cell">{row.petBreed}</TableCell>
-              <TableCell className="table-cell">{row.petAge}</TableCell>
-              <TableCell className="table-cell">{row.petColor}</TableCell>
-              <TableCell className="table-cell">{row.petWeight}</TableCell>
-              <TableCell className="table-cell">
-                {row.petMicrochipNum}
-              </TableCell>
-              <TableCell className="table-cell">{row.petGender}</TableCell>
+              {/* <TableCell className="table-cell">{row.logsID}</TableCell> */}
+              <TableCell className="table-cell">{row.logDate}</TableCell>
+              <TableCell className="table-cell">{row.logEntry}</TableCell>
               <TableCell className="table-cell" colSpan={2}>
-                <Button
+                {/* <Button
                   variant="contained"
                   className="custom-button"
                   style={{
@@ -114,21 +104,33 @@ const DataTable = () => {
                   onClick={() => handleRemovePet(index, row.petID)}
                 >
                   Remove
-                </Button>
-                <Link to={`/pet/${row.petID}`}>
+                </Button> */}
+                <Link to={`/LoggingForms/${row.logsID}/${petID}`}>
                   <Button
                     variant="contained"
                     className="custom-button"
                     style={{
                       backgroundColor: "#01B636",
                       color: "white",
-
-                      marginLeft: "10px", 
+                      marginLeft: "10px",
                     }}
                   >
-                    View Pet
+                    Details
                   </Button>
                 </Link>
+                {/* <Link to={`/LoggingForms/${row.logsID}/${petID}`}>
+                  <Button
+                    variant="contained"
+                    className="custom-button"
+                    style={{
+                      backgroundColor: "#01B636",
+                      color: "white",
+                      marginLeft: "10px",
+                    }}
+                  >
+                    View Details
+                  </Button>
+                </Link> */}
               </TableCell>
             </TableRow>
           ))}
@@ -136,12 +138,12 @@ const DataTable = () => {
       </Table>
       <Button
         component={Link}
-        to="/AddPet"
+        to={`/Log-pet/${petID}`}
         variant="contained"
         className="custom-button custom-table"
         style={{ margin: "1rem", backgroundColor: "#01B636", color: "white" }}
       >
-        Add New Pet
+        Add New Log
       </Button>
     </TableContainer>
   );

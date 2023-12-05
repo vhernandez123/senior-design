@@ -7,10 +7,13 @@ import Axios from "axios";
 import { Auth0Provider } from "@auth0/auth0-react";
 import "../App.css";
 import CatFoot from "../images/cat.jpg";
+// import useUserFinder  from "../components/userFinder.js";
 
 function Home() {
-  const { isAuthenticated, user } = useAuth0();
+  const { isAuthenticated, user, getIdTokenClaims } = useAuth0();
   const [userData, setUserData] = useState(null);
+  const [userId, setUserId] = useState(null);
+  // const { user, getIdTokenClaims } = useAuth0();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,9 +32,25 @@ function Home() {
         console.log("Server response data:", error.response?.data);
       }
     };
-
     fetchData();
   }, [isAuthenticated, user]);
+
+  useEffect(() => {
+    const fetchUserId = async () => {
+      try {
+        // Check if user is defined before accessing its properties
+        if (user) {
+          const idToken = await getIdTokenClaims();
+          setUserId(idToken['https://example.com/userId']);
+        }
+      } catch (error) {
+        console.error("Error fetching user ID:", error);
+      }
+    };
+
+    fetchUserId();
+  }, [getIdTokenClaims, user]); 
+
 
   return (
     <div className="app">
@@ -41,7 +60,7 @@ function Home() {
           <DataTable />
         </div>
         <div class="image-container">
-          <img src={CatFoot} alt="cat1" className="catimage" />
+          <img class="bottom-image"src={CatFoot} alt="cat1" className="catimage" />
         </div>
       </div>
       <Footer />

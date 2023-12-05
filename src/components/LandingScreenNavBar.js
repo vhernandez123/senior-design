@@ -9,16 +9,7 @@ function LandingScreenNavBar() {
       <div className="navbar-container">
         <h1 className="navbar-logo">Pet Logger</h1>
         <ul className="nav-menu">
-          <li className="nav-item">
-            <Button
-              href="/AboutUs"
-              variant="contained"
-              className="custom-button"
-              style={{ margin: "1rem", background: "green" }}
-            >
-              About Us
-            </Button>
-          </li>
+          
         </ul>
       </div>
     </nav>
