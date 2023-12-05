@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Axios from "axios";
 import "../css/PetDetails.css";
 import Navbar from "../components/navbar";
+import pdfVetSend from "../components/pdfVetSend.js";
 import { Button } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -176,7 +177,9 @@ const LoggingForms = () => {
           >
             Export to PDF
           </Button>
+          
         </div>
+   
       </div>
       <div className="pet-details-container">
         <h3>What has your pet eaten today?</h3>
