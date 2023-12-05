@@ -44,7 +44,7 @@ const LogMedication = () => {
 
   const handleFinish = () => {
     const medicationData = {
-      Logs_logsID: logsID || "",
+      Logs_logsID: logsID,
       Logs_Pet_petID: petID,
       Logs_Pet_User_userID: userId,
       name: formData.name,

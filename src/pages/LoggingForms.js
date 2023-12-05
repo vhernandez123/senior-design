@@ -111,17 +111,30 @@ const LoggingForms = () => {
         const petLogsResponse = await Axios.get(
           `http://localhost:4000/GetLog/${logsID}`
         );
+        // const bathroomLogsResponse = await Axios.get(
+        //   `http://localhost:4000/GetBathroomLogsByPetID/${petID}`
+        // );
+        // const foodLogsResponse = await Axios.get(
+        //   `http://localhost:4000/GetFoodLogsByPetID/${petID}`
+        // );
+        // const behaviorLogsResponse = await Axios.get(
+        //   `http://localhost:4000/GetBehaviorogsByPetID/${petID}`
+        // );
+        // const medicationLogsResponse = await Axios.get(
+        //   `http://localhost:4000/GetMedicationLogsByPetID/${petID}`
+        // );
+
         const bathroomLogsResponse = await Axios.get(
-          `http://localhost:4000/GetBathroomLogsByPetID/${petID}`
+          `http://localhost:4000/GetBathroomDetailsbyLogID/${logsID}`
         );
         const foodLogsResponse = await Axios.get(
-          `http://localhost:4000/GetFoodLogsByPetID/${petID}`
+          `http://localhost:4000/GetFoodLogsByLogID/${logsID}`
         );
         const behaviorLogsResponse = await Axios.get(
-          `http://localhost:4000/GetBehaviorogsByPetID/${petID}`
+          `http://localhost:4000/GetBehaviorDetailsbyLogID/${logsID}`
         );
         const medicationLogsResponse = await Axios.get(
-          `http://localhost:4000/GetMedicationLogsByPetID/${petID}`
+          `http://localhost:4000/GetMedicationDetailsbyLogID/${logsID}`
         );
 
         setPetDetails(petDetailsResponse.data);
@@ -132,6 +145,7 @@ const LoggingForms = () => {
         setFoodLogs(foodLogsResponse.data);
       } catch (error) {
         console.error("Error fetching data:", error);
+        console.log(logsID);
       }
     };
 

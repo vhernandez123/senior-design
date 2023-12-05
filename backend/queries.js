@@ -101,11 +101,6 @@ function getUserbyId(userId, callback) {
   db.query(sql, userId, callback);
 }
 
-const getAllIllnesses = (callback) => {
-  const query =
-    "SELECT * FROM Illness WHERE (Logs_logsID = ? AND Logs_Pet_petID = ? AND Logs_Pet_User_userID = ?)";
-  db.query(query, callback);
-};
 
 function insertLog(logData, callback) {
   const sql = `INSERT INTO Logs (
@@ -173,10 +168,10 @@ function insertFood(foodData, callback) {
   db.query(sql, values, callback);
 }
 
-// function getFoodDetailsbyLogID(logID, callback) {
-//   const sql = "SELECT * FROM Food WHERE Logs_logsID = ?";
-//   db.query(sql, logID, callback);
-// }
+function getFoodDetailsbyLogID(logID, callback) {
+  const sql = "SELECT * FROM Food WHERE Logs_logsID = ?";
+  db.query(sql, logID, callback);
+}
 
 function getFoodDetailsbyLogs_Pet_petID(Logs_Pet_petID, callback) {
   const sql = "SELECT * FROM Food WHERE Logs_Pet_petID = ?";
@@ -187,15 +182,29 @@ function getBehaviorDetailsbyLogs_Pet_petID(Logs_Pet_petID, callback) {
   const sql = "SELECT * FROM Behavior WHERE Logs_Pet_petID = ?";
   db.query(sql, Logs_Pet_petID, callback);
 }
+function getBehaviorDetailsbyLogID(logID, callback) {
+  const sql = "SELECT * FROM Behavior WHERE Logs_logsID = ?";
+  db.query(sql, logID, callback);
+}
 
 function getBathroomDetailsbyLogs_Pet_petID(Logs_Pet_petID, callback) {
   const sql = "SELECT * FROM Bathroom WHERE Logs_Pet_petID = ?";
   db.query(sql, Logs_Pet_petID, callback);
 }
 
+function getBathroomDetailsbyLogID(logID, callback) {
+  const sql = "SELECT * FROM Bathroom WHERE Logs_logsID = ?";
+  db.query(sql, logID, callback);
+}
+
 function getMedicationDetailsbyLogs_Pet_petID(Logs_Pet_petID, callback) {
   const sql = "SELECT * FROM Medication WHERE Logs_Pet_petID = ?";
   db.query(sql, Logs_Pet_petID, callback);
+}
+
+function getMedicationDetailsbyLogID(logID, callback) {
+  const sql = "SELECT * FROM Medication WHERE Logs_logsID = ?";
+  db.query(sql, logID, callback);
 }
 
 function getMedicationLogsByPetId(petId, callback) {
@@ -205,7 +214,15 @@ function getMedicationLogsByPetId(petId, callback) {
 
 function insertBathroomData(bathroomData, callback) {
   const bathroomSql =
-    "INSERT INTO Bathroom ( bathroomNumber, bathroomPoop, bathroomUrine, bathroomVomit, Logs_logsID, Logs_Pet_petID, Logs_Pet_User_userID) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    `INSERT INTO Bathroom ( 
+      bathroomNumber, 
+      bathroomPoop, 
+      bathroomUrine, 
+      bathroomVomit, 
+      Logs_logsID, 
+      Logs_Pet_petID, 
+      Logs_Pet_User_userID) 
+      VALUES (?, ?, ?, ?, ?, ?, ?)`;
   const bathroomValues = [
     bathroomData.bathroomNumber,
     bathroomData.bathroomPoop,
@@ -215,7 +232,9 @@ function insertBathroomData(bathroomData, callback) {
     bathroomData.Logs_Pet_petID,
     bathroomData.Logs_Pet_User_userID,
   ];
-
+  // for (let i = 3; i < values.length; i++) {
+  //   values[i] = toEncrypt(values[i]);
+  // }
   db.query(bathroomSql, bathroomValues, callback);
 }
 function insertPetBehavior(behaviorData, callback) {
@@ -259,14 +278,13 @@ function insertPetMedication(medicationData, callback) {
     medicationData.Logs_Pet_petID,
     medicationData.Logs_Pet_User_userID,
   ];
-
+  // for (let i = 3; i < values.length; i++) {
+  //   values[i] = toEncrypt(values[i]);
+  // }
   db.query(medicationSql, medicationValues, callback);
 }
 
-function getIllnessLogsByPetId(petId, callback) {
-  const sql = "SELECT * FROM Pet_has_Illness WHERE Pet_petId = ?";
-  db.query(sql, petId, callback);
-}
+
 
 function getBehaviorLogsByPetId(petId, callback) {
   const sql = "SELECT * FROM Behavior WHERE Pet_petId = ?";
@@ -290,10 +308,8 @@ module.exports = {
   insertPetBehavior,
   getBehaviorLogsByPetId,
   insertBathroomData,
-  getAllIllnesses,
   insertPet,
   getLogsByPetId,
-  getIllnessLogsByPetId,
   removePet,
   insertLog,
   toEncrypt,
@@ -302,4 +318,8 @@ module.exports = {
   getMedicationDetailsbyLogs_Pet_petID,
   getBehaviorDetailsbyLogs_Pet_petID,
   getFoodDetailsbyLogs_Pet_petID,
+  getBathroomDetailsbyLogID,
+  getMedicationDetailsbyLogID,
+  getBehaviorDetailsbyLogID,
+  getFoodDetailsbyLogID,
 };

@@ -57,6 +57,72 @@ app.get("/GetFoodLogsByPetID/:Logs_Pet_petID", (req, res) => {
     }
   });
 });
+app.get("/GetFoodLogsByLogID/:logID", (req, res) => {
+  const { logID } = req.params;
+
+  queries.getFoodDetailsbyLogID(logID, (err, logs) => {
+    if (err) {
+      console.error("Error retrieving logs by petId:", err);
+      res.status(500).json({ error: "Error retrieving logs by petId" });
+    } else {
+      res.status(200).json(logs);
+      // console.log(logs);
+    }
+  });
+});
+app.get("/GetBehaviorDetailsbyLogID/:logID", (req, res) => {
+  const { logID } = req.params;
+
+  queries.getBehaviorDetailsbyLogID(logID, (err, logs) => {
+    if (err) {
+      console.error("Error retrieving logs by petId:", err);
+      res.status(500).json({ error: "Error retrieving logs by petId" });
+    } else {
+      res.status(200).json(logs);
+      // console.log(logs);
+    }
+  });
+});
+app.get("/GetMedicationDetailsbyLogID/:logID", (req, res) => {
+  const { logID } = req.params;
+
+  queries.getMedicationDetailsbyLogID(logID, (err, logs) => {
+    if (err) {
+      console.error("Error retrieving logs by petId:", err);
+      res.status(500).json({ error: "Error retrieving logs by petId" });
+    } else {
+      res.status(200).json(logs);
+      // console.log(logs);
+    }
+  });
+});
+app.get("/GetBathroomDetailsbyLogID/:logID", (req, res) => {
+  const { logID } = req.params;
+
+  queries.getBathroomDetailsbyLogID(logID, (err, logs) => {
+    if (err) {
+      console.error("Error retrieving logs by petId:", err);
+      res.status(500).json({ error: "Error retrieving logs by petId" });
+    } else {
+      res.status(200).json(logs);
+      // console.log(logs);
+    }
+  });
+});
+
+app.get("/GetFoodLogsByPetID/:logID", (req, res) => {
+  const { logID } = req.params;
+
+  queries.getFoodDetailsbyLogs_Pet_petID(logID, (err, logs) => {
+    if (err) {
+      console.error("Error retrieving logs by petId:", err);
+      res.status(500).json({ error: "Error retrieving logs by petId" });
+    } else {
+      res.status(200).json(logs);
+      // console.log(logs);
+    }
+  });
+});
 
 app.get("/GetMedicationLogsByPetID/:Logs_Pet_petID", (req, res) => {
   const { Logs_Pet_petID } = req.params;
@@ -209,18 +275,18 @@ app.get("/GetPet/:petID", (req, res) => {
     }
   });
 });
-app.get("/GetIllnessLogsByPetId/:petId", (req, res) => {
-  const { petId } = req.params;
+// app.get("/GetIllnessLogsByPetId/:petId", (req, res) => {
+//   const { petId } = req.params;
 
-  queries.getIllnessLogsByPetId(petId, (err, illnessLogs) => {
-    if (err) {
-      console.error("Error retrieving illness logs by petId:", err);
-      res.status(500).json({ error: "Error retrieving illness logs by petId" });
-    } else {
-      res.status(200).json(illnessLogs);
-    }
-  });
-});
+//   queries.getIllnessLogsByPetId(petId, (err, illnessLogs) => {
+//     if (err) {
+//       console.error("Error retrieving illness logs by petId:", err);
+//       res.status(500).json({ error: "Error retrieving illness logs by petId" });
+//     } else {
+//       res.status(200).json(illnessLogs);
+//     }
+//   });
+// });
 
 app.get("/GetBehaviorLogsByPetId/:petId", (req, res) => {
   const { petId } = req.params;

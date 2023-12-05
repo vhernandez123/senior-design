@@ -58,7 +58,7 @@ const UpdateBathroom = () => {
         bathroomPoop: formData.bathroomPoop,
         bathroomUrine: formData.bathroomUrine,
         bathroomVomit: formData.bathroomVomit,
-        Logs_logsID: logsID || "", // Provide a default value if logsID is null or undefined
+        Logs_logsID: logsID, 
         Logs_Pet_petID: petID,
         Logs_Pet_User_userID: userId,
       };
@@ -119,9 +119,9 @@ const UpdateBathroom = () => {
         <br />
         <br />
 
-        <Button variant="contained" color="primary" onClick={handleFinish}>
+        {/* <Button variant="contained" color="primary" onClick={handleFinish}>
           Save
-        </Button>
+        </Button> */}
 
         <br />
         <br />
