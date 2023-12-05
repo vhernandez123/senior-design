@@ -132,7 +132,7 @@ const LogFood = () => {
             }
           >
             <FormControlLabel value="oz" control={<Radio />} label="oz" />
-            <FormControlLabel value="lbs" control={<Radio />} label="lbs" />
+            <FormControlLabel value="lbs" control={<Radio />} label="cans" />
             <FormControlLabel value="g" control={<Radio />} label="grams" />
           </RadioGroup>
         </FormControl>
@@ -164,7 +164,7 @@ const LogFood = () => {
         </RadioGroup>
         <br />
         <br />
-        <FormControl>If yes, describe it here:</FormControl>
+        <FormControl>If yes, describe it here, else type N/A:</FormControl>
         <br />
         <br />
         <TextField

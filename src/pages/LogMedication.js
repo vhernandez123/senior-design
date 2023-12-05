@@ -49,7 +49,7 @@ const LogMedication = () => {
       Logs_Pet_User_userID: userId,
       name: formData.name,
       dosage: formData.dosage,
-      duration: formData.duration,
+      duration: formData.duration || "flea and tick which is about every 30-60",
       instruction: formData.instructions, // Changed to match the function parameter
       vet: formData.vet,
     };
@@ -87,7 +87,7 @@ const LogMedication = () => {
         <br />
         <br />
         <TextField
-          label="How many days?"
+          label="If not flea/tick, enter days"
           type="number"
           value={formData.duration}
           onChange={handleInputChange}

@@ -108,7 +108,7 @@ const UpdateBathroom = () => {
         <FormControl>
           <br />
           <br />
-          <InputLabel>How many times did your pet vomit today?</InputLabel>
+          <InputLabel>Any pet vomit today?</InputLabel>
           <TextField
             type="number"
             name="bathroomVomit"
