@@ -17,15 +17,15 @@ app.get("/GetAllPetsID/:userID", (req, res) => {
       console.error("Error retrieving pet data:", err);
       res.status(500).json({ error: "Error retrieving pet data" });
     } else {
-      // for (let i = 0; i < result.length; i++) {
-      //   result[i]['petName'] = queries.toDecrypt(result[i]['petName']);
-      //   result[i]['petBreed'] = queries.toDecrypt(result[i]['petBreed']);
-      //   result[i]['petGender'] = queries.toDecrypt(result[i]['petGender']);
-      //   result[i]['petAge'] = queries.toDecrypt(result[i]['petAge']);
-      //   result[i]['petColor'] = queries.toDecrypt(result[i]['petColor']);
-      //   result[i]['petWeight'] = queries.toDecrypt(result[i]['petWeight']);
-      //   result[i]['petMicrochipNum'] = queries.toDecrypt(result[i]['petMicrochipNum']);
-      // }
+      for (let i = 0; i < result.length; i++) {
+        result[i]['petName'] = queries.toDecrypt(result[i]['petName']);
+        result[i]['petBreed'] = queries.toDecrypt(result[i]['petBreed']);
+        result[i]['petGender'] = queries.toDecrypt(result[i]['petGender']);
+        result[i]['petAge'] = queries.toDecrypt(result[i]['petAge']);
+        result[i]['petColor'] = queries.toDecrypt(result[i]['petColor']);
+        result[i]['petWeight'] = queries.toDecrypt(result[i]['petWeight']);
+        result[i]['petMicrochipNum'] = queries.toDecrypt(result[i]['petMicrochipNum']);
+      }
       res.status(200).json(result);
     }
   });
@@ -38,6 +38,10 @@ app.get("/GetLogsByPetId/:petId", (req, res) => {
       console.error("Error retrieving logs by petId:", err);
       res.status(500).json({ error: "Error retrieving logs by petId" });
     } else {
+      for (let i = 0; i < logs.length; i++) {
+        logs[i]['logDate'] = queries.toDecrypt(logs[i]['logDate']);
+        logs[i]['logEntry'] = queries.toDecrypt(logs[i]['logEntry']);
+      }
       res.status(200).json(logs);
       // console.log(logs);
     }
@@ -52,6 +56,14 @@ app.get("/GetFoodLogsByPetID/:Logs_Pet_petID", (req, res) => {
       console.error("Error retrieving logs by petId:", err);
       res.status(500).json({ error: "Error retrieving logs by petId" });
     } else {
+      for (let i = 0; i < logs.length; i++) {
+        logs[i]['foodType'] = queries.toDecrypt(logs[i]['foodType']);
+        logs[i]['foodAmount'] = queries.toDecrypt(logs[i]['foodAmount']);
+        logs[i]['foodUnit'] = queries.toDecrypt(logs[i]['foodUnit']);
+        logs[i]['foodWater'] = queries.toDecrypt(logs[i]['foodWater']);
+        logs[i]['foodDanger'] = queries.toDecrypt(logs[i]['foodDanger']);
+        logs[i]['foodDangerDescription'] = queries.toDecrypt(logs[i]['foodDangerDescription']);
+      }
       res.status(200).json(logs);
       // console.log(logs);
     }
@@ -65,6 +77,14 @@ app.get("/GetFoodLogsByLogID/:logID", (req, res) => {
       console.error("Error retrieving logs by petId:", err);
       res.status(500).json({ error: "Error retrieving logs by petId" });
     } else {
+      for (let i = 0; i < logs.length; i++) {
+        logs[i]['foodType'] = queries.toDecrypt(logs[i]['foodType']);
+        logs[i]['foodAmount'] = queries.toDecrypt(logs[i]['foodAmount']);
+        logs[i]['foodUnit'] = queries.toDecrypt(logs[i]['foodUnit']);
+        logs[i]['foodWater'] = queries.toDecrypt(logs[i]['foodWater']);
+        logs[i]['foodDanger'] = queries.toDecrypt(logs[i]['foodDanger']);
+        logs[i]['foodDangerDescription'] = queries.toDecrypt(logs[i]['foodDangerDescription']);
+      }
       res.status(200).json(logs);
       // console.log(logs);
     }
@@ -78,6 +98,11 @@ app.get("/GetBehaviorDetailsbyLogID/:logID", (req, res) => {
       console.error("Error retrieving logs by petId:", err);
       res.status(500).json({ error: "Error retrieving logs by petId" });
     } else {
+      for (let i = 0; i < logs.length; i++) {
+        logs[i]['behaviorActivity'] = queries.toDecrypt(logs[i]['behaviorActivity']);
+        logs[i]['behaviorAggression'] = queries.toDecrypt(logs[i]['behaviorAggression']);
+        logs[i]['behaviorChanges'] = queries.toDecrypt(logs[i]['behaviorChanges']);
+      }
       res.status(200).json(logs);
       // console.log(logs);
     }
@@ -91,6 +116,12 @@ app.get("/GetMedicationDetailsbyLogID/:logID", (req, res) => {
       console.error("Error retrieving logs by petId:", err);
       res.status(500).json({ error: "Error retrieving logs by petId" });
     } else {
+      for (let i = 0; i < logs.length; i++) {
+        logs[i]['medicationName'] = queries.toDecrypt(logs[i]['medicationName']);
+        logs[i]['medicationDosage'] = queries.toDecrypt(logs[i]['medicationDosage']);
+        logs[i]['medicationDuration'] = queries.toDecrypt(logs[i]['medicationDuration']);
+        logs[i]['medicationInstructions'] = queries.toDecrypt(logs[i]['medicationInstructions']);
+      }
       res.status(200).json(logs);
       // console.log(logs);
     }
@@ -104,6 +135,12 @@ app.get("/GetBathroomDetailsbyLogID/:logID", (req, res) => {
       console.error("Error retrieving logs by petId:", err);
       res.status(500).json({ error: "Error retrieving logs by petId" });
     } else {
+      for (let i = 0; i < logs.length; i++) {
+        logs[i]['bathroomNumber'] = queries.toDecrypt(logs[i]['bathroomNumber']);
+        logs[i]['bathroomPoop'] = queries.toDecrypt(logs[i]['bathroomPoop']);
+        logs[i]['bathroomUrine'] = queries.toDecrypt(logs[i]['bathroomUrine']);
+        logs[i]['bathroomVomit'] = queries.toDecrypt(logs[i]['bathroomVomit']);
+      }
       res.status(200).json(logs);
       // console.log(logs);
     }
@@ -118,8 +155,15 @@ app.get("/GetFoodLogsByPetID/:logID", (req, res) => {
       console.error("Error retrieving logs by petId:", err);
       res.status(500).json({ error: "Error retrieving logs by petId" });
     } else {
+      for (let i = 0; i < logs.length; i++) {
+        logs[i]['foodType'] = queries.toDecrypt(logs[i]['foodType']);
+        logs[i]['foodAmount'] = queries.toDecrypt(logs[i]['foodAmount']);
+        logs[i]['foodUnit'] = queries.toDecrypt(logs[i]['foodUnit']);
+        logs[i]['foodWater'] = queries.toDecrypt(logs[i]['foodWater']);
+        logs[i]['foodDanger'] = queries.toDecrypt(logs[i]['foodDanger']);
+        logs[i]['foodDangerDescription'] = queries.toDecrypt(logs[i]['foodDangerDescription']);
+      }
       res.status(200).json(logs);
-      // console.log(logs);
     }
   });
 });
@@ -132,8 +176,13 @@ app.get("/GetMedicationLogsByPetID/:Logs_Pet_petID", (req, res) => {
       console.error("Error retrieving logs by petId:", err);
       res.status(500).json({ error: "Error retrieving logs by petId" });
     } else {
+      for (let i = 0; i < logs.length; i++) {
+        logs[i]['medicationName'] = queries.toDecrypt(logs[i]['medicationName']);
+        logs[i]['medicationDosage'] = queries.toDecrypt(logs[i]['medicationDosage']);
+        logs[i]['medicationDuration'] = queries.toDecrypt(logs[i]['medicationDuration']);
+        logs[i]['medicationInstructions'] = queries.toDecrypt(logs[i]['medicationInstructions']);
+      }
       res.status(200).json(logs);
-      // console.log(logs);
     }
   });
 });
@@ -146,6 +195,12 @@ app.get("/GetBathroomLogsByPetID/:Logs_Pet_petID", (req, res) => {
       console.error("Error retrieving logs by petId:", err);
       res.status(500).json({ error: "Error retrieving logs by petId" });
     } else {
+      for (let i = 0; i < logs.length; i++) {
+        logs[i]['bathroomNumber'] = queries.toDecrypt(logs[i]['bathroomNumber']);
+        logs[i]['bathroomPoop'] = queries.toDecrypt(logs[i]['bathroomPoop']);
+        logs[i]['bathroomUrine'] = queries.toDecrypt(logs[i]['bathroomUrine']);
+        logs[i]['bathroomVomit'] = queries.toDecrypt(logs[i]['bathroomVomit']);
+      }
       res.status(200).json(logs);
     }
   });
@@ -159,6 +214,11 @@ app.get("/GetBehaviorogsByPetID/:Logs_Pet_petID", (req, res) => {
       console.error("Error retrieving logs by petId:", err);
       res.status(500).json({ error: "Error retrieving logs by petId" });
     } else {
+      for (let i = 0; i < result.length; i++) {
+        logs[i]['behaviorActivity'] = queries.toDecrypt(logs[i]['behaviorActivity']);
+        logs[i]['behaviorAggression'] = queries.toDecrypt(logs[i]['behaviorAggression']);
+        logs[i]['behaviorChanges'] = queries.toDecrypt(logs[i]['behaviorChanges']);
+      }
       res.status(200).json(logs);
     }
   });
@@ -175,6 +235,10 @@ app.get("/GetLog/:logsID", (req, res) => {
       if (!log) {
         res.status(404).json({ error: "Log not found" });
       } else {
+        for (let i = 0; i < log.length; i++) {
+          log[i]['logDate'] = queries.toDecrypt(log[i]['logDate']);
+          log[i]['logEntry'] = queries.toDecrypt(log[i]['logEntry']);
+        }
         res.status(200).json(log);
       }
     }
@@ -194,33 +258,21 @@ app.get("GetFoodDetails/:logsID", (req, res) => {
       // if (!foodDetails) {
       //   res.status(404).json({ error: "Log not found" });
       // } else {
-      console.log(foodDetails);
+      // console.log(foodDetails);
+      for (let i = 0; i < logs.length; i++) {
+        foodDetails[i]['foodType'] = queries.toDecrypt(foodDetails[i]['foodType']);
+        foodDetails[i]['foodAmount'] = queries.toDecrypt(foodDetails[i]['foodAmount']);
+        foodDetails[i]['foodUnit'] = queries.toDecrypt(foodDetails[i]['foodUnit']);
+        foodDetails[i]['foodWater'] = queries.toDecrypt(foodDetails[i]['foodWater']);
+        foodDetails[i]['foodDanger'] = queries.toDecrypt(foodDetails[i]['foodDanger']);
+        foodDetails[i]['foodDangerDescription'] = queries.toDecrypt(foodDetails[i]['foodDangerDescription']);
+      }
       res.status(200).json(foodDetails);
       // }
     }
   });
 });
-// app.get("/GetAllUsers", (req, res) => {
-//   queries.getAllUsers((err, users) => {
-//     if (err) {
-//       console.error("Error retrieving user data:", err);
-//       res.status(500).json({ error: "Error retrieving user data" });
-//     } else {
-//       res.status(200).json(users);
-//     }
-//   });
-// });
 
-// app.get("/GetAllMedications", (req, res) => {
-//   queries.getMedications((err, users) => {
-//     if (err) {
-//       console.error("Error retrieving medication data:", err);
-//       res.status(500).json({ error: "Error retrieving medication data" });
-//     } else {
-//       res.status(200).json(users);
-//     }
-//   });
-// });
 
 app.post("/InsertMedication", (req, res) => {
   const medicationData = req.body;
@@ -270,23 +322,21 @@ app.get("/GetPet/:petID", (req, res) => {
       if (result.length === 0) {
         res.status(404).json({ error: "Pet not found" });
       } else {
+        for (let i = 0; i < result.length; i++) {
+          result[i]['petName'] = queries.toDecrypt(result[i]['petName']);
+          result[i]['petBreed'] = queries.toDecrypt(result[i]['petBreed']);
+          result[i]['petGender'] = queries.toDecrypt(result[i]['petGender']);
+          result[i]['petAge'] = queries.toDecrypt(result[i]['petAge']);
+          result[i]['petColor'] = queries.toDecrypt(result[i]['petColor']);
+          result[i]['petWeight'] = queries.toDecrypt(result[i]['petWeight']);
+          result[i]['petMicrochipNum'] = queries.toDecrypt(result[i]['petMicrochipNum']);
+        }
         res.status(200).json(result[0]);
       }
     }
   });
 });
-// app.get("/GetIllnessLogsByPetId/:petId", (req, res) => {
-//   const { petId } = req.params;
 
-//   queries.getIllnessLogsByPetId(petId, (err, illnessLogs) => {
-//     if (err) {
-//       console.error("Error retrieving illness logs by petId:", err);
-//       res.status(500).json({ error: "Error retrieving illness logs by petId" });
-//     } else {
-//       res.status(200).json(illnessLogs);
-//     }
-//   });
-// });
 
 app.get("/GetBehaviorLogsByPetId/:petId", (req, res) => {
   const { petId } = req.params;
@@ -298,6 +348,11 @@ app.get("/GetBehaviorLogsByPetId/:petId", (req, res) => {
         .status(500)
         .json({ error: "Error retrieving behavior logs by petId" });
     } else {
+      for (let i = 0; i < behaviorLogs.length; i++) {
+        logs[i]['behaviorActivity'] = queries.toDecrypt(behaviorLogs[i]['behaviorActivity']);
+        logs[i]['behaviorAggression'] = queries.toDecrypt(behaviorLogs[i]['behaviorAggression']);
+        logs[i]['behaviorChanges'] = queries.toDecrypt(behaviorLogs[i]['behaviorChanges']);
+      }
       res.status(200).json(behaviorLogs);
     }
   });
@@ -312,6 +367,12 @@ app.get("/GetMedicationLogsByPetId/:petId", (req, res) => {
         .status(500)
         .json({ error: "Error retrieving medication logs by petId" });
     } else {
+      for (let i = 0; i < logs.length; i++) {
+        medicationLogs[i]['medicationName'] = queries.toDecrypt(medicationLogs[i]['medicationName']);
+        medicationLogs[i]['medicationDosage'] = queries.toDecrypt(medicationLogs[i]['medicationDosage']);
+        medicationLogs[i]['medicationDuration'] = queries.toDecrypt(medicationLogs[i]['medicationDuration']);
+        medicationLogs[i]['medicationInstructions'] = queries.toDecrypt(medicationLogs[i]['medicationInstructions']);
+      }
       res.status(200).json(medicationLogs);
     }
   });
@@ -357,28 +418,6 @@ app.post("/InsertPetBehavior", (req, res) => {
   });
 });
 
-// app.get("/GetAllVets", (req, res) => {
-//   queries.getAllVets((err, vets) => {
-//     if (err) {
-//       console.error("Error fetching vets:", err);
-//       res.status(500).json({ error: "Error fetching vets" });
-//     } else {
-//       res.status(200).json({ vets });
-//     }
-//   });
-// });
-
-// app.get("/GetAllSymptoms", (req, res) => {
-//   queries.getAllSymptoms((err, symptoms) => {
-//     if (err) {
-//       console.error("Error fetching symptoms:", err);
-//       res.status(500).json({ error: "Error fetching symptoms" });
-//     } else {
-//       res.status(200).json({ symptoms });
-//     }
-//   });
-// });
-
 app.post("/insertBathroomData", (req, res) => {
   const bathroomData = req.body;
   queries.insertBathroomData(bathroomData, (err, result) => {
@@ -397,17 +436,6 @@ app.post("/insertBathroomData", (req, res) => {
     }
   });
 });
-
-// app.get("/GetAllIllnesses", (req, res) => {
-//   queries.getAllIllnesses((err, illnesses) => {
-//     if (err) {
-//       console.error("Error fetching illnesses:", err);
-//       res.status(500).json({ error: "Error fetching illnesses" });
-//     } else {
-//       res.status(200).json({ illnesses });
-//     }
-//   });
-// });
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
