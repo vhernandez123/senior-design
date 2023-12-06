@@ -205,18 +205,6 @@ const LoggingForms = () => {
         const petLogsResponse = await Axios.get(
           `http://localhost:4000/GetLog/${logsID}`
         );
-        // const bathroomLogsResponse = await Axios.get(
-        //   `http://localhost:4000/GetBathroomLogsByPetID/${petID}`
-        // );
-        // const foodLogsResponse = await Axios.get(
-        //   `http://localhost:4000/GetFoodLogsByPetID/${petID}`
-        // );
-        // const behaviorLogsResponse = await Axios.get(
-        //   `http://localhost:4000/GetBehaviorogsByPetID/${petID}`
-        // );
-        // const medicationLogsResponse = await Axios.get(
-        //   `http://localhost:4000/GetMedicationLogsByPetID/${petID}`
-        // );
 
         const bathroomLogsResponse = await Axios.get(
           `http://localhost:4000/GetBathroomDetailsbyLogID/${logsID}`
@@ -315,7 +303,8 @@ const LoggingForms = () => {
           </Button>
         </Link>
       </div>
-      <div className="pet-logs-container">
+      <div className="pet-details-container logsAppear1">
+      <div className="pet-logs-container logsApp">
         <div className="pet-logs notepad">
           <div className="log-box">
             <h3>Daily log for {petDetails.petName}</h3>
@@ -350,7 +339,9 @@ const LoggingForms = () => {
             </ul>
           </div>
         </div>
-        <div className="pet-logs notepad">
+      </div>
+      <div className="pet-logs-container logsAppear">
+      <div className="pet-logs notepad">
           <div className="log-box">
             <h3>Bathroom/Illness logs for {petDetails.petName}</h3>
             <ul>
@@ -384,7 +375,7 @@ const LoggingForms = () => {
             </ul>
           </div>
         </div>
-      </div>
+        </div></div>
       <div className="pet-logs-container meds">
         <div className="pet-logs notepad">
           <div className="log-box">
