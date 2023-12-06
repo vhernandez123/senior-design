@@ -1,5 +1,4 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import "../css/PetDetails.css";
 import Navbar from "../components/navbar";
@@ -26,63 +25,95 @@ const LoggingForms = () => {
   };
 
   const handleExportToPdf = () => {
-    const { petName, petBreed, petAge, petColor, petWeight, petMicrochipNum } =
-      petDetails;
-
+    const { petName, petBreed, petAge, petColor, petWeight, petMicrochipNum } = petDetails;
     const currentDate = new Date().toLocaleDateString();
-
+  
     const formattedLogs = {
-      petLogs: petLogs.map((log) => ({
-        logEntry: log.logEntry,
-        logDate: formatLogDate(log.logDate),
+      petLogs: petLogs.map((log) => ({ logEntry: log.logEntry, logDate: formatLogDate(log.logDate) })),
+      foodLogs: foodLogs.map((foodDetails) => ({
+        foodEntry: `Ate ${foodDetails.foodAmount} ${foodDetails.foodUnit} of ${foodDetails.foodType}. Drank ${foodDetails.foodWater} times.`,
+        foodDanger:
+          foodDetails.foodDanger === "yes"
+            ? `Ate something bad: ${foodDetails.foodDangerDescription}`
+            : "Did not eat something bad",
       })),
-      behaviorLogs: behaviorLogs?.map((behaviorLog) => ({
-        activity: behaviorLog.behaviorActivity,
-        aggression: behaviorLog.behaviorAggression === "yes" ? "Yes" : "No",
-        behaviorChanges: behaviorLog.behaviorChanges,
+      bathroomLogs: bathroomLogs.map((bathroomLog) => ({
+        bathroomEntry: `Used Bathroom ${bathroomLog.bathroomNumber} times. Poop Description: ${bathroomLog.bathroomPoop}. Urine Description: ${bathroomLog.bathroomUrine}. Vomit Count: ${bathroomLog.bathroomVomit}`,
       })),
-      medicationLogs: medicationLogs?.map((medicationLog) => ({
-        medicationName: medicationLog.medicationName,
-        medicationDosage: medicationLog.medicationDosage,
-        instructions: medicationLog.medicationInstructions,
-        durationInDays: medicationLog.medicationDuration,
+      behaviorLogs: behaviorLogs.map((behaviorLog) => ({
+        behaviorEntry: `Current Activity: ${behaviorLog.behaviorActivity}, Any signs of aggression: ${
+          behaviorLog.behaviorAggression === "yes" ? "Yes" : "No"
+        }, Behavior Changes: ${behaviorLog.behaviorChanges}`,
+        behaviorDate: formatLogDate(behaviorLog.logDate),
+      })),
+      medicationLogs: medicationLogs.map((medicationLog) => ({
+        medicationEntry: `Takes ${medicationLog.medicationDosage} of ${medicationLog.medicationName} for ${medicationLog.medicationDuration} days. Instructions: ${medicationLog.medicationInstructions}`,
       })),
     };
-
-    const petInfoText = `Pet Information:
-      Name: ${petName}
-      Breed: ${petBreed}
-      Age: ${petAge}
-      Color: ${petColor}
-      Weight: ${petWeight}
-      Microchip Number: ${petMicrochipNum}
-      Date Of log: ${currentDate}`;
-
-    const logsText = `
-        Daily Log:
-      ${formattedLogs.petLogs
-        ?.map((log) => `${log.logDate}: ${log.logEntry}`)
-        .join("\n")}
-        Behavior Logs:
-      ${formattedLogs.petBehaviorLogs
-        ?.map(
-          (behaviorLog) =>
-            `Current Activity: ${behaviorLog.activity}, Any signs of aggression: ${behaviorLog.aggression}, Behavior Changes: ${behaviorLog.behaviorChanges}, Logged on ${behaviorLog.logDate}`
-        )
-        .join("\n")}
-        Medication Logs:
-      ${formattedLogs.medicationLogs
-        ?.map(
-          (medicationLog) =>
-            `Takes ${medicationLog.medicationName} ${medicationLog.instructions} for ${medicationLog.durationInDays} days`
-        )
-        .join("\n")}
-    `;
-
-    const fullText = `${petInfoText}${logsText}`;
-
+  
     const pdf = new jsPDF();
-    pdf.text(fullText, 10, 10);
+    const margin = 15;
+    let yPosition = margin;
+  
+    const addText = (text, color = "#000000", fontSize = 12) => {
+      pdf.setFontSize(fontSize);
+      pdf.setTextColor(color);
+    
+      const margin = 10;
+      const pageWidth = pdf.internal.pageSize.width;
+      const remainingWidth = pageWidth - margin * 2;
+    
+      const lines = pdf.splitTextToSize(text, remainingWidth);
+      const lineHeight = fontSize / pdf.internal.scaleFactor;
+    
+      for (let i = 0; i < lines.length; i++) {
+        if (yPosition + lineHeight > pdf.internal.pageSize.height - margin) {
+          pdf.addPage();
+          yPosition = margin;
+        }
+    
+        pdf.text(margin, yPosition, lines[i]);
+        yPosition += lineHeight;
+      }
+    };  
+    addText("Pet Information", "#01B636", 16);
+    addText(`Name: ${petName}`);
+    addText(`Breed: ${petBreed}`);
+    addText(`Age: ${petAge}`);
+    addText(`Color: ${petColor}`);
+    addText(`Weight: ${petWeight}`);
+    addText(`Microchip Number: ${petMicrochipNum}`);
+    addText(`Date Of Log: ${currentDate}`);
+    yPosition += 10;
+  
+    addText("Daily Log", "#01B636", 16);
+    formattedLogs.petLogs.forEach((log) => addText(`${log.logDate}: ${log.logEntry}`));
+    yPosition += 10;
+  
+    addText("Food Logs", "#01B636", 16);
+    formattedLogs.foodLogs.forEach((foodLog) => {
+      addText(foodLog.foodEntry);
+      addText(foodLog.foodDanger);
+    });
+    yPosition += 10;
+  
+    addText("Bathroom/Illness Logs", "#01B636", 16);
+    formattedLogs.bathroomLogs.forEach((bathroomLog) => addText(bathroomLog.bathroomEntry));
+    yPosition += 10;
+  
+    addText("Behavior Logs", "#01B636", 16);
+    formattedLogs.behaviorLogs.forEach((behaviorLog) => {
+      addText(`Current Activity: ${behaviorLog.activity}`);
+      addText(`Any signs of aggression: ${behaviorLog.aggression}`);
+      addText(`Behavior Changes: ${behaviorLog.behaviorChanges}`);
+      addText(`Logged on ${behaviorLog.behaviorDate}`);
+    });
+    yPosition += 10;
+  
+    addText("Medication Logs", "#01B636", 16);
+    formattedLogs.medicationLogs.forEach((medicationLog) => addText(medicationLog.medicationEntry));
+    yPosition += 10;
+  
     pdf.save(`pet_data_${petDetails.petName}_${currentDate}.pdf`);
   };
 
@@ -104,37 +135,12 @@ const LoggingForms = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const petDetailsResponse = await Axios.get(
-          `http://localhost:4000/GetPet/${petID}`
-        );
-        const petLogsResponse = await Axios.get(
-          `http://localhost:4000/GetLog/${logsID}`
-        );
-        // const bathroomLogsResponse = await Axios.get(
-        //   `http://localhost:4000/GetBathroomLogsByPetID/${petID}`
-        // );
-        // const foodLogsResponse = await Axios.get(
-        //   `http://localhost:4000/GetFoodLogsByPetID/${petID}`
-        // );
-        // const behaviorLogsResponse = await Axios.get(
-        //   `http://localhost:4000/GetBehaviorogsByPetID/${petID}`
-        // );
-        // const medicationLogsResponse = await Axios.get(
-        //   `http://localhost:4000/GetMedicationLogsByPetID/${petID}`
-        // );
-
-        const bathroomLogsResponse = await Axios.get(
-          `http://localhost:4000/GetBathroomDetailsbyLogID/${logsID}`
-        );
-        const foodLogsResponse = await Axios.get(
-          `http://localhost:4000/GetFoodLogsByLogID/${logsID}`
-        );
-        const behaviorLogsResponse = await Axios.get(
-          `http://localhost:4000/GetBehaviorDetailsbyLogID/${logsID}`
-        );
-        const medicationLogsResponse = await Axios.get(
-          `http://localhost:4000/GetMedicationDetailsbyLogID/${logsID}`
-        );
+        const petDetailsResponse = await Axios.get(`http://localhost:4000/GetPet/${petID}`);
+        const petLogsResponse = await Axios.get(`http://localhost:4000/GetLog/${logsID}`);
+        const bathroomLogsResponse = await Axios.get(`http://localhost:4000/GetBathroomDetailsbyLogID/${logsID}`);
+        const foodLogsResponse = await Axios.get(`http://localhost:4000/GetFoodLogsByLogID/${logsID}`);
+        const behaviorLogsResponse = await Axios.get(`http://localhost:4000/GetBehaviorDetailsbyLogID/${logsID}`);
+        const medicationLogsResponse = await Axios.get(`http://localhost:4000/GetMedicationDetailsbyLogID/${logsID}`);
 
         setPetDetails(petDetailsResponse.data);
         setBathroomLogs(bathroomLogsResponse.data);
@@ -176,7 +182,7 @@ const LoggingForms = () => {
           <Button
             variant="contained"
             className="pet-details-item "
-            style={{ backgroundColor: "#01B636", color: "white",margin:"10px" }}
+            style={{ backgroundColor: "#01B636", color: "white", margin: "10px" }}
           >
             Log Food
           </Button>
@@ -188,110 +194,108 @@ const LoggingForms = () => {
           <Button
             variant="contained"
             className="pet-details-item "
-            style={{ backgroundColor: "#01B636", color: "white",margin:"10px" }}
+            style={{ backgroundColor: "#01B636", color: "white", margin: "10px" }}
           >
             Click Here
           </Button>
         </Link>
-
         <br />
         <br />
         <h3>Does your pet take any medication?</h3>
-
         <Link to={`/LogMedication/${logsID}/${petID}`}>
           <Button
             variant="contained"
             className="pet-details-item "
-            style={{ backgroundColor: "#01B636", color: "white",margin:"10px" }}
+            style={{ backgroundColor: "#01B636", color: "white", margin: "10px" }}
           >
             Log it Here
           </Button>
         </Link>
       </div>
       <div className="pet-logs-container">
-      <div className="pet-logs notepad">
-        <div className="log-box">
-          <h3>Daily log for {petDetails.petName}</h3>
-          <ul>
-            {petLogs.map((log) => (
-              <li key={log.logsId}>{log.logEntry}</li>
-            ))}
-          </ul>
+        <div className="pet-logs notepad">
+          <div className="log-box">
+            <h3>Daily log for {petDetails.petName}</h3>
+            <ul>
+              {petLogs.map((log) => (
+                <li key={log.logsId}>{log.logEntry}</li>
+              ))}
+            </ul>
+          </div>
         </div>
-      </div>
-      <div className="pet-logs notepad">
-        <div className="log-box">
-          <h3>Food logs for {petDetails.petName}</h3>
-          <ul>
-            {foodLogs.map((foodDetails) => (
-              <li key={foodDetails.foodID}>
-                Ate {foodDetails.foodAmount}
-                {""}
-                {foodDetails.foodUnit} {""}
-                of {foodDetails.foodType}. Drank {foodDetails.foodWater} times.
-                {foodDetails.foodDanger === "yes" ? (
-                  <span>
-                    {" "}
-                    Ate something bad: {foodDetails.foodDangerDescription}
-                  </span>
-                ) : (
-                  <span> Did not eat something bad</span>
-                )}
-              </li>
-            ))}
-          </ul>
+        <div className="pet-logs notepad">
+          <div className="log-box">
+            <h3>Food logs for {petDetails.petName}</h3>
+            <ul>
+              {foodLogs.map((foodDetails) => (
+                <li key={foodDetails.foodID}>
+                  Ate {foodDetails.foodAmount}
+                  {""}
+                  {foodDetails.foodUnit} {""}
+                  of {foodDetails.foodType}. Drank {foodDetails.foodWater} times.
+                  {foodDetails.foodDanger === "yes" ? (
+                    <span>
+                      {" "}
+                      Ate something bad: {foodDetails.foodDangerDescription}
+                    </span>
+                  ) : (
+                    <span> Did not eat something bad</span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-      </div>
-      <div className="pet-logs notepad">
-        <div className="log-box">
-          <h3>Bathroom/Illness logs for {petDetails.petName}</h3>
-          <ul>
-            {bathroomLogs.map((bathroomLog) => (
-              <li key={bathroomLog.bathroomID}>
-                <p>
-                  Used Bathroom {bathroomLog.bathroomNumber} times. Poop
-                  Description: {bathroomLog.bathroomPoop}. Urine Description:{" "}
-                  {bathroomLog.bathroomUrine}. Vomit Count:{" "}
-                  {bathroomLog.bathroomVomit}
-                </p>
-              </li>
-            ))}
-          </ul>
+        <div className="pet-logs notepad">
+          <div className="log-box">
+            <h3>Bathroom/Illness logs for {petDetails.petName}</h3>
+            <ul>
+              {bathroomLogs.map((bathroomLog) => (
+                <li key={bathroomLog.bathroomID}>
+                  <p>
+                    Used Bathroom {bathroomLog.bathroomNumber} times. Poop
+                    Description: {bathroomLog.bathroomPoop}. Urine Description:{" "}
+                    {bathroomLog.bathroomUrine}. Vomit Count:{" "}
+                    {bathroomLog.bathroomVomit}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-      </div>
-      <div className="pet-logs notepad">
-        <div className="log-box">
-          <h3>Behavior logs for {petDetails.petName}</h3>
-          <ul>
-            {behaviorLogs.map((behaviorLog) => (
-              <li key={behaviorLog.behaviorID}>
-                <p>
-                  Current Activity: {behaviorLog.behaviorActivity}, Any signs of
-                  aggression:{" "}
-                  {behaviorLog.behaviorAggression === "yes" ? "Yes" : "No"},
-                  Behavior Changes: {behaviorLog.behaviorChanges}
-                </p>
-              </li>
-            ))}
-          </ul>
+        <div className="pet-logs notepad">
+          <div className="log-box">
+            <h3>Behavior logs for {petDetails.petName}</h3>
+            <ul>
+              {behaviorLogs.map((behaviorLog) => (
+                <li key={behaviorLog.behaviorID}>
+                  <p>
+                    Current Activity: {behaviorLog.behaviorActivity}, Any signs of
+                    aggression:{" "}
+                    {behaviorLog.behaviorAggression === "yes" ? "Yes" : "No"},
+                    Behavior Changes: {behaviorLog.behaviorChanges}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-      </div>
 
-      <div className="pet-logs notepad">
-        <div className="log-box">
-          <h3>Medication logs for {petDetails.petName}</h3>
-          <ul>
-            {medicationLogs.map((medicationLog) => (
-              <li key={medicationLog.medicationLogId}>
-                Takes {medicationLog.medicationDosage} of{" "}
-                {medicationLog.medicationName} for{" "}
-                {medicationLog.medicationDuration} days. Instructions:
-                {medicationLog.medicationInstructions}
-              </li>
-            ))}
-          </ul>
+        <div className="pet-logs notepad">
+          <div className="log-box">
+            <h3>Medication logs for {petDetails.petName}</h3>
+            <ul>
+              {medicationLogs.map((medicationLog) => (
+                <li key={medicationLog.medicationLogId}>
+                  Takes {medicationLog.medicationDosage} of{" "}
+                  {medicationLog.medicationName} for{" "}
+                  {medicationLog.medicationDuration} days. Instructions:
+                  {medicationLog.medicationInstructions}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-      </div>
       </div>
     </div>
   );
