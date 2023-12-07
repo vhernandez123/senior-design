@@ -9,6 +9,7 @@ import useUserFinder from "../components/userFinder.js";
 
 const AddPet = () => {
   const { user, getIdTokenClaims } = useAuth0();
+  const [isFormValid, setIsFormValid] = useState(false);
   const [petName, setPetName] = useState("");
   const [petBreed, setPetBreed] = useState("");
   const [petAge, setPetAge] = useState("");
@@ -31,10 +32,34 @@ const AddPet = () => {
     };
 
     fetchUserId();
-  }, [getIdTokenClaims, user]); // Include user in the dependency array
+  }, [getIdTokenClaims, user]);
+
+  useEffect(() => {
+    const isValid =
+      petName !== "" &&
+      petBreed !== "" &&
+      petGender !== "" &&
+      petAge !== "" &&
+      petColor !== "" &&
+      petWeight !== "" &&
+      petMicrochipNum !== "";
+    setIsFormValid(isValid);
+  }, [
+    petName,
+    petBreed,
+    petGender,
+    petAge,
+    petColor,
+    petWeight,
+    petMicrochipNum,
+  ]);
 
   const handleAddPet = async () => {
-    // Check if user and userId are defined before proceeding
+    if (!isFormValid) {
+      window.alert("Please fill in all fields before adding a pet.");
+      return;
+    }
+
     if (user && userId) {
       const petData = {
         petName,
@@ -119,16 +144,26 @@ const AddPet = () => {
             margin="normal"
           />
 
-          <Button
-            variant="contained"
-            color="primary"
-            href="/home"
-            style={{ backgroundColor: "#01B636", color: "white" }}
-            className="button"
-            onClick={handleAddPet}
+          <div
+            onClick={() => {
+              if (isFormValid) {
+                handleAddPet();
+              } else {
+                window.alert("Please fill in all fields before adding a pet.");
+              }
+            }}
           >
-            Add Pet
-          </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              href="/home"
+              style={{ backgroundColor: "#01B636", color: "white" }}
+              className="button"
+              disabled={!isFormValid}
+            >
+              Add Pet
+            </Button>
+          </div>
         </Paper>
       </div>
       <Footer />
