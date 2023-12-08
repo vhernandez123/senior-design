@@ -37,20 +37,35 @@ const LoggingForms = () => {
     const currentDate = new Date().toLocaleDateString();
 
     const formattedLogs = {
-      petLogs: petLogs.map((log) => ({ logEntry: log.logEntry, logDate: formatLogDate(log.logDate) })),
+      petLogs: petLogs.map((log) => ({
+        logEntry: log.logEntry,
+        logDate: formatLogDate(log.logDate),
+      })),
       foodLogs: foodLogs.map((foodDetails) => ({
-        foodEntry: `Ate ${foodDetails.foodAmount} ${foodDetails.foodUnit} of ${foodDetails.foodType}. Drank ${foodDetails.foodWater} times. ${
-          foodDetails.foodDanger === "yes" ? `Ate something bad: ${foodDetails.foodDangerDescription}` : "Did not eat something bad"
+        foodEntry: `Ate ${foodDetails.foodAmount} ${foodDetails.foodUnit} of ${
+          foodDetails.foodType
+        }. Drank ${foodDetails.foodWater} times. ${
+          foodDetails.foodDanger === "yes"
+            ? `Ate something bad: ${foodDetails.foodDangerDescription}`
+            : "Did not eat something bad"
         }`,
       })),
       bathroomLogs: bathroomLogs.map((bathroomLog) => ({
         bathroomEntry: `Used Bathroom ${bathroomLog.bathroomNumber} times. Poop Description: ${bathroomLog.bathroomPoop}. Urine Description: ${bathroomLog.bathroomUrine}. Vomit Count: ${bathroomLog.bathroomVomit}`,
       })),
       behaviorLogs: behaviorLogs.map((behaviorLog) => ({
-        behaviorEntry: `Current Activity: ${behaviorLog.behaviorActivity || "N/A"}. Any signs of aggression: ${behaviorLog.behaviorAggression === "yes" ? "Yes" : "No"}. Behavior Changes: ${behaviorLog.behaviorChanges || "N/A"}. Logged on ${behaviorLog.behaviorDate ? formatLogDate(behaviorLog.behaviorDate) : "N/A"}`,
+        behaviorEntry: `Current Activity: ${
+          behaviorLog.behaviorActivity || "N/A"
+        }. Any signs of aggression: ${
+          behaviorLog.behaviorAggression === "yes" ? "Yes" : "No"
+        }. Behavior Changes: ${behaviorLog.behaviorChanges || ""}`,
       })),
       medicationLogs: medicationLogs.map((medicationLog) => ({
-        medicationEntry: `Takes ${medicationLog.medicationDosage} of ${medicationLog.medicationName} for ${medicationLog.medicationDuration} days. Instructions: ${medicationLog.medicationInstructions || "No instructions provided."}`,
+        medicationEntry: `Takes ${medicationLog.medicationDosage} of ${
+          medicationLog.medicationName
+        } for ${medicationLog.medicationDuration} days. Instructions: ${
+          medicationLog.medicationInstructions || "No instructions provided."
+        }`,
       })),
     };
 
@@ -122,7 +137,6 @@ const LoggingForms = () => {
 
     pdf.save(`pet_data_${petName}_${currentDate}.pdf`);
   };
-
 
   useEffect(() => {
     const fetchUserId = async () => {
@@ -245,78 +259,79 @@ const LoggingForms = () => {
         </Link>
       </div>
       <div className="pet-details-container logsAppear1">
-      <div className="pet-logs-container logsApp">
-        <div className="pet-logs notepad">
-          <div className="log-box">
-            <h3>Daily log for {petDetails.petName}</h3>
-            <ul>
-              {petLogs.map((log) => (
-                <li key={log.logsId}>{log.logEntry}</li>
-              ))}
-            </ul>
+        <div className="pet-logs-container logsApp">
+          <div className="pet-logs notepad">
+            <div className="log-box">
+              <h3>Daily log for {petDetails.petName}</h3>
+              <ul>
+                {petLogs.map((log) => (
+                  <li key={log.logsId}>{log.logEntry}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <div className="pet-logs notepad">
+            <div className="log-box">
+              <h3>Food logs for {petDetails.petName}</h3>
+              <ul>
+                {foodLogs.map((foodDetails) => (
+                  <li key={foodDetails.foodID}>
+                    Ate {foodDetails.foodAmount}
+                    {""}
+                    {foodDetails.foodUnit} {""}
+                    of {foodDetails.foodType}. Drank {foodDetails.foodWater}{" "}
+                    times.
+                    {foodDetails.foodDanger === "yes" ? (
+                      <span>
+                        {" "}
+                        Ate something bad: {foodDetails.foodDangerDescription}
+                      </span>
+                    ) : (
+                      <span> Did not eat something bad</span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
-        <div className="pet-logs notepad">
-          <div className="log-box">
-            <h3>Food logs for {petDetails.petName}</h3>
-            <ul>
-              {foodLogs.map((foodDetails) => (
-                <li key={foodDetails.foodID}>
-                  Ate {foodDetails.foodAmount}
-                  {""}
-                  {foodDetails.foodUnit} {""}
-                  of {foodDetails.foodType}. Drank {foodDetails.foodWater}{" "}
-                  times.
-                  {foodDetails.foodDanger === "yes" ? (
-                    <span>
-                      {" "}
-                      Ate something bad: {foodDetails.foodDangerDescription}
-                    </span>
-                  ) : (
-                    <span> Did not eat something bad</span>
-                  )}
-                </li>
-              ))}
-            </ul>
+        <div className="pet-logs-container logsAppear">
+          <div className="pet-logs notepad">
+            <div className="log-box">
+              <h3>Bathroom/Illness logs for {petDetails.petName}</h3>
+              <ul>
+                {bathroomLogs.map((bathroomLog) => (
+                  <li key={bathroomLog.bathroomID}>
+                    <p>
+                      Used Bathroom {bathroomLog.bathroomNumber} times. Poop
+                      Description: {bathroomLog.bathroomPoop}. Urine
+                      Description: {bathroomLog.bathroomUrine}. Vomit Count:{" "}
+                      {bathroomLog.bathroomVomit}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <div className="pet-logs notepad">
+            <div className="log-box">
+              <h3>Behavior logs for {petDetails.petName}</h3>
+              <ul>
+                {behaviorLogs.map((behaviorLog) => (
+                  <li key={behaviorLog.behaviorID}>
+                    <p>
+                      Current Activity: {behaviorLog.behaviorActivity}, Any
+                      signs of aggression:{" "}
+                      {behaviorLog.behaviorAggression === "yes" ? "Yes" : "No"},
+                      Behavior Changes: {behaviorLog.behaviorChanges}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </div>
-      <div className="pet-logs-container logsAppear">
-      <div className="pet-logs notepad">
-          <div className="log-box">
-            <h3>Bathroom/Illness logs for {petDetails.petName}</h3>
-            <ul>
-              {bathroomLogs.map((bathroomLog) => (
-                <li key={bathroomLog.bathroomID}>
-                  <p>
-                    Used Bathroom {bathroomLog.bathroomNumber} times. Poop
-                    Description: {bathroomLog.bathroomPoop}. Urine Description:{" "}
-                    {bathroomLog.bathroomUrine}. Vomit Count:{" "}
-                    {bathroomLog.bathroomVomit}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-        <div className="pet-logs notepad">
-          <div className="log-box">
-            <h3>Behavior logs for {petDetails.petName}</h3>
-            <ul>
-              {behaviorLogs.map((behaviorLog) => (
-                <li key={behaviorLog.behaviorID}>
-                  <p>
-                    Current Activity: {behaviorLog.behaviorActivity}, Any signs
-                    of aggression:{" "}
-                    {behaviorLog.behaviorAggression === "yes" ? "Yes" : "No"},
-                    Behavior Changes: {behaviorLog.behaviorChanges}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-        </div></div>
       <div className="pet-logs-container meds">
         <div className="pet-logs notepad">
           <div className="log-box">
