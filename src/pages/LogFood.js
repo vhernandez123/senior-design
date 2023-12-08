@@ -56,6 +56,17 @@ const LogFood = () => {
 
   const handleFinish = async () => {
     try {
+      // Validation: Check if any required field is blank
+      if (
+        formData.foodType.trim() === "" ||
+        formData.foodNumber.trim() === "" ||
+        formData.drank.trim() === "" ||
+        formData.ateBad.trim() === ""
+      ) {
+        window.alert("Please fill in all required fields");
+        return;
+      }
+
       const totalFoodEaten = Number(formData.foodNumber);
       const totalDrinks = Number(formData.drank);
 
@@ -70,7 +81,7 @@ const LogFood = () => {
       const foodData = {
         foodType: formData.foodType,
         foodAmount: formData.foodNumber,
-        foodUnit: formData.selectedUnit|| "",
+        foodUnit: formData.selectedUnit || "",
         foodWater: formData.drank || "",
         foodDanger: formData.ateBad || "nothing bad was eaten",
         foodDangerDescription: formData.ateBadDesc || "",
@@ -100,9 +111,12 @@ const LogFood = () => {
     <div>
       <Navbar />
       <div className="form">
-      <Typography variant="h6" style={{ padding: '10px', fontWeight:'bolder' }}>
-  Food (All Fields Required)
-</Typography>
+        <Typography
+          variant="h6"
+          style={{ padding: "10px", fontWeight: "bolder" }}
+        >
+          Food (All Fields Required)
+        </Typography>
 
         <TextField
           label="What did your pet eat today? (Food Brand and indicate dry or wet food)"
@@ -181,7 +195,17 @@ const LogFood = () => {
         <br />
         <br />
         <Link to={`/LoggingForms/${logsID}/${petID}`}>
-          <Button variant="contained" color="primary" onClick={handleFinish}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleFinish}
+            disabled={
+              formData.foodType.trim() === "" ||
+              formData.foodNumber.trim() === "" ||
+              formData.drank.trim() === "" ||
+              formData.ateBad.trim() === ""
+            }
+          >
             Finish
           </Button>
         </Link>

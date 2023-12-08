@@ -41,7 +41,6 @@ const UpdateBathroom = () => {
   }, [getIdTokenClaims, user]);
 
   const handleInputChange = (event) => {
-    console.log("event:", event);
     const { name, value } = event?.target || event;
     if (name) {
       setFormData((prevData) => ({
@@ -53,12 +52,23 @@ const UpdateBathroom = () => {
 
   const handleFinish = async () => {
     try {
+      // Validation: Check if any required field is blank
+      if (
+        formData.bathroomNumber.trim() === "" ||
+        formData.bathroomPoop.trim() === "" ||
+        formData.bathroomUrine.trim() === "" ||
+        formData.bathroomVomit.trim() === ""
+      ) {
+        window.alert("Please fill in all required fields");
+        return;
+      }
+
       const bathroomData = {
         bathroomNumber: formData.bathroomNumber,
         bathroomPoop: formData.bathroomPoop,
         bathroomUrine: formData.bathroomUrine,
         bathroomVomit: formData.bathroomVomit,
-        Logs_logsID: logsID, 
+        Logs_logsID: logsID,
         Logs_Pet_petID: petID,
         Logs_Pet_User_userID: userId,
       };
@@ -119,14 +129,18 @@ const UpdateBathroom = () => {
         <br />
         <br />
 
-        {/* <Button variant="contained" color="primary" onClick={handleFinish}>
-          Save
-        </Button> */}
-
-        <br />
-        <br />
         <Link to={`/UpdateBehavior/${logsID}/${petID}`}>
-          <Button variant="contained" color="primary" onClick={handleFinish}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleFinish}
+            disabled={
+              formData.bathroomNumber.trim() === "" ||
+              formData.bathroomPoop.trim() === "" ||
+              formData.bathroomUrine.trim() === "" ||
+              formData.bathroomVomit.trim() === ""
+            }
+          >
             Next
           </Button>
         </Link>

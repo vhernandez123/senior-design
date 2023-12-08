@@ -1,25 +1,15 @@
 import React, { useState, useEffect } from "react";
-import {
-  Button,
-  Typography,
-  TextField,
-  FormControl,
-  InputLabel,
-  Radio,
-  RadioGroup,
-  FormControlLabel,
-} from "@mui/material";
+import { Button, Typography, TextField } from "@mui/material";
 import Axios from "axios";
 import Navbar from "../components/navbar";
-import "../css/LogPet.css";
 import { useParams } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const LogPet = () => {
   const [formData, setFormData] = useState({});
   const [userId, setUserId] = useState(null);
+  const [isFormValid, setIsFormValid] = useState(false);
   const { petID } = useParams();
-  const { logsID } = useParams();
   const { user, getIdTokenClaims } = useAuth0();
 
   useEffect(() => {
@@ -44,11 +34,19 @@ const LogPet = () => {
         ...prevData,
         [name]: String(value),
       }));
+
+      const isValid = value.trim() !== "";
+      setIsFormValid(isValid);
     }
   };
 
   const handleFinish = async () => {
     try {
+      if (!isFormValid) {
+        window.alert("Please fill field before adding a log.");
+        return;
+      }
+
       const loggingData = {
         logDate: new Date().toISOString().split("T")[0],
         logEntry: formData.logEntry || "",
@@ -60,7 +58,7 @@ const LogPet = () => {
         "http://localhost:4000/InsertLog",
         loggingData
       );
-      console.log("Feeding info added to Logs table successfully");
+      console.log("Log data added to Logs table successfully");
 
       window.location.href = `/pet/${petID}`;
     } catch (error) {
@@ -92,6 +90,7 @@ const LogPet = () => {
             color="primary"
             href={`/pet/${petID}`}
             onClick={handleFinish}
+            disabled={!isFormValid}
           >
             Add Log
           </Button>
