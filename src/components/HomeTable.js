@@ -123,10 +123,23 @@ const DataTable = () => {
                       backgroundColor: "#01B636",
                       color: "white",
 
-                      marginLeft: "10px", 
+                      marginLeft: "10px",
                     }}
                   >
                     View Pet
+                  </Button>
+                </Link>
+                <Link to={`/EditPet/${row.petID}`}>
+                  <Button
+                    variant="contained"
+                    className="custom-button"
+                    style={{
+                      backgroundColor: "#01B636",
+                      color: "white",
+                      marginLeft: "10px",
+                    }}
+                  >
+                    Edit Pet
                   </Button>
                 </Link>
               </TableCell>

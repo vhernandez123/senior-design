@@ -18,6 +18,7 @@ import UpdateBathroom from "./pages/UpdateBathroom.js";
 import LogMedication from "./pages/LogMedication.js";
 import LogFood from "./pages/LogFood.js";
 import LoggingForms from "./pages/LoggingForms.js";
+import EditPet from "./pages/EditPet.js";
 const domain = process.env.REACT_APP_AUTH0_DOMAIN;
 const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
 
@@ -52,7 +53,7 @@ ReactDOM.render(
             path="/UpdateBathroom/:logsID/:petID"
             element={<UpdateBathroom />}
           />
-
+          <Route path="/EditPet/:petID" element={<EditPet />} />
         </Routes>
       </Router>
     </Auth0Bugs>
