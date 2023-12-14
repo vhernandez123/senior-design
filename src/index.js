@@ -26,6 +26,7 @@ import EditPet from "./pages/EditPet.js";
 const domain = process.env.REACT_APP_AUTH0_DOMAIN;
 const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
 
+/*
 const rootElement = document.getElementById("root");
 if (rootElement.hasChildNodes()){
   console.log("Using hydrate");  
@@ -105,9 +106,10 @@ if (rootElement.hasChildNodes()){
     </Auth0Bugs>
   </React.StrictMode>, rootElement);
 }
+*/
 
 
-/*
+
 ReactDOM.render(
   <React.StrictMode>
     <Auth0Bugs>
@@ -146,4 +148,3 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById("root")
 );
-*/
