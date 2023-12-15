@@ -1,16 +1,16 @@
 
 import React, { lazy, Suspense, useState} from "react";
 import BannerImage from "../assets/orangeCat.png";
+import emailjs from "emailjs-com";
 const Navbar = lazy(() => import('./navbar'));
 //import Navbar from "./navbar";
 const Footer = lazy(() => import('../components/Footer.js'));
 //import Footer from "../components/Footer.js";
-//import emailjs from "emailjs-com";
 const Home = () => {
   const sendEmail = (e) => {
     e.preventDefault();
 
-    import("emailjs-com").then(emailjs
+    emailjs
       .sendForm(
         "service_ftnjz4b",
         "template_vk7nuxq",
@@ -24,7 +24,6 @@ const Home = () => {
         (error) => {
           console.log(error.text);
         }
-      )
       );
     
       resetForm();
