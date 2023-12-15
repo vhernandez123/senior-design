@@ -1,28 +1,43 @@
-import React from "react";
+import React, { lazy, Suspense }  from "react";
 import ReactDOM from "react-dom";
 
 //react-snap
 import { hydrate, render } from "react-dom";
 
 import "./index.css";
-import App from "./App";
-import Main from "./components/Main.jsx";
+const App = lazy(() => import('./App'));
+//import App from "./App";
+const Main = lazy(() => import('./components/Main.jsx'));
+//import Main from "./components/Main.jsx";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Home from "./components/Home.js";
-import AddPet from "./pages/AddPet";
-import AboutUs from "./components/aboutUs.js";
-import Checklist from "./components/Checklist.js";
-import VetFinder from "./pages/VetFinder.js";
-import LogPet from "./pages/LogPet";
-import PetDetails from "./pages/PetDetails";
-import UpdateBehavior from "./pages/UpdateBehavior.js";
+const Home = lazy(() => import('./components/Home.js'));
+//import Home from "./components/Home.js";
+const AddPet = lazy(() => import('./pages/AddPet'));
+//import AddPet from "./pages/AddPet";
+const AboutUs = lazy(() => import('./components/aboutUs.js'));
+//import AboutUs from "./components/aboutUs.js";
+const Checklist = lazy(() => import('./components/Checklist.js'));
+//import Checklist from "./components/Checklist.js";
+const VetFinder = lazy(() => import('./pages/VetFinder.js'));
+//import VetFinder from "./pages/VetFinder.js";
+const LogPet = lazy(() => import('./pages/LogPet.js'));
+//import LogPet from "./pages/LogPet";
+const PetDetails = lazy(() => import('./pages/PetDetails.js'));
+//import PetDetails from "./pages/PetDetails";
+const UpdateBehavior = lazy(() => import('./pages/UpdateBehavior.js'));
+//import UpdateBehavior from "./pages/UpdateBehavior.js";
 import "normalize.css";
 import Auth0Bugs from "./components/Auth0Bugs";
-import UpdateBathroom from "./pages/UpdateBathroom.js";
-import LogMedication from "./pages/LogMedication.js";
-import LogFood from "./pages/LogFood.js";
-import LoggingForms from "./pages/LoggingForms.js";
-import EditPet from "./pages/EditPet.js";
+const UpdateBathroom = lazy(() => import('./pages/UpdateBathroom.js'));
+//import UpdateBathroom from "./pages/UpdateBathroom.js";
+const LogMedication = lazy(() => import('./pages/LogMedication.js'));
+//import LogMedication from "./pages/LogMedication.js";
+const LogFood = lazy(() => import('./pages/LogFood.js'));
+//import LogFood from "./pages/LogFood.js";
+const LoggingForms = lazy(() => import('./pages/LoggingForms.js'));
+//import LoggingForms from "./pages/LoggingForms.js";
+const EditPet = lazy(() => import('./pages/EditPet.js'));
+//import EditPet from "./pages/EditPet.js";
 const domain = process.env.REACT_APP_AUTH0_DOMAIN;
 const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
 
@@ -114,6 +129,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Auth0Bugs>
       <Router>
+      <Suspense fallback={<span>Loading...</span>}>
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/app" element={<App />} />
@@ -143,6 +159,7 @@ ReactDOM.render(
           />
           <Route path="/EditPet/:petID" element={<EditPet />} />
         </Routes>
+        </Suspense>
       </Router>
     </Auth0Bugs>
   </React.StrictMode>,

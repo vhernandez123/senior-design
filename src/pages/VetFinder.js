@@ -1,5 +1,6 @@
-import * as React from "react";
-import Map from "../components/Map";
+import React, { lazy, Suspense }  from "react";
+const Map = lazy(() => import('./components/Map'));
+//import Map from "../components/Map";
 import { useState} from "react";
 import Navbar from "../components/navbar";
 import "../css/VetFinder.css"; //import css file
@@ -63,7 +64,9 @@ const VetFinder =() => {
 
                 { //added
 					showMap ? 
-					<Map></Map> 
+                    <Suspense fallback={<span>Loading...</span>}>
+                        <Map></Map>
+                    </Suspense> 
 					: <div>
                         <h4>Allow browser location access to see the map</h4>
                         <Button onClick={() => handleOpen()}>Grant Access</Button>
