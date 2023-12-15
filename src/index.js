@@ -5,11 +5,15 @@ import ReactDOM from "react-dom";
 import { hydrate, render } from "react-dom";
 
 import "./index.css";
-const App = lazy(() => import('./App'));
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
+import "normalize.css";
+import Auth0Bugs from "./components/Auth0Bugs";
+
+const App = lazy(() => import('./App.js'));
 //import App from "./App";
 const Main = lazy(() => import('./components/Main.jsx'));
 //import Main from "./components/Main.jsx";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 const Home = lazy(() => import('./components/Home.js'));
 //import Home from "./components/Home.js";
 const AddPet = lazy(() => import('./pages/AddPet'));
@@ -26,8 +30,7 @@ const PetDetails = lazy(() => import('./pages/PetDetails.js'));
 //import PetDetails from "./pages/PetDetails";
 const UpdateBehavior = lazy(() => import('./pages/UpdateBehavior.js'));
 //import UpdateBehavior from "./pages/UpdateBehavior.js";
-import "normalize.css";
-import Auth0Bugs from "./components/Auth0Bugs";
+
 const UpdateBathroom = lazy(() => import('./pages/UpdateBathroom.js'));
 //import UpdateBathroom from "./pages/UpdateBathroom.js";
 const LogMedication = lazy(() => import('./pages/LogMedication.js'));

@@ -1,5 +1,5 @@
 
-import React, { useState} from "react";
+import React, { lazy, Suspense, useState} from "react";
 import BannerImage from "../assets/orangeCat.png";
 const Navbar = lazy(() => import('./navbar'));
 //import Navbar from "./navbar";

@@ -1,7 +1,6 @@
-import React, { useState, useEffect} from "react";
-import Navbar from "../components/navbar.js";
-import Footer from "../components/Footer.js";
-const DataTable = lazy(() => import('./components/HomeTable'));
+import React, { lazy, Suspense, useState, useEffect} from "react";
+import Navbar from "./navbar.js";
+import Footer from "./Footer.js";
 //import DataTable from "../components/HomeTable.js";
 import { useAuth0 } from "@auth0/auth0-react";
 import Axios from "axios";
@@ -9,12 +8,11 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import "../App.css";
 import CatFoot from "../images/cat.jpg";
 // import useUserFinder  from "../components/userFinder.js";
-import { blobToURL, fromBlob } from 'image-resize-compress';
-import {
-  useWindowSize,
-  useWindowWidth,
-  useWindowHeight,
-} from '@react-hook/window-size'
+import { useWindowWidth} from '@react-hook/window-size';
+import imageCompression from 'browser-image-compression';
+
+const DataTable = lazy(() => import('./HomeTable.js'));
+
 
 function Home() {
   const { isAuthenticated, user, getIdTokenClaims } = useAuth0();
@@ -58,24 +56,23 @@ function Home() {
     fetchUserId();
   }, [getIdTokenClaims, user]); 
 
-    //const onlyWidth = useWindowWidth()
-    // quality value for webp and jpeg formats.
-    const quality = 80;
-    // output width. 0 will keep its original width and 'auto' will calculate its scale from height.
-    const width = import("@react-hook/window-size").then(useWindowWidth() * 0.8); //make it 80% of the current window width 
-    // output height. 0 will keep its original height and 'auto' will calculate its scale from width.
-    const height = 'auto';
-    // file format: png, jpeg, bmp, gif, webp. If null, original format will be used.
-    const format = 'webp';
 
-      // note only the blobFile argument is required
-    fromBlob(CatFoot, quality, width, height, format).then((blob) => {
-      // will output the converted blob file
-      console.log(blob);
-      // will generate a url to the converted file
-      blobToURL(blob).then((url) => console.log(url));
-    });
+  const optImage = async () => {
+
+    const imageFile = CatFoot;
   
+    const options = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: useWindowWidth()
+    }
+    try {
+      const compressedFile = await imageCompression(imageFile, options);
+      console.log(compressedFile.size/1024/1024);
+    } catch (error) {
+      console.log("Error compressing image: ", error);
+    }
+  
+  }
 
   return (
     <div className="app">
@@ -87,7 +84,7 @@ function Home() {
           </Suspense> 
         </div>
         <div class="image-container">
-          <img class="bottom-image"src={url} alt="cat1" className="catimage" />
+          <img class="bottom-image"src={compressedFile} alt="cat1" className="catimage" />
         </div>
       </div>
       <Footer />

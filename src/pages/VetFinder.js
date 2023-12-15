@@ -1,5 +1,4 @@
 import React, { lazy, Suspense }  from "react";
-const Map = lazy(() => import('./components/Map'));
 //import Map from "../components/Map";
 import { useState} from "react";
 import Navbar from "../components/navbar";
@@ -16,6 +15,8 @@ import {
     Radio,
     FormControlLabel
   } from "@mui/material";
+
+  const Map = lazy(() => import('../components/Map.js'));
 
 
 const VetFinder =() => {

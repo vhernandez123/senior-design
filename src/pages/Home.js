@@ -1,7 +1,7 @@
-import React from "react";
+import React, { lazy, Suspense }  from "react";
 import Navbar from "../components/navbar.js";
 import Footer from "../components/Footer";
-import DataTable from "../components/HomeTable";
+import DataTable from "../components/HomeTable.js";
 import "../App.css";
 
 function Home() {
