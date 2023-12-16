@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkpet_logger=self.webpackChunkpet_logger||[]).push([[555],{9555:function(e,n,s){s.r(n);s(2791),s(3508);var i=s(184);n.default=function(){return(0,i.jsx)("div",{className:"App",children:(0,i.jsx)("h1",{children:"Let senior design begin!"})})}},3508:function(){}}]);
+//# sourceMappingURL=555.a7820e3d.chunk.js.map

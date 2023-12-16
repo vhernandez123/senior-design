@@ -1,0 +1,17 @@
+id,file,Component,Smell,Details,"Em uma escala de 1 a 5, como você avalia a relevância desse smell?
+1 = smell não é importante e, provavelmente, não será refatorado
+5 = smell é muito importante e, provavelmente, será refatorado em breve.",Observação
+1,/Users/ruthwager/Documents/GitHub/senior-design/src/components/HomeTable.js,DataTable,Large Component,LOC: 144; Number of props: 9; Number of attributes: 0; Number of methods: 3,,
+2,/Users/ruthwager/Documents/GitHub/senior-design/src/components/Landing.js,Landing,Large Component,LOC: 153; Number of props: 0; Number of attributes: 0; Number of methods: 0,,
+3,/Users/ruthwager/Documents/GitHub/senior-design/src/components/LogTable.js,DataTable,Large Component,LOC: 132; Number of props: 9; Number of attributes: 0; Number of methods: 2,,
+4,/Users/ruthwager/Documents/GitHub/senior-design/src/pages/AddPet.js,AddPet,Large Component,LOC: 163; Number of props: 12; Number of attributes: 0; Number of methods: 2,,
+5,/Users/ruthwager/Documents/GitHub/senior-design/src/pages/FoodDetails.js,PetDetails,Large Component,LOC: 176; Number of props: 6; Number of attributes: 0; Number of methods: 1,,
+6,/Users/ruthwager/Documents/GitHub/senior-design/src/pages/LogFood.js,LogFood,Large Component,LOC: 197; Number of props: 22; Number of attributes: 0; Number of methods: 3,,
+7,/Users/ruthwager/Documents/GitHub/senior-design/src/pages/LogFood.js,LogFood,Too many props,"Number of props: 22; Props: foodType,foodNumber,selectedUnit,drank,ateBad,ateBadDesc,logsID,petID,user,getIdTokenClaims,name,value,foodAmount,foodUnit,foodWater,foodDanger,foodDangerDescription,Logs_logsID,Logs_Pet_petID,Logs_Pet_User_userID,padding,fontWeight",,
+8,/Users/ruthwager/Documents/GitHub/senior-design/src/pages/LogMedication.js,LogMedication,Large Component,LOC: 117; Number of props: 14; Number of attributes: 0; Number of methods: 3,,
+9,/Users/ruthwager/Documents/GitHub/senior-design/src/pages/LogMedication.js,LogMedication,Too many props,"Number of props: 14; Props: name,dosage,duration,instructions,vet,logsID,petID,user,getIdTokenClaims,value,Logs_logsID,Logs_Pet_petID,Logs_Pet_User_userID,instruction",,
+10,/Users/ruthwager/Documents/GitHub/senior-design/src/pages/LoggingForms.js,LoggingForms,Large Component,LOC: 344; Number of props: 22; Number of attributes: 0; Number of methods: 5,,
+11,/Users/ruthwager/Documents/GitHub/senior-design/src/pages/LoggingForms.js,LoggingForms,Too many props,"Number of props: 22; Props: petID,logsID,user,getIdTokenClaims,year,month,day,petName,petBreed,petAge,petColor,petWeight,petMicrochipNum,petGender,petLogs,foodLogs,bathroomLogs,behaviorLogs,medicationLogs,backgroundColor,color,margin",,
+12,/Users/ruthwager/Documents/GitHub/senior-design/src/pages/UpdateBathroom.js,UpdateBathroom,Large Component,LOC: 135; Number of props: 13; Number of attributes: 0; Number of methods: 3,,
+13,/Users/ruthwager/Documents/GitHub/senior-design/src/pages/UpdateBehavior.js,UpdateBehavior,Large Component,LOC: 203; Number of props: 17; Number of attributes: 0; Number of methods: 5,,
+14,/Users/ruthwager/Documents/GitHub/senior-design/src/pages/UpdateBehavior.js,UpdateBehavior,Too many props,"Number of props: 17; Props: selectedPetId,aggression,aggressionExplanation,selectedSymptomId,logsID,petID,user,getIdTokenClaims,name,value,activity,behaviorChanges,Logs_logsID,Logs_Pet_petID,Logs_Pet_User_userID,marginBottom,target",,

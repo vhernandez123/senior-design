@@ -8,6 +8,8 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import "../App.css";
 import CatFoot from "../images/cat.jpg";
 // import useUserFinder  from "../components/userFinder.js";
+import { Picture } from 'react-optimized-images'
+
 
 const DataTable = lazy(() => import('./HomeTable.js'));
 
@@ -66,12 +68,15 @@ function Home() {
           </Suspense> 
         </div>
         <div class="image-container">
-          <img class="bottom-image"src={CatFoot} alt="cat1" className="catimage" />
+          <Picture class="bottom-image" src={CatFoot.src} alt="cat1" className="catimage" />
         </div>
       </div>
       <Footer />
     </div>
   );
 }
+
+//          <img class="bottom-image"src={CatFoot} alt="cat1" className="catimage" />
+
 
 export default Home;
