@@ -30,6 +30,7 @@
     "react-router-dom": "^6.16.0",
     "react-script-hook": "^1.7.2",
     "react-scripts": "^5.0.1",
+    "react-snap": "^1.23.0",
     "start": "^5.1.0",
     "unimported": "^1.31.1",
     "web-vitals": "^2.1.4"
