@@ -37,7 +37,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "convert-images": "npx convert-images",
+    "build": "react-scripts build && npm run convert-images",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
